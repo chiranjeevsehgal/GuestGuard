@@ -5,6 +5,9 @@ import Dash from './Dash.js'
 import SignIn from './SignIn.js'
 import SignUp from './SignUp.js'
 import Navigation from './Navigation.js'
+import GatePass from './GatePass.js'
+import About from './About.js'
+
 // import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 const auth =getAuth(app);
@@ -17,6 +20,8 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/navigation" element={<Navigation />} />
+          <Route path="/gatepass" element={<GatePass />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
 

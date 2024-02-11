@@ -12,7 +12,7 @@ function SignIn() {
     signInWithEmailAndPassword(auth, email, password).then(() => {
       console.log("Signin Success");
       // Redirect to another page after successful sign-in
-      window.location.href = "/Navigation"; // Specify the URL you want to redirect to
+      window.location.href = "/gatepass"; // Specify the URL you want to redirect to
     })
       .catch(err => {
         setError('Invalid Username or Password')
@@ -82,7 +82,7 @@ function SignIn() {
                 </svg>
               </button>
             </div>
-              :null}          
+              :null}
 
 
 
