@@ -1,5 +1,20 @@
+import React , {useState} from "react";
+import {getAuth,signInWithEmailAndPassword} from "firebase/auth";
 function SignIn() {
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  // const [name,setname] = useState("");
 
+
+  const signinUser =()=>{
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth,email,password).then(() => {
+      console.log("Signin Success");
+      // Redirect to another page after successful sign-in
+      window.location.href = "/Navigation"; // Specify the URL you want to redirect to
+    })
+    .catch(err=>console.log(err));
+  };
 	return (
 
 <div className="font-sans">
@@ -26,15 +41,21 @@ function SignIn() {
             <form method="#" action="#" className="mt-10">
 
               <div className="mt-7">
-                <input type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input 
+                 onChange={(e)=>setEmail(e.target.value)}
+                 value={email}
+                 type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <input type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input 
+                onChange={(e)=>setPassword(e.target.value)}
+                value={password}
+                type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <button className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button onClick ={signinUser}className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign In
                 </button>
               </div>

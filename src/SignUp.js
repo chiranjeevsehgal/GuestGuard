@@ -1,4 +1,17 @@
+import React , {useState} from "react";
+import {getAuth,createUserWithEmailAndPassword} from "firebase/auth";
+// import {app} from "./firebase";
+
 function SignUp() {
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const [name,setname] = useState("");
+
+
+  const createUser =()=>{
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth,email,password,name).then(value=>alert("Success"));
+  };
 
 	return (
 
@@ -25,23 +38,33 @@ function SignUp() {
             <form method="#" action="#" className="mt-10">
 
               <div>
-                <input type="text" placeholder="Name" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor" />
+                <input
+                 onChange={(e)=>setname(e.target.value)}
+                 value={name}
+                type="text" placeholder="Name" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor" />
               </div>
 
               <div className="mt-7">
-                <input type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input 
+                onChange={(e)=>setEmail(e.target.value)}
+                value={email}
+                type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <input type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input
+                 onChange={(e)=>setPassword(e.target.value)}
+                 value={password}
+                type="password"
+                 placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <input type="password" placeholder="Confirm Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input placeholder="Confirm Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <button className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button onClick ={createUser} className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign Up
                 </button>
               </div>
