@@ -1,39 +1,44 @@
-import React , {useState} from "react";
-import {getAuth,signInWithEmailAndPassword} from "firebase/auth";
+import React, { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 function SignIn() {
-  const [email,setEmail] = useState("");
-  const [password,setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // const [name,setname] = useState("");
+  const [error, setError] = useState();
 
 
-  const signinUser =()=>{
+  const signinUser = () => {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth,email,password).then(() => {
+    signInWithEmailAndPassword(auth, email, password).then(() => {
       console.log("Signin Success");
       // Redirect to another page after successful sign-in
       window.location.href = "/Navigation"; // Specify the URL you want to redirect to
     })
-    .catch(err=>console.log(err));
-  };
-	return (
+      .catch(err => {
+        setError('Invalid Username or Password')
 
-<div className="font-sans">
+        console.log("Error signin");
+      });
+  };
+  return (
+
+    <div className="font-sans">
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
         <div className="relative sm:max-w-sm w-full">
-		
-		<div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
-		{/* <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-purple-500 to-red-100 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
-        
 
-		{/* <div className="card bg-red-100 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div> */}
-        {/* <div className="card bg-purple-500 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div> */}
-		
-		{/* Actual */}
-		{/* <div className="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
+          <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+          {/* <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-purple-500 to-red-100 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
+
+
+          {/* <div className="card bg-red-100 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div> */}
+          {/* <div className="card bg-purple-500 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div> */}
+
+          {/* Actual */}
+          {/* <div className="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
         <div className="card bg-red-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div> */}
-        
-		  <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
-		  <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
+
+          <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
+            <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
 
             <label htmlFor="" className="block mt-3 text-sm text-gray-700 text-center font-semibold">
               Sign In
@@ -41,24 +46,45 @@ function SignIn() {
             <form method="#" action="#" className="mt-10">
 
               <div className="mt-7">
-                <input 
-                 onChange={(e)=>setEmail(e.target.value)}
-                 value={email}
-                 type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <input 
-                onChange={(e)=>setPassword(e.target.value)}
-                value={password}
-                type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
-                <button onClick ={signinUser}className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button onClick={signinUser} className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign In
                 </button>
               </div>
+
+              {error?
+              <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7">
+              <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-8 w-8">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div className="p-4 flex-1">
+                <h3 className="text-xl font-bold">Error</h3>
+                <p className="text-sm text-gray-600">Wrong credentials.</p>
+              </div>
+              <button className="absolute top-2 right-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 p-2 rounded cursor-pointer">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                </svg>
+              </button>
+            </div>
+              :null}          
+
+
 
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
@@ -91,7 +117,7 @@ function SignIn() {
         </div>
       </div>
     </div>
-			)
+  )
 }
 
-			export default SignIn;
+export default SignIn;
