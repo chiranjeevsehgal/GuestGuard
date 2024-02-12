@@ -9,9 +9,12 @@ function GatePass() {
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
+<<<<<<< Updated upstream:src/components/GatePass.js
     const navigate = useNavigate();
 
 
+=======
+>>>>>>> Stashed changes:src/GatePass.js
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -50,7 +53,7 @@ function GatePass() {
                             <a rel="noopener noreferrer" href="/navigation" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Navigation</a>
                         </li>
                         <li className="flex">
-                            <a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">FAQ</a>
+                            <a rel="noopener noreferrer" href="/faq" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">FAQ</a>
                         </li>
                         {/* <li className="flex">
                         <a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Link</a>
@@ -74,8 +77,8 @@ function GatePass() {
                         <form noValidate="" action="" className="container flex flex-col mx-auto space-y-12">
                             <fieldset className="grid grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
                                 <div className="space-y-2 col-span-full lg:col-span-1">
-                                    <p className="font-medium">Personal Information</p>
-                                    <p className="text-xs">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci fuga autem eum!</p>
+                                    <p className="font-medium">Required Information</p>
+                                    <p className="text-sm">Please ensure that all mandatory fields are completed accurately. The information provided in these fields is essential for us to effectively process your request.</p>
                                 </div>
                                 <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                                     <div className="col-span-full sm:col-span-3">
@@ -171,7 +174,6 @@ function GatePass() {
                 </div>
             </section>
         </div>
-
     )
 }
 

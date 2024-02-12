@@ -1,12 +1,24 @@
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { app } from "./services/firebase.js";
 import './App.css';
+<<<<<<< Updated upstream
 import Dash from './components/Dash.js'
 import SignIn from './components/SignIn.js'
 import SignUp from './components/SignUp.js'
 import Navigation from './components/Navigation.js'
 import GatePass from './components/GatePass.js'
 import About from './components/About.js'
+=======
+import Dash from './Dash.js'
+import SignIn from './SignIn.js'
+import SignUp from './SignUp.js'
+import Navigation from './Navigation.js'
+import GatePass from './GatePass.js'
+import About from './About.js'
+import Faq from './Faq.js'
+import Admin from './Admin.js'
+
+>>>>>>> Stashed changes
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -28,6 +40,8 @@ function App() {
           <Route path="/navigation" element={<Navigation />} />
           <Route path="/gatepass" element={<GatePass user={user} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>

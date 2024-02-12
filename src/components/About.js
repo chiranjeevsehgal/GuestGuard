@@ -2,11 +2,20 @@ function About() {
     return (
         <div>
             {/* <section className="py-6 bg-gray-100 text-gray-800"> */}
-            <section className="m-4 md:m-8 bg-gray-100 text-gray-800">
-                
+            {/* <section className="m-4 md:m-8 bg-gray-100 text-gray-800"> */}
+            <div class="min-h-screen min-w-full bg-gray-100 flex flex-col justify-center p-10">
+			<div class="relative w-full max-w-full lg:max-w-6xl xl:max-w-screen-2xl mx-auto">
+			{/* <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
+            <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+			<div class="relative bg-white shadow-lg sm:rounded-3xl">
+
                 {/* Product Info */}
                 <div className="container mx-auto p-4 my-6 space-y-2 text-center">
+                {/* <a rel="noopener noreferrer" href="/" className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-600" >Back to dashboard</a> */}
+            
+                
                 <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
+                
                     <h2 className="text-5xl font-bold">Revolutionizing Campus Security and Efficiency
                     </h2>
                     <p className="text-gray-600">Centralized Tracking, GPS Integration, and Seamless Navigation for a Safer and More Streamlined Visitor Experience.</p>
@@ -60,7 +69,8 @@ function About() {
                     <p className="p-2 text-sm font-medium tracki text-center uppercase">Development team</p>
                     <h1 className="text-4xl font-bold leadi text-center sm:text-5xl">The talented people behind the scenes</h1>
                     <div className="flex flex-row flex-wrap-reverse justify-center mt-8">
-                        <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100">
+                        {/* <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100"> */}
+                        <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-cyan-500 text-gray-100">
                             <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
                             <div className="flex-1 my-4">
                                 <p className="text-xl font-semibold leadi">Chiranjeev Sehgal</p>
@@ -90,7 +100,8 @@ function About() {
                                 </a>
                             </div>
                         </div>
-                        <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100">
+                        {/* <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-gray-800 text-gray-100"> */}
+                        <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-cyan-500 text-gray-100">
                             <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
                             <div className="flex-1 my-4">
                                 <p className="text-xl font-semibold leadi">Hemangshu Dey</p>
@@ -123,8 +134,11 @@ function About() {
 
                     </div>
                 </div>
-
-            </section>
+	</div>
+				</div>
+				</div>
+			
+            {/* </section> */}
 
         </div>
     )
