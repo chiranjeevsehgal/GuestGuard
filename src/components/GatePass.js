@@ -1,9 +1,15 @@
+import { getAuth, signOut } from 'firebase/auth';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getFirestore } from "firebase/firestore";
+
 
 function GatePass() {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
+
+    const navigate = useNavigate();
 
 
     const handleCheckboxChange = () => {
@@ -13,6 +19,17 @@ function GatePass() {
     const handleButtonClick = () => {
         setShowDetails(!showDetails);
         setButtonDisabled(true);
+    };
+
+    const handleSignOut = () => {
+        const auth = getAuth(); // Get authentication instance
+        signOut(auth)
+        .then(() => {
+            console.log("User signed out");
+            navigate("/signin");
+        }).catch((error) => {
+            console.error("Error signing out:", error);
+        });
     };
 
     return (
@@ -41,7 +58,7 @@ function GatePass() {
                     </ul>
                     <div className="items-center flex-shrink-0 hidden lg:flex">
                         {/* <button className="self-center px-8 py-3 rounded">Sign in</button> */}
-                        <button className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Sign Out</button>
+                        <button className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50" onClick={handleSignOut}>Sign Out</button>
                     </div>
                     <button className="p-4 lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-800">
@@ -54,7 +71,7 @@ function GatePass() {
             <section className="bg-gray-100 text-gray-800">
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
                     <div className="mr-12 bg-gray-100 text-gray-900">
-                        <form novalidate="" action="" className="container flex flex-col mx-auto space-y-12">
+                        <form noValidate="" action="" className="container flex flex-col mx-auto space-y-12">
                             <fieldset className="grid grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
                                 <div className="space-y-2 col-span-full lg:col-span-1">
                                     <p className="font-medium">Personal Information</p>
@@ -62,27 +79,27 @@ function GatePass() {
                                 </div>
                                 <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                                     <div className="col-span-full sm:col-span-3">
-                                        <label for="firstname" className="text-sm">First name</label>
+                                        <label htmlFor="firstname" className="text-sm">First name</label>
                                         <input id="firstname" type="text" placeholder="First name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
-                                        <label for="lastname" className="text-sm">Last name</label>
+                                        <label htmlFor="lastname" className="text-sm">Last name</label>
                                         <input id="lastname" type="text" placeholder="Last name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
-                                        <label for="phone" className="text-sm">Phone Number</label>
+                                        <label htmlFor="phone" className="text-sm">Phone Number</label>
                                         <input id="phone" type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
-                                        <label for="email" className="text-sm">Email</label>
+                                        <label htmlFor="email" className="text-sm">Email</label>
                                         <input id="email" type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full">
-                                        <label for="address" className="text-sm">Address</label>
+                                        <label htmlFor="address" className="text-sm">Address</label>
                                         <input id="address" type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-1">
-                                        <label for="ID" className="text-sm">ID</label>
+                                        <label htmlFor="ID" className="text-sm">ID</label>
                                         {/* <input id="id" type="text" placeholder="ID" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" /> */}
                                         <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400">
                                             <option value="">Select ID</option>
@@ -91,14 +108,14 @@ function GatePass() {
                                             <option value="3">Pan Card</option>
                                         </select>
                                     </div>
-                                        
+
 
                                     <div className="col-span-full sm:col-span-2">
-                                        <label for="idnumber" className="text-sm">ID Number</label>
+                                        <label htmlFor="idnumber" className="text-sm">ID Number</label>
                                         <input id="idnumber" type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
-                                        <label for="purpose" className="text-sm">Purpose</label>
+                                        <label htmlFor="purpose" className="text-sm">Purpose</label>
                                         <input id="purpose" type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">

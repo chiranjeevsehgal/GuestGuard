@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
+import { getAuth, signOut } from "firebase/auth";
+
 function Navigation() {
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleImageLoad = () => {
         setImageLoaded(true);
     };
+
+    const handleSignOut = () => {
+        const auth = getAuth(); // Get authentication instance
+        signOut(auth).then(() => {
+            console.log("User signed out");
+        }).catch((error) => {
+            console.error("Error signing out:", error);
+        });
+    };
+
 
     return (
 
@@ -33,7 +45,7 @@ function Navigation() {
                     </ul>
                     <div className="items-center flex-shrink-0 hidden lg:flex">
                         {/* <button className="self-center px-8 py-3 rounded">Sign in</button> */}
-                        <button className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Sign Out</button>
+                        <button onClick={handleSignOut} className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Sign Out</button>
                     </div>
                     <button className="p-4 lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-800">
