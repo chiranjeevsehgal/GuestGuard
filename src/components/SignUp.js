@@ -53,8 +53,9 @@ function SignUp({ user, app }) {
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
         <div className="relative sm:max-w-sm w-full">
 
-          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
-          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-purple-500 to-red-100 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+          {/* <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-purple-500 to-red-100 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
+          <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
 
 
           {/* <div className="card bg-red-100 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div> */}
@@ -98,7 +99,7 @@ function SignUp({ user, app }) {
               </div>
 
               <div className="mt-7">
-                <button onClick={createUser} type="button" className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button onClick={createUser} type="button" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign Up
                 </button>
               </div>
@@ -112,11 +113,8 @@ function SignUp({ user, app }) {
               </div>
 
               <div className="flex mt-7 justify-center w-full">
-                <button className="mr-5 bg-blue-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
-                  Facebook
-                </button>
-
-                <button className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+              
+                <button className="bg-red-800 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Google
                 </button>
               </div>
@@ -124,7 +122,7 @@ function SignUp({ user, app }) {
               <div className="mt-7">
                 <div className="flex justify-center items-center">
                   <label className="mr-2">Already a user?</label>
-                  <a href="/signin" className=" text-blue-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                  <a href="/signin" className=" text-cyan-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                     Sign In
                   </a>
                 </div>

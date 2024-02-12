@@ -9,12 +9,9 @@ function GatePass() {
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-<<<<<<< Updated upstream:src/components/GatePass.js
     const navigate = useNavigate();
 
 
-=======
->>>>>>> Stashed changes:src/GatePass.js
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -75,7 +72,7 @@ function GatePass() {
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
                     <div className="mr-12 bg-gray-100 text-gray-900">
                         <form noValidate="" action="" className="container flex flex-col mx-auto space-y-12">
-                            <fieldset className="grid grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
+                            <fieldset className="grid grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-gray-50 ">
                                 <div className="space-y-2 col-span-full lg:col-span-1">
                                     <p className="font-medium">Required Information</p>
                                     <p className="text-sm">Please ensure that all mandatory fields are completed accurately. The information provided in these fields is essential for us to effectively process your request.</p>

@@ -31,7 +31,8 @@ function SignIn({ user }) {
     <div className="font-sans">
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
         <div className="relative sm:max-w-sm w-full">
-          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+          {/* <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
+          <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
           <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
             <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
 
@@ -54,14 +55,14 @@ function SignIn({ user }) {
               </div>
 
               <div className="mt-7">
-                <button onClick={signinUser} type="button" className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button onClick={signinUser} type="button" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign In
                 </button>
               </div>
 
               {error ?
                 <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7">
-                  <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-600">
+                  <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-8 w-8">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
@@ -79,7 +80,6 @@ function SignIn({ user }) {
                 : null}
 
 
-
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
                 <label className="block font-medium text-sm text-gray-600 w-full">
@@ -89,10 +89,7 @@ function SignIn({ user }) {
               </div>
 
               <div className="flex mt-7 justify-center w-full">
-                <button className="mr-5 bg-blue-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
-                  Facebook
-                </button>
-
+                
                 <button className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Google
                 </button>
@@ -101,7 +98,7 @@ function SignIn({ user }) {
               <div className="mt-7">
                 <div className="flex justify-center items-center">
                   <label className="mr-2">Not a user?</label>
-                  <a href="/signup" className=" text-blue-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                  <a href="/signup" className=" text-cyan-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                     Sign Up
                   </a>
                 </div>

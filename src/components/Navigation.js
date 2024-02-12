@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-<<<<<<< Updated upstream:src/components/Navigation.js
 import { getAuth, signOut } from "firebase/auth";
-=======
->>>>>>> Stashed changes:src/Navigation.js
+import { useNavigate } from 'react-router-dom';
 
 function Navigation() {
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -10,11 +8,13 @@ function Navigation() {
     const handleImageLoad = () => {
         setImageLoaded(true);
     };
+    const navigate = useNavigate();
 
     const handleSignOut = () => {
         const auth = getAuth(); // Get authentication instance
         signOut(auth).then(() => {
             console.log("User signed out");
+            navigate("/signin");
         }).catch((error) => {
             console.error("Error signing out:", error);
         });
