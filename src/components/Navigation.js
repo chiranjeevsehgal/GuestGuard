@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
 
 
-function Navigation() {
+function Navigation({ user }) {
 
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if (user == null) {
+            navigate("/signin");
+        }
+    }, [])
 
     const [imageLoaded, setImageLoaded] = useState(false);
 
     const handleImageLoad = () => {
         setImageLoaded(true);
     };
-    const navigate = useNavigate();
 
     const handleSignOut = () => {
         const auth = getAuth(); // Get authentication instance

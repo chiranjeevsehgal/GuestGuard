@@ -1,6 +1,16 @@
+import React, { useEffect, useState } from 'react';
 import Header from './Header.js'
-function Faq() {
+import { useNavigate } from 'react-router-dom';
+
+function Faq({ user }) {
+    const navigate = useNavigate();
     
+    useEffect(() => {
+        if (user == null) {
+            navigate("/signin");
+        }
+    }, [])
+
     return (
         
         <div>
