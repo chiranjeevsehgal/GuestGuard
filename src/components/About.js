@@ -15,12 +15,12 @@ function About() {
                     
                                 {/* Product Info */}
                                 <div className="container mx-auto p-4 my-6 space-y-2 text-center">
-                                    {/* <a rel="noopener noreferrer" href="/" className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-600" >Back to dashboard</a> */}
+                                    
 
 
-                                    <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
+                                    {/* <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a> */}
 
-                                    <h2 className="text-5xl font-bold">Revolutionizing Campus Security and Efficiency
+                                    <h2 className="text-5xl font-bold mt-7">Revolutionizing Campus Security and Efficiency
                                     </h2>
                                     <p className="text-gray-600">Centralized Tracking, GPS Integration, and Seamless Navigation for a Safer and More Streamlined Visitor Experience.</p>
                                 </div>
@@ -135,8 +135,8 @@ function About() {
                                                 </a>
                                             </div>
                                         </div>
-
                                     </div>
+                                        <a rel="noopener noreferrer" href="/" className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-500" >Back to dashboard</a>
                                 </div>
                             </div>
                         </div>

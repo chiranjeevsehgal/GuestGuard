@@ -19,9 +19,11 @@ function SignUp({ user, app }) {
     const db = getFirestore(app);
     try {
       const docRef = await addDoc(collection(db, "users"), {
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815
+        // first: "Ada",
+        name:{name},
+        email: {email},
+        password:{password}
+
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
@@ -67,7 +69,7 @@ function SignUp({ user, app }) {
 
           <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
             <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
-            <label htmlFor="" className="block mt-3 text-sm text-gray-700 text-center font-semibold">
+            <label htmlFor="" className="block mt-3 text-lg text-gray-700 text-center font-semibold">
               Sign Up
             </label>
             <form method="#" action="#" className="mt-10">
@@ -95,7 +97,9 @@ function SignUp({ user, app }) {
               </div>
 
               <div className="mt-7">
-                <input placeholder="Confirm Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                <input placeholder="Confirm Password" 
+                type="password"
+                className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
               </div>
 
               <div className="mt-7">
