@@ -14,7 +14,7 @@ function SignIn({ user }) {
     if(user != null) {
       navigate("/gatepass")
     }
-  },[])
+  },[user])
 
 
   const signinUser = () => {
@@ -33,7 +33,7 @@ function SignIn({ user }) {
       {/* <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-blue-50 "> */}
         <div className="relative sm:max-w-sm w-full">
           {/* <div className="absolute inset-0 -mr-3.5 bg-grad  ient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
-          <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
           <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
             <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
 

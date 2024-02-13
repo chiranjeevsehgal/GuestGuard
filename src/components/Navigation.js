@@ -1,4 +1,4 @@
-import React, { useState  } from 'react';
+import React, { useState } from 'react';
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
@@ -23,16 +23,13 @@ function Navigation() {
             console.error("Error signing out:", error);
         });
     };
-    
-    
-    return (
-        
-        // <div className="bg-gray-100 text-gray-800">
-        <div>
-            
-            <Header />
 
-            <div class="px-20 py-6">
+
+    return (
+
+        <div>
+            <Header />
+            <div className="px-20 py-6">
                 <div className="bg-gray-100 text-gray-800">
 
 

@@ -1,17 +1,22 @@
 import { getAuth, signOut } from 'firebase/auth';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getFirestore } from "firebase/firestore";
 import Header from './Header.js'
 
 
-function GatePass() {
+function GatePass({ user }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (user == null) {
+            navigate("/signin");
+        }
+    }, [])
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -22,22 +27,11 @@ function GatePass() {
         setButtonDisabled(true);
     };
 
-    const handleSignOut = () => {
-        const auth = getAuth(); // Get authentication instance
-        signOut(auth)
-        .then(() => {
-            console.log("User signed out");
-            navigate("/signin");
-        }).catch((error) => {
-            console.error("Error signing out:", error);
-        });
-    };
-
 
     return (
         <div>
-            <Header/>
-            
+            <Header />
+
 
             <section className="bg-gray-100 text-gray-800">
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">

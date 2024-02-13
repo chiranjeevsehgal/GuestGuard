@@ -24,7 +24,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Dash />} />
+          <Route path="/" element={<Dash user={user}/>} />
           <Route path="/signin" element={<SignIn user={user}  />} />
           <Route path="/signup" element={<SignUp user={user} app={app} />} />
           <Route path="/navigation" element={<Navigation />} />
