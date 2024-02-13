@@ -1,7 +1,8 @@
 import Header from './Header.js'
 function Faq() {
+    
     return (
-
+        
         <div>
             <Header />
 

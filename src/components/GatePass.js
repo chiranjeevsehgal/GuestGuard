@@ -33,9 +33,10 @@ function GatePass() {
         });
     };
 
+
     return (
         <div>
-            <Header />
+            <Header/>
             
 
             <section className="bg-gray-100 text-gray-800">

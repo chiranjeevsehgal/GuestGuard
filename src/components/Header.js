@@ -1,7 +1,17 @@
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 function Header(){
+    const location = useLocation();
+
+  // Extract the path from the location object
+    const currentPath = location.pathname;
+
+    console.log(currentPath)
+    // console.log(typeof currentPath)
+
     const navigate = useNavigate();
 
     const handleSignOut = () => {
@@ -13,6 +23,36 @@ function Header(){
             console.error("Error signing out:", error);
         });
     };
+    
+    let classn ="flex items-center px-4 -mb-1 border-b-2 border-transparent"; ;
+    let cpath = document.querySelectorAll("a")
+    let cpatharr = Array.from(cpath)
+    
+    
+    if (currentPath==="/gatepass"){        
+        cpatharr.forEach(element => {
+            console.log(element.id)
+            if(element.id == "gatepass"){
+                element.className = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
+            }
+        });
+    }
+    else if (currentPath==="/navigation"){
+        cpatharr.forEach(element => {
+            console.log(element.id)
+            if(element.id == "navigation"){
+                element.className = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
+            }
+        });
+    }
+    else if (currentPath==="/faq"){
+        cpatharr.forEach(element => {
+            console.log(element.id)
+            if(element.id == "faq"){
+                element.className = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
+            }
+        });
+    }
 
     return (
     <header className="p-4 bg-gray-100 text-gray-800">
@@ -25,17 +65,14 @@ function Header(){
                     </a>
                     <ul className="items-stretch hidden space-x-3 lg:flex">
                         <li className="flex">
-                            <a rel="noopener noreferrer" href="/gatepass" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Gate Pass</a>
+                            <a rel="noopener noreferrer" id="gatepass" href="/gatepass" className={classn}>Gate Pass</a>
                         </li>
                         <li className="flex">
-                            <a rel="noopener noreferrer" href="/navigation" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600">Navigation</a>
+                            <a rel="noopener noreferrer" id="navigation" href="/navigation" className={classn}>Navigation</a>
                         </li>
                         <li className="flex">
-                            <a rel="noopener noreferrer" href="/faq" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">FAQ</a>
+                            <a rel="noopener noreferrer" id="faq" href="/faq" className={classn}>FAQ</a>
                         </li>
-                        {/* <li className="flex">
-                        <a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 border-transparent">Link</a>
-                    </li> */}
                     </ul>
                     <div className="items-center flex-shrink-0 hidden lg:flex">
                         {/* <button className="self-center px-8 py-3 rounded">Sign in</button> */}
@@ -45,12 +82,6 @@ function Header(){
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 text-gray-800">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
-                        <ul  className="absolute top-12 bg-white border rounded shadow-md">
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Home</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">About</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Services</li>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Contact</li>
-                        </ul>
                     </button>
                 </div>
             </header>
