@@ -29,74 +29,33 @@ function Navigation() {
 
         <div>
             <Header />
-            <div className="px-20 py-6">
-                <div className="bg-gray-100 text-gray-800">
+            <section className="pt-12 bg-gray-100 text-gray-800">
+                <div className="px-12 mx-auto max-w-7xl">
+                    <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">
+                        <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
+                            <span>Campus Navigation</span>
+                        </h1>
+                        <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
 
-
-                    <section className="bg-gray-100 text-gray-800">
-                        <div className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl">
-                            <h1 className="text-5xl font-extrabold text-gray-900">Campus Navigation</h1>
-                            <p>Navigate the campus with ease</p><p>using our navigation feature.</p>
-                            <p>Whether you're a visitor</p>
-                            <p>or a regular, our system</p>
-                            <p>ensures seamless assistance,</p>
-                            <p>for a stress-free and </p>
-                            <p>efficient experience within the premises.</p>
-
-
-                            {/* <h1 className="text-4xl font-bold leadi sm:text-5xl">Quisquam necessita vel
-                                <span className="text-cyan-600">laborum doloribus</span>delectus
-                            </h1>
-                            <p className="px-8 mt-8 mb-12 text-lg">Cupiditate minima voluptate temporibus quia? Architecto beatae esse ab amet vero eaque explicabo!</p> */}
-                            <div className="flex flex-wrap justify-center">
-                                <div >
+                            <p>Navigate the campus with ease using our navigation feature.</p>
+                            <p>Whether you're a visitor or a regular, our system
+                                ensures seamless assistance, for a stress-free and
+                                efficient experience within the premises.</p>
+                        </p>
+                    </div>
+                    <div className="w-full mx-auto mt-20 text-center md:w-10/12">
+                        <div className="relative z-0 w-full mt-8 mb-20">
+                            <div className="relative overflow-hidden">
                                     {!imageLoaded && (
-                                        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600 absolute"></div>
+                                        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
                                     )}
-                                    <img src="map.jpg" alt="Campus Map" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-500" onLoad={handleImageLoad} />
-                                </div>
+                                    <img src="map.jpg" alt="Campus Map" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-100 " onLoad={handleImageLoad} />
                             </div>
                         </div>
-                    </section>
-
-
-
-                    {/* <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"> */}
-                    {/* <img src="map.jpg" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" /> */}
-                    {/* </div> */}
-
-                    {/* <section className="p-6 bg-gray-100 text-gray-800">
-                        <div className="container grid gap-6 mx-auto text-center lg:grid-cols-6 xl:grid-cols-5">
-                            <div className="w-full px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 bg-gray-50"> */}
-                    {/* <div className="mt-7">
-                                            <button className="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105 mb-7" >
-                                                Sign Out
-                                            </button>
-                                        </div> */}
-                    {/* <a href="/"><span className="block mb-2 text-cyan-600">GuestGuard</span></a>
-                                <h1 className="text-5xl font-extrabold text-gray-900">Campus Navigation</h1>
-                                <p className="my-8"> */}
-                    {/* <span className="font-medium text-gray-900">Modular and versatile.</span>Fugit vero facilis dolor sit neque cupiditate minus esse accusamus cumque at. */}
-                    {/* <p>Navigate the campus with ease</p><p>using our navigation feature.</p>
-                                    <p>Whether you're a visitor</p>
-                                    <p>or a regular, our system</p>
-                                    <p>ensures seamless assistance,</p>
-                                    <p>for a stress-free and </p>
-                                    <p>efficient experience within the premises.</p> */}
-                    {/* </p> */}
-                    {/* <div > */}
-                    {/* {!imageLoaded && (
-                                    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600 absolute"></div>
-                                )}
-                                <img src="map.jpg" alt="Campus Map" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-500" onLoad={handleImageLoad} />
-                            </div>
-                            </div> */}
-                    {/* </div>
-                    </section> */}
-
+                    </div>
                 </div>
+            </section>
             </div>
-        </div>
     )
 }
 
