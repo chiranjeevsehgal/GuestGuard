@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "./services/firebase.js";
 import './App.css';
 import Dash from './components/Dash.js'
