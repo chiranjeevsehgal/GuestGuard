@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getAuth, signOut } from "firebase/auth";
+// import { getAuth, signOut } from "firebase/auth";
+import { getAuth} from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
 
@@ -8,11 +9,19 @@ function Navigation({ user }) {
 
     const navigate = useNavigate();
     
+   
     useEffect(() => {
-        if (user == null) {
-            navigate("/signin");
-        }
-    }, [])
+        const auth = getAuth();
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in, do nothing
+            } else {
+                navigate("/signin");
+            }
+        });
+    
+        return unsubscribe;
+    }, []);
 
     const [imageLoaded, setImageLoaded] = useState(false);
 
@@ -20,15 +29,6 @@ function Navigation({ user }) {
         setImageLoaded(true);
     };
 
-    const handleSignOut = () => {
-        const auth = getAuth(); // Get authentication instance
-        signOut(auth).then(() => {
-            console.log("User signed out");
-            navigate("/signin");
-        }).catch((error) => {
-            console.error("Error signing out:", error);
-        });
-    };
 
 
     return (

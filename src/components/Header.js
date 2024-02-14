@@ -23,36 +23,6 @@ function Header() {
     let classn = "flex items-center px-4 -mb-1 border-b-2 border-transparent";
     let classActive = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
 
-
-    // let cpath = document.querySelectorAll("a")
-    // let cpatharr = Array.from(cpath)
-
-
-    // if (currentPath === "/gatepass") {
-    //     cpatharr.forEach(element => {
-    //         console.log(element.id)
-    //         if (element.id == "gatepass") {
-    //             element.className = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
-    //         }
-    //     });
-    // }
-    // else if (currentPath === "/navigation") {
-    //     cpatharr.forEach(element => {
-    //         console.log(element.id)
-    //         if (element.id == "navigation") {
-    //             element.className = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
-    //         }
-    //     });
-    // }
-    // else if (currentPath === "/faq") {
-    //     cpatharr.forEach(element => {
-    //         console.log(element.id)
-    //         if (element.id == "faq") {
-    //             element.className = "flex items-center px-4 -mb-1 border-b-2 border-transparent text-cyan-600 border-cyan-600";
-    //         }
-    //     });
-    // }
-
     return (
         <header className="p-4 bg-gray-100 text-gray-800">
             <div className="container flex justify-between h-16 mx-auto">

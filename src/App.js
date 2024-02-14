@@ -27,10 +27,10 @@ function App() {
           <Route path="/" element={<Dash user={user}/>} />
           <Route path="/signin" element={<SignIn user={user}  />} />
           <Route path="/signup" element={<SignUp user={user} app={app} />} />
-          <Route path="/navigation" element={<Navigation />} />
+          <Route path="/navigation" element={<Navigation user={user}/>} />
           <Route path="/gatepass" element={<GatePass user={user} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/faq" element={<Faq />} />
+          <Route path="/faq" element={<Faq user={user} />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
