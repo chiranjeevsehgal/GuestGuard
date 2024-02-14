@@ -105,7 +105,7 @@ function Header() {
                             </li>
                         </ul>
                         
-                        <button onClick={handleSignOut} className="self-center ml-8 px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Sign Out</button>
+                        <button onClick={handleSignOut} className="self-center ml-14 px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Sign Out</button>
                     </div>
                     </nav>
                     <style>{`
