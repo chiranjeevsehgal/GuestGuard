@@ -1,12 +1,12 @@
-import { getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {  addDoc, collection, getFirestore } from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 import Header from './Header.js'
 
 
 
-function GatePass({ user,app }) {
+function GatePass({ user, app }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -17,8 +17,10 @@ function GatePass({ user,app }) {
     const [phonenumber, setPhoneNumber] = useState("");
     const [address, setAddress] = useState("");
     const [ID, setID] = useState("");
+    const [IDtype, setIDType] = useState("");
     const [purpose, setPurpose] = useState("");
- 
+    const [error, setError] = useState(null);
+
 
     const navigate = useNavigate();
 
@@ -31,40 +33,73 @@ function GatePass({ user,app }) {
                 navigate("/signin");
             }
         });
-    
+
         return unsubscribe;
     }, []);
 
     async function addNewUser() {
         const db = getFirestore(app);
         try {
-          const docRef = await addDoc(collection(db, "users"), {
-            name:{fullname},
-            // firstname:{firstname},
-            // lastname:{lastname},
-            phonenumber:{phonenumber},
-            email: {email},
-            address:{address},
-            ID:{ID},
-            purpose:{purpose}
-    
-          });
-          console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
-      }
+            const docRef = await addDoc(collection(db, "users"), {
+                name: { fullname },
+                // firstname:{firstname},
+                // lastname:{lastname},
+                phonenumber: { phonenumber },
+                email: { email },
+                address: { address },
+                IDtype: { IDtype },
+                ID: { ID },
+                purpose: { purpose }
 
-          
+            });
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    }
+
+
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
 
     const handleButtonClick = () => {
-        addNewUser()
-        setShowDetails(!showDetails);
-        setButtonDisabled(true);
+        
+        if (handlevalidation()) {
+            setError(null)
+            addNewUser()
+            setShowDetails(!showDetails);
+            setButtonDisabled(true);
+        }
+        else {
+            console.log("Error");
+            setError('Invalid Username or Password')
+        }
     };
+
+    const handlevalidation = () => {
+        const datobj = {
+            name: { fullname },
+            phonenumber: { phonenumber },
+            email: { email },
+            address: { address },
+            IDtype: { IDtype },
+            ID: { ID },
+            purpose: { purpose }
+        }
+
+        let flag = true
+        for (const key in datobj) {
+            if (datobj.hasOwnProperty(key)) {
+
+                // console.log(datobj[key][Object.keys(datobj[key])[0]]);
+                if (datobj[key][Object.keys(datobj[key])[0]] == "") {
+                    flag = false
+                }
+            }
+        }
+        return flag
+    }
 
 
     return (
@@ -84,10 +119,12 @@ function GatePass({ user,app }) {
                                 <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="name" className="text-sm">Name</label>
-                                        <input id="name" 
-                                        onChange={(e) => setFullName(e.target.value)}
-                                        value={fullname}
-                                        type="text" placeholder="Name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="name"
+                                            onChange={(e) => {
+                                                setFullName(e.target.value)
+                                            }}
+                                            value={fullname}
+                                            type="text" placeholder="Name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     {/* <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="lastname" className="text-sm">Last name</label>
@@ -98,52 +135,78 @@ function GatePass({ user,app }) {
                                     </div> */}
                                     <div className="col-span-full sm:col-span-1">
                                         <label htmlFor="ID" className="text-sm">ID</label>
-                                        {/* <input id="id" type="text" placeholder="ID" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" /> */}
-                                        <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400">
+                                        {/* <input id="id" type="text" placeholder="ID" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" /> */}  
+                                        <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400" 
+                                        onChange={(e) => {
+                                            setIDType(e.target.value == "1" ? "Aadhar Card" : (e.target.value == "2" ? "Driving License" : "Pan Card"))
+                                        }}
+                                        datap={IDtype}>
                                             <option value="">Select ID</option>
                                             <option value="1">Aadhar Card</option>
                                             <option value="2">Driving License</option>
                                             <option value="3">Pan Card</option>
                                         </select>
                                     </div>
+                                    
                                     <div className="col-span-full sm:col-span-2">
                                         <label htmlFor="idnumber" className="text-sm">ID Number</label>
-                                        <input id="idnumber" 
-                                        onChange={(e) => setID(e.target.value)}
-                                        value={ID}
-                                        type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="idnumber"
+                                            onChange={(e) => setID(e.target.value)}
+                                            value={ID}
+                                            type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="phone" className="text-sm">Phone Number</label>
-                                        <input id="phone" 
-                                        onChange={(e) => setPhoneNumber(e.target.value)}
-                                        value={phonenumber}
-                                        type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="phone"
+                                            onChange={(e) => setPhoneNumber(e.target.value)}
+                                            value={phonenumber}
+                                            type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="email" className="text-sm">Email</label>
-                                        <input id="email" 
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        value={email}type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="email"
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full">
                                         <label htmlFor="address" className="text-sm">Address</label>
-                                        <input id="address" 
-                                        onChange={(e) => setAddress(e.target.value)}
-                                        value={address}
-                                        type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="address"
+                                            onChange={(e) => setAddress(e.target.value)}
+                                            value={address}
+                                            type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
                                         <label htmlFor="purpose" className="text-sm">Purpose</label>
-                                        <input id="purpose" 
-                                        onChange={(e) => setPurpose(e.target.value)}
-                                        value={purpose}
-                                        type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="purpose"
+                                            onChange={(e) => setPurpose(e.target.value)}
+                                            value={purpose}
+                                            type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                    </div>
+                                    <div className="col-span-full sm:col-span-full">
+                                        {error ?
+                                            <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7 mb-5">
+                                                <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-800">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-8 w-8">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                </div>
+                                                <div className="p-4 flex-1">
+                                                    <h3 className="text-xl font-bold">Error</h3>
+                                                    <p className="text-sm text-gray-600">Invalid details.</p>
+                                                </div>
+                                                <button className="absolute top-2 right-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 p-2 rounded cursor-pointer">
+                                                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            : null}
+
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
                                         {/* <button onClick={addNewUser} type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button> */}
-                                        <button onClick={handleButtonClick} disabled={buttonDisabled} 
- type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
+                                        <button onClick={handleButtonClick} disabled={buttonDisabled}
+                                            type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
                                     </div>
                                 </div>
                             </fieldset>
