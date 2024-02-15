@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { addDoc, collection, getFirestore } from "firebase/firestore";
+// import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 function SignUp({ user, app }) {
@@ -15,29 +15,29 @@ function SignUp({ user, app }) {
       navigate("/gatepass");
   }, [])
 
-  async function addNewUser() {
-    const db = getFirestore(app);
-    try {
-      const docRef = await addDoc(collection(db, "users"), {
-        // first: "Ada",
-        name:{name},
-        email: {email},
-        password:{password}
+  // async function addNewUser() {
+  //   const db = getFirestore(app);
+  //   try {
+  //     const docRef = await addDoc(collection(db, "users"), {
+  //       // first: "Ada",
+  //       name:{name},
+  //       email: {email},
+  //       password:{password}
 
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  }
+  //     });
+  //     console.log("Document written with ID: ", docRef.id);
+  //   } catch (e) {
+  //     console.error("Error adding document: ", e);
+  //   }
+  // }
 
 
   const createUser = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        console.log("Sign up success");
-        addNewUser()
+        console.log("Sign up success")
+        // addNewUser()
           .then(() => {
             navigate("/signin")
           }).catch(() => {
@@ -57,7 +57,7 @@ function SignUp({ user, app }) {
 
           {/* <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
           <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-purple-500 to-red-100 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
-          <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
 
 
           {/* <div className="card bg-red-100 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div> */}
