@@ -11,9 +11,9 @@ function GatePass({ user,app }) {
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
 
-    const [firstname, setFirstName] = useState("");
+    const [fullname, setFullName] = useState("");
     const [email, setEmail] = useState("");
-    const [lastname, setLastName] = useState("");
+    // const [lastname, setLastName] = useState("");
     const [phonenumber, setPhoneNumber] = useState("");
     const [address, setAddress] = useState("");
     const [ID, setID] = useState("");
@@ -39,8 +39,9 @@ function GatePass({ user,app }) {
         const db = getFirestore(app);
         try {
           const docRef = await addDoc(collection(db, "users"), {
-            firstname:{firstname},
-            lastname:{lastname},
+            name:{fullname},
+            // firstname:{firstname},
+            // lastname:{lastname},
             phonenumber:{phonenumber},
             email: {email},
             address:{address},
@@ -82,18 +83,35 @@ function GatePass({ user,app }) {
                                 </div>
                                 <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                                     <div className="col-span-full sm:col-span-3">
-                                        <label htmlFor="firstname" className="text-sm">First name</label>
-                                        <input id="firstname" 
-                                        onChange={(e) => setFirstName(e.target.value)}
-                                        value={firstname}
-                                        type="text" placeholder="First name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <label htmlFor="name" className="text-sm">Name</label>
+                                        <input id="name" 
+                                        onChange={(e) => setFullName(e.target.value)}
+                                        value={fullname}
+                                        type="text" placeholder="Name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
-                                    <div className="col-span-full sm:col-span-3">
+                                    {/* <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="lastname" className="text-sm">Last name</label>
                                         <input id="lastname" 
                                         onChange={(e) => setLastName(e.target.value)}
                                         value={lastname}
                                         type="text" placeholder="Last name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                    </div> */}
+                                    <div className="col-span-full sm:col-span-1">
+                                        <label htmlFor="ID" className="text-sm">ID</label>
+                                        {/* <input id="id" type="text" placeholder="ID" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" /> */}
+                                        <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400">
+                                            <option value="">Select ID</option>
+                                            <option value="1">Aadhar Card</option>
+                                            <option value="2">Driving License</option>
+                                            <option value="3">Pan Card</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-span-full sm:col-span-2">
+                                        <label htmlFor="idnumber" className="text-sm">ID Number</label>
+                                        <input id="idnumber" 
+                                        onChange={(e) => setID(e.target.value)}
+                                        value={ID}
+                                        type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="phone" className="text-sm">Phone Number</label>
@@ -114,25 +132,6 @@ function GatePass({ user,app }) {
                                         onChange={(e) => setAddress(e.target.value)}
                                         value={address}
                                         type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
-                                    </div>
-                                    <div className="col-span-full sm:col-span-1">
-                                        <label htmlFor="ID" className="text-sm">ID</label>
-                                        {/* <input id="id" type="text" placeholder="ID" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" /> */}
-                                        <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400">
-                                            <option value="">Select ID</option>
-                                            <option value="1">Aadhar Card</option>
-                                            <option value="2">Driving License</option>
-                                            <option value="3">Pan Card</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div className="col-span-full sm:col-span-2">
-                                        <label htmlFor="idnumber" className="text-sm">ID Number</label>
-                                        <input id="idnumber" 
-                                        onChange={(e) => setID(e.target.value)}
-                                        value={ID}
-                                        type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
                                         <label htmlFor="purpose" className="text-sm">Purpose</label>
