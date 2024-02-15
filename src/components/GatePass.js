@@ -1,14 +1,24 @@
 import { getAuth} from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFirestore } from "firebase/firestore";
+import {  addDoc, collection, getFirestore } from "firebase/firestore";
 import Header from './Header.js'
 
 
-function GatePass({ user }) {
+
+function GatePass({ user,app }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
+
+    const [firstname, setFirstName] = useState("");
+    const [email, setEmail] = useState("");
+    const [lastname, setLastName] = useState("");
+    const [phonenumber, setPhoneNumber] = useState("");
+    const [address, setAddress] = useState("");
+    const [ID, setID] = useState("");
+    const [purpose, setPurpose] = useState("");
+ 
 
     const navigate = useNavigate();
 
@@ -25,6 +35,25 @@ function GatePass({ user }) {
         return unsubscribe;
     }, []);
 
+    async function addNewUser() {
+        const db = getFirestore(app);
+        try {
+          const docRef = await addDoc(collection(db, "users"), {
+            firstname:{firstname},
+            lastname:{lastname},
+            phonenumber:{phonenumber},
+            email: {email},
+            address:{address},
+            ID:{ID},
+            purpose:{purpose}
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
+
+          
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -52,23 +81,37 @@ function GatePass({ user }) {
                                 <div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="firstname" className="text-sm">First name</label>
-                                        <input id="firstname" type="text" placeholder="First name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="firstname" 
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        value={firstname}
+                                        type="text" placeholder="First name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="lastname" className="text-sm">Last name</label>
-                                        <input id="lastname" type="text" placeholder="Last name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="lastname" 
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        value={lastname}
+                                        type="text" placeholder="Last name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="phone" className="text-sm">Phone Number</label>
-                                        <input id="phone" type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="phone" 
+                                        onChange={(e) => setPhoneNumber(e.target.value)}
+                                        value={phonenumber}
+                                        type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="email" className="text-sm">Email</label>
-                                        <input id="email" type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="email" 
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={email}type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full">
                                         <label htmlFor="address" className="text-sm">Address</label>
-                                        <input id="address" type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="address" 
+                                        onChange={(e) => setAddress(e.target.value)}
+                                        value={address}
+                                        type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-1">
                                         <label htmlFor="ID" className="text-sm">ID</label>
@@ -84,14 +127,20 @@ function GatePass({ user }) {
 
                                     <div className="col-span-full sm:col-span-2">
                                         <label htmlFor="idnumber" className="text-sm">ID Number</label>
-                                        <input id="idnumber" type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="idnumber" 
+                                        onChange={(e) => setID(e.target.value)}
+                                        value={ID}
+                                        type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
                                         <label htmlFor="purpose" className="text-sm">Purpose</label>
-                                        <input id="purpose" type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
+                                        <input id="purpose" 
+                                        onChange={(e) => setPurpose(e.target.value)}
+                                        value={purpose}
+                                        type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
-                                        <button onClick={handleButtonClick} disabled={buttonDisabled} className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
+                                        <button onClick={addNewUser} type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
                                     </div>
                                 </div>
                             </fieldset>

@@ -10,7 +10,6 @@ function Faq({ user }) {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                // User is signed in, do nothing
             } else {
                 navigate("/signin");
             }
