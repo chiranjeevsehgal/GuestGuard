@@ -46,6 +46,7 @@ function GatePass({ user,app }) {
             address:{address},
             ID:{ID},
             purpose:{purpose}
+    
           });
           console.log("Document written with ID: ", docRef.id);
         } catch (e) {
@@ -59,6 +60,7 @@ function GatePass({ user,app }) {
     };
 
     const handleButtonClick = () => {
+        addNewUser()
         setShowDetails(!showDetails);
         setButtonDisabled(true);
     };
@@ -140,7 +142,9 @@ function GatePass({ user,app }) {
                                         type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
-                                        <button onClick={addNewUser} type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
+                                        {/* <button onClick={addNewUser} type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button> */}
+                                        <button onClick={handleButtonClick} disabled={buttonDisabled} 
+ type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
                                     </div>
                                 </div>
                             </fieldset>
