@@ -17,7 +17,8 @@ function SignIn({ user }) {
   },[user])
 
 
-  const signinUser = () => {
+  const signinUser = (e) => {
+    e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then(() =>
         navigate("/gatepass")
@@ -26,6 +27,8 @@ function SignIn({ user }) {
         setError('Invalid Username or Password')
       );
   };
+
+  
 
   return (
     <div className="font-sans">
@@ -40,23 +43,26 @@ function SignIn({ user }) {
             <label htmlFor="" className="block mt-3 text-lg text-gray-700 text-center font-semibold">
               Sign In
             </label>
-            <form method="#" action="#" className="mt-10">
+            <form method="#" action="#" className="mt-10" onSubmit={signinUser}>
               <div className="mt-7">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                  type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  required/>
               </div>
 
               <div className="mt-7">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
-                  type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" />
+                  type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  required
+                  />
               </div>
 
               <div className="mt-7">
-                <button onClick={signinUser} type="button" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button type="submit" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign In
                 </button>
               </div>

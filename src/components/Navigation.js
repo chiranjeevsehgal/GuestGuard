@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import { getAuth, signOut } from "firebase/auth";
-import { getAuth} from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
 
@@ -8,8 +8,8 @@ import Header from './Header.js'
 function Navigation({ user }) {
 
     const navigate = useNavigate();
-    
-   
+
+
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -19,7 +19,7 @@ function Navigation({ user }) {
                 navigate("/signin");
             }
         });
-    
+
         return unsubscribe;
     }, []);
 
@@ -52,16 +52,20 @@ function Navigation({ user }) {
                     <div className="w-full mx-auto mt-20 text-center md:w-10/12">
                         <div className="relative z-0 w-full mt-8 mb-20">
                             <div className="relative overflow-hidden">
-                                    {!imageLoaded && (
+                                {!imageLoaded && (
+                                    // <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
+                                    <div className="flex justify-center items-center h-16">
                                         <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
-                                    )}
-                                    <img src="map.jpg" alt="Campus Map" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-100 " onLoad={handleImageLoad} />
+                                    </div>
+
+                                )}
+                                <img src="map.jpg" alt="Campus Map" className="object-cover w-full rounded-md xl:col-span-3 bg-gray-100 " onLoad={handleImageLoad} />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            </div>
+        </div>
     )
 }
 

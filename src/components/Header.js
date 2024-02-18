@@ -7,7 +7,6 @@ import { Button } from "@chakra-ui/react";
 
 
 
-
 function Header() {
 
     const [isNavOpen, setIsNavOpen] = useState(false);
