@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 // import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import {getFirestore,} from "firebase/firestore";
+import { doc, setDoc} from "firebase/firestore"; 
 
 function SignUp({ user, app }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
-  const [name, setname] = useState("");
+  const [fullname, setname] = useState("");
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -20,21 +22,7 @@ function SignUp({ user, app }) {
       navigate("/gatepass");
   }, [])
 
-  // async function addNewUser() {
-  //   const db = getFirestore(app);
-  //   try {
-  //     const docRef = await addDoc(collection(db, "users"), {
-  //       // first: "Ada",
-  //       name:{name},
-  //       email: {email},
-  //       password:{password}
-
-  //     });
-  //     console.log("Document written with ID: ", docRef.id);
-  //   } catch (e) {
-  //     console.error("Error adding document: ", e);
-  //   }
-  // }
+  
 
 
   const createUser = (e) => {
@@ -48,7 +36,7 @@ function SignUp({ user, app }) {
           setButtonDisabled(true)
           // console.log("Sign up success")
           setSuccess('Sign up success')
-            // addNewUser()
+            addNewUser()
             .then(() => {
               navigate("/signin")
             }).catch(() => {
@@ -67,6 +55,19 @@ function SignUp({ user, app }) {
     // }
   };
 
+  async function addNewUser() {
+    const db = getFirestore(app);
+    try {
+      const docRef = await setDoc(doc(db, "signUp",email), {
+        fullname,
+        email,
+
+      });
+      console.log("Document written with ID: ");
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
   // const handlevalidation = () => {
   //   const datobj = {
   //     name: { name },
@@ -117,7 +118,7 @@ function SignUp({ user, app }) {
               <div>
                 <input
                   onChange={(e) => setname(e.target.value)}
-                  value={name}
+                  value={fullname}
                   type="text" placeholder="Name" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor" 
                   required/>
               </div>

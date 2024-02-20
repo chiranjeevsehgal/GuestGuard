@@ -45,7 +45,7 @@ function GatePass({ user, app }) {
     async function addNewUser() {
         const db = getFirestore(app);
         try {
-          const docRef = await setDoc(doc(db, "users",phonenumber), {
+          const docRef = await setDoc(doc(db, "gatepass",phonenumber), {
             fullname,
             phonenumber,
             email,
@@ -62,7 +62,7 @@ function GatePass({ user, app }) {
 
       const fetchUserData = async (phonenumber) => {
         const db = getFirestore(app);       
-         const userRef = doc(db, "users", phonenumber);
+         const userRef = doc(db, "gatepass", phonenumber);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
             setUserData(docSnap.data());
