@@ -19,16 +19,18 @@ function App() {
   const [user, setUser] = useState(null);
 
   onAuthStateChanged(getAuth(app), (user) => setUser(user));
-
+  //adarsh
+  const [useremail, setUserEmail] = useState("");
+  const [username, setUsername] = useState("");
   return (
     <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dash user={user}/>} />
           <Route path="/signin" element={<SignIn user={user}  />} />
-          <Route path="/signup" element={<SignUp user={user} app={app} />} />
+          <Route path="/signup" element={<SignUp setUserEmail={setUserEmail} setUsername={setUsername} user={user} app={app} />} />
           <Route path="/navigation" element={<Navigation user={user}/>} />
-          <Route path="/gatepass" element={<GatePass user={user} />} />
+          <Route path="/gatepass" element={<GatePass username={username} useremail={useremail} user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq user={user} />} />
           <Route path="/admin" element={<Admin />} />

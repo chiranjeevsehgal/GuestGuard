@@ -21,6 +21,9 @@ function SignIn({ user }) {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
       .then(() =>
+      //request firesbase for usenasme related to the email and password
+      //setusername=username
+      //setemail=email
         navigate("/gatepass")
       )
       .catch(() =>
@@ -28,6 +31,17 @@ function SignIn({ user }) {
       );
   };
 
+//   const fetchUserData = async (email) => {
+//     const db = getFirestore(app);       
+//      const userRef = doc(db, "signUp", email);
+//     const docSnap = await getDoc(userRef);
+//     if (docSnap.exists()) {
+//         setUserData(docSnap.data());
+//     } else {
+//         console.log("No such document!");
+//         setUserData(null);
+//     }
+// };
   
 
   return (

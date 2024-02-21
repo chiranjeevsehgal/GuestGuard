@@ -5,14 +5,15 @@ import { useNavigate } from "react-router-dom";
 import {getFirestore,} from "firebase/firestore";
 import { doc, setDoc} from "firebase/firestore"; 
 
-function SignUp({ user, app }) {
-  const [email, setEmail] = useState("");
+function SignUp({ user, app,setUserEmail,setUsername }) {
+   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
   const [fullname, setname] = useState("");
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+
 
 
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ function SignUp({ user, app }) {
           setSuccess('Sign up success')
             addNewUser()
             .then(() => {
+              
               navigate("/signin")
             }).catch(() => {
               //  Show Relevant Error Message
@@ -64,6 +66,8 @@ function SignUp({ user, app }) {
 
       });
       console.log("Document written with ID: ");
+      setUserEmail(email)
+      setUsername(fullname)
     } catch (e) {
       console.error("Error adding document: ", e);
     }
