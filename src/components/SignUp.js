@@ -6,7 +6,9 @@ import {getFirestore,} from "firebase/firestore";
 import { doc, setDoc} from "firebase/firestore"; 
 
 function SignUp({ user, app,setUserEmail,setUsername }) {
-   const [email, setEmail] = useState("");
+  
+  const [email, setEmail] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
   const [fullname, setname] = useState("");
@@ -63,6 +65,7 @@ function SignUp({ user, app,setUserEmail,setUsername }) {
       const docRef = await setDoc(doc(db, "signUp",email), {
         fullname,
         email,
+        phonenumber
 
       });
       console.log("Document written with ID: ");
@@ -123,15 +126,25 @@ function SignUp({ user, app,setUserEmail,setUsername }) {
                 <input
                   onChange={(e) => setname(e.target.value)}
                   value={fullname}
-                  type="text" placeholder="Name" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor" 
+                  type="text" placeholder="Name" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor" 
                   required/>
               </div>
 
               <div className="mt-7">
                 <input
+                  onChange={(e) => setPhonenumber(e.target.value)}
+                  value={phonenumber}
+                  type="tel" placeholder="Phone Number" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  required
+                  pattern="[0-9]{10}"
+                  />
+              </div>
+              
+              <div className="mt-7">
+                <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  type="email" placeholder="Email" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
                   required
                   />
               </div>
@@ -141,7 +154,7 @@ function SignUp({ user, app,setUserEmail,setUsername }) {
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   type="password"
-                  placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
                   required/>
               </div>
 
@@ -151,7 +164,7 @@ function SignUp({ user, app,setUserEmail,setUsername }) {
                 value={cnfpassword}
                 placeholder="Confirm Password"
                   type="password"
-                  className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
                   required/>
               </div>
 
