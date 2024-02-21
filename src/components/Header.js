@@ -8,7 +8,7 @@ import { Button } from "@chakra-ui/react";
 
 
 function Header(props) {
-
+    console.log(props)
     const [isNavOpen, setIsNavOpen] = useState(false);
 
     const location = useLocation();
@@ -21,8 +21,8 @@ function Header(props) {
         const auth = getAuth(); // Get authentication instance
         signOut(auth).then(() => {
             console.log("User signed out");
-            //setusername=""
-            //setUserEmail=""
+            props.setUsername("")
+            props.setUserEmail("")
             navigate("/signin");
         }).catch((error) => {
             console.error("Error signing out:", error);
@@ -101,8 +101,8 @@ function Header(props) {
                             <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
                             <section>
                         {/* ----------------------- */}
-                            <Button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" class=" hover:bg-gray-50 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-cyan-600 border-cyan-600 md:p-0 flex items-center justify-between w-full md:w-auto" onClick={() => setIsNavOpen((prev) => !prev)}>Profile
-                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                            <Button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className=" hover:bg-gray-50 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-cyan-600 border-cyan-600 md:p-0 flex items-center justify-between w-full md:w-auto" onClick={() => setIsNavOpen((prev) => !prev)}>Profile
+                            <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                             {/* <div
                                 className=" space-y-2"
                                 onClick={() => setIsNavOpen((prev) => !prev)}
@@ -188,7 +188,7 @@ function Header(props) {
                                     
                                     {/* <!-- Dropdown menu --> */}
                                     
-                                <div id="dropdownNavbar" class="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4">
+                                <div id="dropdownNavbar" className="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4">
                                     
                                     
                                         {/* <div className="max-w-md p-8 sm:flex sm:space-x-6 bg-gray-50 text-gray-800">

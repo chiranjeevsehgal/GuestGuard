@@ -9,7 +9,7 @@ import { doc, setDoc,getDoc } from "firebase/firestore";
 
 
 
-function GatePass({ user, app,username,useremail }) {
+function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -141,7 +141,7 @@ function GatePass({ user, app,username,useremail }) {
 
     return (
         <div>
-            <Header username={username} useremail={useremail} />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername}username={username} useremail={useremail} />
 
 
             <section className="bg-gray-100 text-gray-800">

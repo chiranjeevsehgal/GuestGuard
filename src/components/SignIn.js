@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import {getFirestore,} from "firebase/firestore";
+import { doc, getDoc} from "firebase/firestore"; 
 
-function SignIn({ user }) {
+function SignIn({ user,app,setUserEmail,setUsername }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const [userData, setUserData] = useState({
+    email:"",
+    fullName:""
+  });
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -20,28 +26,38 @@ function SignIn({ user }) {
   const signinUser = (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
-      .then(() =>
+      .then(() =>{
       //request firesbase for usenasme related to the email and password
       //setusername=username
       //setemail=email
-        navigate("/gatepass")
+        fetchUserData(email)
+        
+      }
       )
       .catch(() =>
         setError('Invalid Username or Password')
       );
   };
 
-//   const fetchUserData = async (email) => {
-//     const db = getFirestore(app);       
-//      const userRef = doc(db, "signUp", email);
-//     const docSnap = await getDoc(userRef);
-//     if (docSnap.exists()) {
-//         setUserData(docSnap.data());
-//     } else {
-//         console.log("No such document!");
-//         setUserData(null);
-//     }
-// };
+  const fetchUserData = async (email) => {
+    console.log("test")
+    const db = getFirestore(app);       
+     const userRef = doc(db, "signUp", email);
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+        //setUserData(docSnap.data());
+        //setUserData({email:docSnap.data.email,fullName:docSnap.data.fullName})
+        console.log(docSnap.data());
+        //console.log(userData)
+        setUserEmail(docSnap.data().email)
+        setUsername(docSnap.data().fullname)
+        navigate("/gatepass")
+       
+    } else {
+        console.log("No such document!");
+        setUserData(null);
+    }
+};
   
 
   return (
@@ -62,7 +78,7 @@ function SignIn({ user }) {
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  type="email" placeholder="Email" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  type="email" placeholder="Email" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
                   required/>
               </div>
 
@@ -70,7 +86,7 @@ function SignIn({ user }) {
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
-                  type="password" placeholder="Password" className="mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  type="password" placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
                   required
                   />
               </div>
