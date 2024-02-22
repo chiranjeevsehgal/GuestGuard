@@ -22,17 +22,18 @@ function App() {
   //adarsh
   const [useremail, setUserEmail] = useState("");
   const [username, setUsername] = useState("");
+  const [userNumber, setUserNumber] = useState("");
   return (
     <div>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Dash user={user}/>} />
-          <Route path="/signin" element={<SignIn setUserEmail={setUserEmail} setUsername={setUsername} user={user}  />} />
-          <Route path="/signup" element={<SignUp setUserEmail={setUserEmail} setUsername={setUsername} user={user} app={app} />} />
-          <Route path="/navigation" element={<Navigation user={user}/>} />
-          <Route path="/gatepass" element={<GatePass username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} user={user} />} />
+          <Route path="/signin" element={<SignIn setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user}  />} />
+          <Route path="/signup" element={<SignUp setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user} app={app} />} />
+          <Route path="/navigation" element={<Navigation username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user}/>} />
+          <Route path="/gatepass" element={<GatePass username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/faq" element={<Faq user={user} />} />
+          <Route path="/faq" element={<Faq username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>

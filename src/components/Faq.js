@@ -3,7 +3,7 @@ import Header from './Header.js'
 import { useNavigate } from 'react-router-dom';
 import { getAuth} from 'firebase/auth';
 
-function Faq({ user }) {
+function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber  }) {
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -21,7 +21,7 @@ function Faq({ user }) {
     return (
         
         <div>
-            <Header />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername} username={username} useremail={useremail} setUserNumber={setUserNumber} userNumber={userNumber}/>
 
             <section className="bg-gray-100 text-gray-800">
                 <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">

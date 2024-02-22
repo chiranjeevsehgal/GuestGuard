@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {getFirestore,} from "firebase/firestore";
 import { doc, getDoc} from "firebase/firestore"; 
 
-function SignIn({ user,app,setUserEmail,setUsername }) {
+function SignIn({ user,app,setUserEmail,setUsername, setUserNumber}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
@@ -51,6 +51,7 @@ function SignIn({ user,app,setUserEmail,setUsername }) {
         //console.log(userData)
         setUserEmail(docSnap.data().email)
         setUsername(docSnap.data().fullname)
+        setUserNumber(docSnap.data().phonenumber)
         navigate("/gatepass")
        
     } else {

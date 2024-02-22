@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
 
 
-function Navigation({ user }) {
+function Navigation({ user,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber }) {
 
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function Navigation({ user }) {
     return (
 
         <div>
-            <Header />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername} username={username} useremail={useremail} setUserNumber={setUserNumber} userNumber={userNumber} />
             <section className="pt-12 bg-gray-100 text-gray-800">
                 <div className="px-12 mx-auto max-w-7xl">
                     <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center">

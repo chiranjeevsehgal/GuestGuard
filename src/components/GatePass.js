@@ -1,7 +1,6 @@
 import { getAuth } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { addDoc, collection, getFirestore } from "firebase/firestore";
 import Header from './Header.js'
 
 import {getFirestore,} from "firebase/firestore";
@@ -9,7 +8,7 @@ import { doc, setDoc,getDoc } from "firebase/firestore";
 
 
 
-function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
+function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -72,26 +71,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
         }
     };
 
-    // async function addNewUser() {
-    //     const db = getFirestore(app);
-    //     try {
-    //         const docRef = await addDoc(collection(db, "users"), {
-    //             name: { fullname },
-    //             // firstname:{firstname},
-    //             // lastname:{lastname},
-    //             phonenumber: { phonenumber },
-    //             email: { email },
-    //             address: { address },
-    //             IDtype: { IDtype },
-    //             ID: { ID },
-    //             purpose: { purpose }
-
-    //         });
-    //         console.log("Document written with ID: ", docRef.id);
-    //     } catch (e) {
-    //         console.error("Error adding document: ", e);
-    //     }
-    // }
+  
 
 
     const handleCheckboxChange = () => {
@@ -141,7 +121,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
 
     return (
         <div>
-            <Header setUserEmail={setUserEmail} setUsername={setUsername}username={username} useremail={useremail} />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername} username={username} useremail={useremail} setUserNumber={setUserNumber} userNumber={userNumber}/>
 
 
             <section className="bg-gray-100 text-gray-800">

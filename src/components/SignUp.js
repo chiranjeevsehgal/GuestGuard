@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {getFirestore,} from "firebase/firestore";
 import { doc, setDoc} from "firebase/firestore"; 
 
-function SignUp({ user, app,setUserEmail,setUsername }) {
+function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
   
   const [email, setEmail] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
@@ -71,6 +71,7 @@ function SignUp({ user, app,setUserEmail,setUsername }) {
       console.log("Document written with ID: ");
       setUserEmail(email)
       setUsername(fullname)
+      setUserNumber(phonenumber)
     } catch (e) {
       console.error("Error adding document: ", e);
     }
