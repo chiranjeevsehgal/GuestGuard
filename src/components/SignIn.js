@@ -3,7 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
-import {reactLocalStorage} from 'reactjs-localstorage';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [email, setEmail] = useState("");
@@ -46,10 +46,11 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
       setUserEmail(docSnap.data().email)
       setUsername(docSnap.data().fullname)
       setUserNumber(docSnap.data().phonenumber)
-      reactLocalStorage.setObject('udata', {'name': docSnap.data().fullname,
-      'email': docSnap.data().email,
-      'number': docSnap.data().phonenumber
-    });
+      reactLocalStorage.setObject('udata', {
+        'name': docSnap.data().fullname,
+        'email': docSnap.data().email,
+        'number': docSnap.data().phonenumber
+      });
       console.log(reactLocalStorage.getObject('udata'))
       navigate("/gatepass")
 
@@ -59,13 +60,17 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     }
   };
 
+  const adminbtn = ()=>{
+    navigate('/admin')
+  }
+
 
   return (
     <div className="font-sans">
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
-        
+
         <div className="relative sm:max-w-sm w-full">
-          
+
           <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
           <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
             <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
@@ -94,6 +99,12 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
               <div className="mt-7">
                 <button type="submit" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign In
+                </button>
+              </div>
+              
+              <div className="mt-7">
+                <button onClick={adminbtn} type="button" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                  Admin
                 </button>
               </div>
 
