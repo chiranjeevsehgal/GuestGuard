@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [email, setEmail] = useState("");
@@ -45,6 +46,11 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
       setUserEmail(docSnap.data().email)
       setUsername(docSnap.data().fullname)
       setUserNumber(docSnap.data().phonenumber)
+      reactLocalStorage.setObject('udata', {'name': docSnap.data().fullname,
+      'email': docSnap.data().email,
+      'number': docSnap.data().phonenumber
+    });
+      console.log(reactLocalStorage.getObject('udata'))
       navigate("/gatepass")
 
     } else {

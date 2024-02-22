@@ -5,6 +5,7 @@ import Header from './Header.js'
 
 import {getFirestore,} from "firebase/firestore";
 import { doc, setDoc,getDoc } from "firebase/firestore"; 
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 
 
@@ -29,6 +30,9 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in, do nothing
+                // console.log(reactLocalStorage.getObject('udata'))
+                // console.log(reactLocalStorage.getObject('udata').name)
+                
             } else {
                 navigate("/signin");
             }

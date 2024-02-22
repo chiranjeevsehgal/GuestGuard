@@ -3,6 +3,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
@@ -14,9 +15,7 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-
-
-
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,7 +27,7 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
 
   const createUser = (e) => {
-    
+
     e.preventDefault()
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
@@ -38,7 +37,13 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
         setSuccess('Sign up success')
         addNewUser()
           .then(() => {
-
+            reactLocalStorage.remove('udata');
+            reactLocalStorage.setObject('udata', {
+              'name': fullname,
+              'email': email,
+              'number': phonenumber
+            });
+            console.log(reactLocalStorage.getObject('udata'));
             navigate("/signin")
           }).catch(() => {
             console.log("failed");
