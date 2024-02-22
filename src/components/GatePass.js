@@ -8,22 +8,18 @@ import { doc, setDoc,getDoc } from "firebase/firestore";
 
 
 
-function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber }) {
+function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
-
     const [fullname, setFullName] = useState("");
     const [email, setEmail] = useState("");
-    // const [lastname, setLastName] = useState("");
     const [phonenumber, setPhoneNumber] = useState("");
     const [address, setAddress] = useState("");
     const [ID, setID] = useState("");
     const [IDtype, setIDType] = useState("");
-    const [purpose, setPurpose] = useState("");
-    // const [error, setError] = useState(null);
+    const [purpose, setPurpose] = useState("");;
     const [userData, setUserData] = useState("");
-
 
 
     const navigate = useNavigate();
@@ -39,7 +35,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
         });
 
         return unsubscribe;
-    }, []);
+    });
 
     async function addNewUser() {
         const db = getFirestore(app);
@@ -71,8 +67,6 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
         }
     };
 
-  
-
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -81,7 +75,6 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
     const handleButtonClick = (e) => {
         e.preventDefault()
         if (handlevalidation()) {
-            // setError(null)
             addNewUser()
             setShowDetails(!showDetails);
             setButtonDisabled(true);
@@ -90,7 +83,6 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
         }
         else {
             console.log("Error");
-            // setError('Invalid Username or Password')
         }
     };
 
@@ -110,7 +102,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
             if (datobj.hasOwnProperty(key)) {
 
                 // console.log(datobj[key][Object.keys(datobj[key])[0]]);
-                if (datobj[key][Object.keys(datobj[key])[0]] == "") {
+                if (datobj[key][Object.keys(datobj[key])[0]] === "") {
                     flag = false
                 }
             }
@@ -121,7 +113,8 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
 
     return (
         <div>
-            <Header setUserEmail={setUserEmail} setUsername={setUsername} username={username} useremail={useremail} setUserNumber={setUserNumber} userNumber={userNumber}/>
+            
+            <Header setUserEmail={setUserEmail} setUsername={setUsername}username={username} useremail={useremail} />
 
 
             <section className="bg-gray-100 text-gray-800">
@@ -146,19 +139,13 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
                                             type="text" placeholder="Name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
                                             required/>
                                     </div>
-                                    {/* <div className="col-span-full sm:col-span-3">
-                                        <label htmlFor="lastname" className="text-sm">Last name</label>
-                                        <input id="lastname" 
-                                        onChange={(e) => setLastName(e.target.value)}
-                                        value={lastname}
-                                        type="text" placeholder="Last name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" />
-                                    </div> */}
+                                    
                                     <div className="col-span-full sm:col-span-1">
                                         <label htmlFor="ID" className="text-sm">ID</label>
-                                        {/* <input id="id" type="text" placeholder="ID" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" /> */}  
+                                        
                                         <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400" 
                                         onChange={(e) => {
-                                            setIDType(e.target.value == "1" ? "Aadhar Card" : (e.target.value == "2" ? "Driving License" : "Pan Card"))
+                                            setIDType(e.target.value === "1" ? "Aadhar Card" : (e.target.value === "2" ? "Driving License" : "Pan Card"))
                                         }}
                                         datap={IDtype}
                                         required>
@@ -209,28 +196,10 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
                                             required/>
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
-                                        {/* {error ?
-                                            <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7 mb-5">
-                                                <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-800">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-8 w-8">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                                    </svg>
-                                                </div>
-                                                <div className="p-4 flex-1">
-                                                    <h3 className="text-xl font-bold">Error</h3>
-                                                    <p className="text-sm text-gray-600">Invalid details.</p>
-                                                </div>
-                                                <button className="absolute top-2 right-2">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 p-2 rounded cursor-pointer">
-                                                        <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                                                    </svg>
-                                                </button>
-                                            </div>
-                                            : null} */}
 
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
-                                        {/* <button onClick={addNewUser} type="button" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button> */}
+                                        
                                         <button disabled={buttonDisabled}
                                             type="submit" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
                                     </div>
@@ -238,8 +207,6 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
                             </fieldset>
                         </form>
 
-
-                        {/* <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800"> */}
                         <div>
                             {showDetails ?
                                 <div className="container flex flex-col w-full max-w-lg p-6 mt-10 divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
@@ -268,10 +235,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail,userNu
                                         </div>
                                     </div>
                                     <div className="p-4 space-y-2 text-sm text-gray-600">
-                                        {/* <p><span className="font-bold">Gate Pass ID:</span> 000</p>
-                                        <p><span className="font-bold">Name:</span> John Doe</p>
-                                        <p><span className="font-bold">Number:</span> 9999999999</p>
-                                        <p><span className="font-bold">Purpose of Visit:</span> Test</p> */}
+                                        
                                         <p><span className="font-bold">Gate Pass ID:</span>1234556</p>
                                         <p><span className="font-bold">Name:</span> {userData.fullname}</p>
                                         <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>

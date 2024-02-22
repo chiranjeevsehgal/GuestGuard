@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import {getFirestore,} from "firebase/firestore";
-import { doc, getDoc} from "firebase/firestore"; 
+import { getFirestore, } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
-function SignIn({ user,app,setUserEmail,setUsername, setUserNumber}) {
+function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
   const [userData, setUserData] = useState({
-    email:"",
-    fullName:""
+    email: "",
+    fullName: ""
   });
 
   const navigate = useNavigate();
   const auth = getAuth();
 
   useEffect(() => {
-    if(user != null) {
+    if (user != null) {
       navigate("/gatepass")
     }
-  },[user])
+  }, [user])
 
 
   const signinUser = (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
-      .then(() =>{
-      //request firesbase for usenasme related to the email and password
-      //setusername=username
-      //setemail=email
+      .then(() => {
         fetchUserData(email)
-        
       }
       )
       .catch(() =>
@@ -41,32 +37,29 @@ function SignIn({ user,app,setUserEmail,setUsername, setUserNumber}) {
 
   const fetchUserData = async (email) => {
     console.log("test")
-    const db = getFirestore(app);       
-     const userRef = doc(db, "signUp", email);
+    const db = getFirestore(app);
+    const userRef = doc(db, "signUp", email);
     const docSnap = await getDoc(userRef);
     if (docSnap.exists()) {
-        //setUserData(docSnap.data());
-        //setUserData({email:docSnap.data.email,fullName:docSnap.data.fullName})
-        console.log(docSnap.data());
-        //console.log(userData)
-        setUserEmail(docSnap.data().email)
-        setUsername(docSnap.data().fullname)
-        setUserNumber(docSnap.data().phonenumber)
-        navigate("/gatepass")
-       
+      console.log(docSnap.data());
+      setUserEmail(docSnap.data().email)
+      setUsername(docSnap.data().fullname)
+      setUserNumber(docSnap.data().phonenumber)
+      navigate("/gatepass")
+
     } else {
-        console.log("No such document!");
-        setUserData(null);
+      console.log("No such document!");
+      setUserData(null);
     }
-};
-  
+  };
+
 
   return (
     <div className="font-sans">
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
-      {/* <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-blue-50 "> */}
+        
         <div className="relative sm:max-w-sm w-full">
-          {/* <div className="absolute inset-0 -mr-3.5 bg-grad  ient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
+          
           <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
           <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
             <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
@@ -79,17 +72,17 @@ function SignIn({ user,app,setUserEmail,setUsername, setUserNumber}) {
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
-                  type="email" placeholder="Email" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
-                  required/>
+                  type="email" placeholder="Email" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  required />
               </div>
 
               <div className="mt-7">
                 <input
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
-                  type="password" placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
+                  type="password" placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
                   required
-                  />
+                />
               </div>
 
               <div className="mt-7">
@@ -127,7 +120,7 @@ function SignIn({ user,app,setUserEmail,setUsername, setUserNumber}) {
               </div>
 
               <div className="flex mt-7 justify-center w-full">
-                
+
                 <button className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Google
                 </button>

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
-// import { getAuth, signOut } from "firebase/auth";
 import { getAuth } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import Header from './Header.js'
 
 
 function Navigation({ user,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber }) {
-
-    const navigate = useNavigate();
-
 
     useEffect(() => {
         const auth = getAuth();
@@ -16,7 +12,9 @@ function Navigation({ user,username,useremail,setUsername,setUserEmail,userNumbe
             if (user) {
                 // User is signed in, do nothing
             } else {
+                <BrowserRouter>
                 navigate("/signin");
+                </BrowserRouter>
             }
         });
 
@@ -53,7 +51,6 @@ function Navigation({ user,username,useremail,setUsername,setUserEmail,userNumbe
                         <div className="relative z-0 w-full mt-8 mb-20">
                             <div className="relative overflow-hidden">
                                 {!imageLoaded && (
-                                    // <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
                                     <div className="flex justify-center items-center h-16">
                                         <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-600"></div>
                                     </div>

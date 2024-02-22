@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-// import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-import {getFirestore,} from "firebase/firestore";
-import { doc, setDoc} from "firebase/firestore"; 
+import { getFirestore, } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
-function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
-  
+function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
+
   const [email, setEmail] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
   const [password, setPassword] = useState("");
@@ -25,44 +24,35 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
       navigate("/gatepass");
   }, [])
 
-  
+
 
 
   const createUser = (e) => {
-    // if (handlevalidation()) {
-      // setError(null)
-      e.preventDefault()
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          setError(null)
-          setButtonDisabled(true)
-          // console.log("Sign up success")
-          setSuccess('Sign up success')
-            addNewUser()
-            .then(() => {
-              
-              navigate("/signin")
-            }).catch(() => {
-              //  Show Relevant Error Message
-              console.log("failed");
-            });
-        })
-        .catch((error) => {
-          // console.error("Error signing up:", error);
-          setError('Error occured')
-        });
-    // }
-    // else {
-    //   console.log("Error");
-    //   setError('Invalid Username or Password')
-    // }
+    
+    e.preventDefault()
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        setError(null)
+        setButtonDisabled(true)
+        setSuccess('Sign up success')
+        addNewUser()
+          .then(() => {
+
+            navigate("/signin")
+          }).catch(() => {
+            console.log("failed");
+          });
+      })
+      .catch((error) => {
+        setError('Error occured')
+      });
   };
 
   async function addNewUser() {
     const db = getFirestore(app);
     try {
-      const docRef = await setDoc(doc(db, "signUp",email), {
+      const docRef = await setDoc(doc(db, "signUp", email), {
         fullname,
         email,
         phonenumber
@@ -76,26 +66,6 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
       console.error("Error adding document: ", e);
     }
   }
-  // const handlevalidation = () => {
-  //   const datobj = {
-  //     name: { name },
-  //     email: { email },
-  //     password: { password },
-  //     cnfpassword: { cnfpassword }
-  //   }
-
-  //   let flag = true
-  //   for (const key in datobj) {
-  //     if (datobj.hasOwnProperty(key)) {
-
-  //       // console.log(datobj[key][Object.keys(datobj[key])[0]]);
-  //       if (datobj[key][Object.keys(datobj[key])[0]] === "") {
-  //         flag = false
-  //       }
-  //     }
-  //   }
-  //   return flag
-  // }
 
   return (
 
@@ -103,17 +73,7 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 ">
         <div className="relative sm:max-w-sm w-full">
 
-          {/* <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-red-100 to-purple-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
-          <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-purple-500 to-red-100 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div> */}
           <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
-
-
-          {/* <div className="card bg-red-100 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div> */}
-          {/* <div className="card bg-purple-500 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div> */}
-
-          {/* Actual */}
-          {/* <div className="card bg-blue-400 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6"></div>
-        <div className="card bg-red-400 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6"></div> */}
 
           <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
             <a href="/"><span className="px-32 block mb-2 text-cyan-600">GuestGuard</span></a>
@@ -121,14 +81,14 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
               Sign Up
             </label>
             <form method="#" action="#" className="mt-10"
-            onSubmit={createUser}>
+              onSubmit={createUser}>
 
               <div>
                 <input
                   onChange={(e) => setname(e.target.value)}
                   value={fullname}
-                  type="text" placeholder="Name" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor" 
-                  required/>
+                  type="text" placeholder="Name" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0 focus:cursor"
+                  required />
               </div>
 
               <div className="mt-7">
@@ -138,16 +98,16 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
                   type="tel" placeholder="Phone Number" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
                   required
                   pattern="[0-9]{10}"
-                  />
+                />
               </div>
-              
+
               <div className="mt-7">
                 <input
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
                   type="email" placeholder="Email" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
                   required
-                  />
+                />
               </div>
 
               <div className="mt-7">
@@ -155,18 +115,18 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   type="password"
-                  placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
-                  required/>
+                  placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  required />
               </div>
 
               <div className="mt-7">
-                <input 
-                onChange={(e) => setcnfPassword(e.target.value)}
-                value={cnfpassword}
-                placeholder="Confirm Password"
+                <input
+                  onChange={(e) => setcnfPassword(e.target.value)}
+                  value={cnfpassword}
+                  placeholder="Confirm Password"
                   type="password"
-                  className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0" 
-                  required/>
+                  className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                  required />
               </div>
 
               <div className="mt-7">
@@ -177,13 +137,13 @@ function SignUp({ user, app,setUserEmail,setUsername,setUserNumber}) {
 
               {success ?
                 <div className="flex shadow-md gap-6 rounded-lg overflow-hidden divide-x max-w-2xl bg-gray-50 text-gray-800 divide-gray-300 mt-7">
-                <div className="flex flex-1 flex-col p-4 border-l-8 border-cyan-600">
-                  <span className="text-2xl">Success</span>
-                  <span className="text-xs text-gray-600">You have been successfully registered. Please sign in with your details</span>
+                  <div className="flex flex-1 flex-col p-4 border-l-8 border-cyan-600">
+                    <span className="text-2xl">Success</span>
+                    <span className="text-xs text-gray-600">You have been successfully registered. Please sign in with your details</span>
+                  </div>
                 </div>
-              </div>
                 : null}
-              
+
               {error ?
                 <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7">
                   <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-800">

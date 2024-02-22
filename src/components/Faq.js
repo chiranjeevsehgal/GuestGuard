@@ -1,17 +1,19 @@
 import React, { useEffect} from 'react';
 import Header from './Header.js'
-import { useNavigate } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { getAuth} from 'firebase/auth';
 
 function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber  }) {
-    const navigate = useNavigate();
+    
     
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
             } else {
+                <BrowserRouter>
                 navigate("/signin");
+                </BrowserRouter>
             }
         });
     
