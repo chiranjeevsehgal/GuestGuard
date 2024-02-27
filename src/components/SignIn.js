@@ -5,6 +5,7 @@ import { getFirestore, } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
 import { reactLocalStorage } from 'reactjs-localstorage';
 
+
 function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,20 +15,23 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     fullName: ""
   });
 
+  
   const navigate = useNavigate();
   const auth = getAuth();
 
   useEffect(() => {
     if (user != null) {
+  
       navigate("/gatepass")
     }
   }, [user])
-
-
+  
+  
   const signinUser = (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+    .then(() => {
+        
         fetchUserData(email)
       }
       )
@@ -37,21 +41,24 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   };
 
   const fetchUserData = async (email) => {
-    console.log("test")
+    
     const db = getFirestore(app);
     const userRef = doc(db, "signUp", email);
     const docSnap = await getDoc(userRef);
     if (docSnap.exists()) {
-      console.log(docSnap.data());
+      
       setUserEmail(docSnap.data().email)
       setUsername(docSnap.data().fullname)
       setUserNumber(docSnap.data().phonenumber)
+
+
       reactLocalStorage.setObject('udata', {
         'name': docSnap.data().fullname,
         'email': docSnap.data().email,
         'number': docSnap.data().phonenumber
+        
       });
-      console.log(reactLocalStorage.getObject('udata'))
+      
       navigate("/gatepass")
 
     } else {
@@ -60,7 +67,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     }
   };
 
-  const adminbtn = ()=>{
+  const adminbtn = () => {
     navigate('/admin')
   }
 
@@ -101,7 +108,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                   Sign In
                 </button>
               </div>
-              
+
               <div className="mt-7">
                 <button onClick={adminbtn} type="button" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Admin

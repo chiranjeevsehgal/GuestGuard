@@ -7,9 +7,9 @@ import { Button } from "@chakra-ui/react";
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 
-
 function Header(props) {
-    console.log(props)
+    // console.log(props)
+
     const [isNavOpen, setIsNavOpen] = useState(false);
 
     const [pname, setPName] = useState("")
@@ -47,6 +47,7 @@ function Header(props) {
                 setPName(reactLocalStorage.getObject('udata').name)
                 setPEmail(reactLocalStorage.getObject('udata').email)
                 setPNumber(reactLocalStorage.getObject('udata').number)
+
                 
             } else {
                 navigate("/signin");

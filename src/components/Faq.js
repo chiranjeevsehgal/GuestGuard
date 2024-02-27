@@ -5,7 +5,6 @@ import { getAuth} from 'firebase/auth';
 
 function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber  }) {
     
-    
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {

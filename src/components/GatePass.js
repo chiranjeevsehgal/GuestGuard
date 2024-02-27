@@ -8,7 +8,6 @@ import { doc, setDoc,getDoc } from "firebase/firestore";
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 
-
 function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -22,6 +21,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
     const [purpose, setPurpose] = useState("");;
     const [userData, setUserData] = useState("");
 
+    
 
     const navigate = useNavigate();
 
@@ -29,6 +29,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
+                
                 // User is signed in, do nothing
                 // console.log(reactLocalStorage.getObject('udata'))
                 // console.log(reactLocalStorage.getObject('udata').name)
@@ -61,7 +62,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
 
       const fetchUserData = async (phonenumber) => {
         const db = getFirestore(app);       
-         const userRef = doc(db, "gatepass", phonenumber);
+        const userRef = doc(db, "gatepass", phonenumber);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
             setUserData(docSnap.data());

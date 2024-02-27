@@ -1,4 +1,24 @@
-function Admin() {
+import React, { useState, useEffect } from 'react';
+import { getFirestore } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+
+
+function Admin(app) {
+    const [visitors, setVisitors] = useState([]);
+    useEffect(() => {
+        const fetchData = async (app) => {
+            const db = getFirestore(app);
+            const querySnapshot = await getDocs(collection(db, "gatepass"));
+            const data = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setVisitors(data);
+        };
+        fetchData();
+    }, []); // Empty dependency array to run the effect only once
+
+
     return (
         <div>
             <header className="p-4 bg-gray-100 text-gray-800">
@@ -50,135 +70,24 @@ function Admin() {
                         <thead className="bg-gray-300">
                             <tr className="text-left">
                                 <th className="p-3">Gate Pass ID</th>
-                                <th className="p-3">Name</th>
-                                <th className="p-3">Date</th>
+                                <th className="p-3">Full Name</th>
+                                <th className="p-3">Email</th>
                                 <th className="p-3">Phone Number</th>
                                 <th className="p-3">Purpose</th>
-                                <th className="p-3">Status</th>
+                                {/* Add more table headers if needed */}
                             </tr>
                         </thead>
                         <tbody>
-                            
-                            <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                                <td className="p-3">
-                                    <p>974123</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Anil Singh</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>14 Jan 2022</p>
-                                    <p className="text-gray-600">Friday</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>9876543210</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Admission</p>
-                                </td>
-                                <td className="p-3">
-                                    <span className="px-3 py-1 font-semibold rounded-md bg-cyan-600 text-gray-50">
-                                        <span>Used</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            
-                            <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                                <td className="p-3">
-                                    <p>974123</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Anil Singh</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>14 Jan 2022</p>
-                                    <p className="text-gray-600">Friday</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>9876543210</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Admission</p>
-                                </td>
-                                <td className="p-3">
-                                    <span className="px-3 py-1 font-semibold rounded-md bg-cyan-600 text-gray-50">
-                                        <span>Used</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            
-                            <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                                <td className="p-3">
-                                    <p>974123</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Anil Singh</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>14 Jan 2022</p>
-                                    <p className="text-gray-600">Friday</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>9876543210</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Admission</p>
-                                </td>
-                                <td className="p-3">
-                                    <span className="px-3 py-1 font-semibold rounded-md bg-cyan-600 text-gray-50">
-                                        <span>Used</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            
-                            <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                                <td className="p-3">
-                                    <p>974123</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Anil Singh</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>14 Jan 2022</p>
-                                    <p className="text-gray-600">Friday</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>9876543210</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Admission</p>
-                                </td>
-                                <td className="p-3">
-                                    <span className="px-3 py-1 font-semibold rounded-md bg-cyan-600 text-gray-50">
-                                        <span>Used</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            
-                            <tr className="border-b border-opacity-20 border-gray-300 bg-gray-50">
-                                <td className="p-3">
-                                    <p>974123</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Anil Singh</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>14 Jan 2022</p>
-                                    <p className="text-gray-600">Friday</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>9876543210</p>
-                                </td>
-                                <td className="p-3">
-                                    <p>Admission</p>
-                                </td>
-                                <td className="p-3">
-                                    <span className="px-3 py-1 font-semibold rounded-md bg-cyan-600 text-gray-50">
-                                        <span>Used</span>
-                                    </span>
-                                </td>
-                            </tr>
-                            
+                            {visitors.map(visitor => (
+                                <tr key={visitor.id} className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                                    <td className="p-3">{visitor.id}</td>
+                                    <td className="p-3">{visitor.fullname}</td>
+                                    <td className="p-3">{visitor.email}</td>
+                                    <td className="p-3">{visitor.phonenumber}</td>
+                                    <td className="p-3">{visitor.purpose}</td>
+                                    {/* Add more table data cells if needed */}
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>

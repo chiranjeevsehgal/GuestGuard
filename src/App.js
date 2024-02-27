@@ -11,7 +11,8 @@ import Faq from './components/Faq.js'
 import Admin from './components/Admin.js'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 
 
 function App() {
@@ -34,8 +35,9 @@ function App() {
           <Route path="/gatepass" element={<GatePass username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin app={app} />} />
         </Routes>
+      
       </BrowserRouter>
     </div>
   );
