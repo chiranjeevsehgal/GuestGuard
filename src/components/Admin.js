@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import {reactLocalStorage} from 'reactjs-localstorage';
+import Dialogue from './ui/dialogue';
 
 function Admin(user, app, props) {
     const [visitors, setVisitors] = useState([]);
@@ -85,6 +86,7 @@ function Admin(user, app, props) {
                             <col />
                             <col />
                             <col />
+                            
                             <col className="w-24" />
                         </colgroup>
                         <thead className="bg-gray-300">
@@ -94,6 +96,7 @@ function Admin(user, app, props) {
                                 <th className="p-3">Email</th>
                                 <th className="p-3">Phone Number</th>
                                 <th className="p-3">Purpose</th>
+                                <th className="p-3">Alert</th>
                                 {/* Add more table headers if needed */}
                             </tr>
                         </thead>
@@ -105,6 +108,7 @@ function Admin(user, app, props) {
                                     <td className="p-3">{visitor.email}</td>
                                     <td className="p-3">{visitor.phonenumber}</td>
                                     <td className="p-3">{visitor.purpose}</td>
+                                    <td className="p-3"><Dialogue email={visitor.email} /></td>
                                     {/* Add more table data cells if needed */}
                                 </tr>
                             ))}
