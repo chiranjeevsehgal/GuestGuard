@@ -35,7 +35,7 @@ function App() {
           <Route path="/gatepass" element={<GatePass username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
-          <Route path="/admin" element={<Admin app={app} />} />
+          <Route path="/admin" element={<Admin setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user} app={app} />} />
         </Routes>
       
       </BrowserRouter>

@@ -8,7 +8,7 @@ import { doc, setDoc,getDoc } from "firebase/firestore";
 import {reactLocalStorage} from 'reactjs-localstorage';
 
 
-function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
+function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUserNumber }) {
     const [showDetails, setShowDetails] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -119,7 +119,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail }) {
     return (
         <div>
             
-            <Header setUserEmail={setUserEmail} setUsername={setUsername}username={username} useremail={useremail} />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail} />
 
 
             <section className="bg-gray-100 text-gray-800">

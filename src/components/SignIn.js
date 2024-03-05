@@ -10,6 +10,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const [role, setRole] = useState();
   const [userData, setUserData] = useState({
     email: "",
     fullName: ""
@@ -21,17 +22,29 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
   useEffect(() => {
     if (user != null) {
-  
-      navigate("/gatepass")
+      // console.log(role);
+      if(role == "user"){
+         navigate("/gatepass")
+        }
+        else{
+        navigate("/admin")
+      }
     }
   }, [user])
   
+  useEffect(()=>{
+    if (email == "admin@gmail.com"){
+      setRole("admin")
+    }
+    else{
+      setRole("user")
+    }
+  })
   
   const signinUser = (e) => {
     e.preventDefault()
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-        
         fetchUserData(email)
       }
       )
@@ -51,7 +64,6 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
       setUsername(docSnap.data().fullname)
       setUserNumber(docSnap.data().phonenumber)
 
-
       reactLocalStorage.setObject('udata', {
         'name': docSnap.data().fullname,
         'email': docSnap.data().email,
@@ -59,17 +71,19 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
         
       });
       
-      navigate("/gatepass")
+      // navigate("/gatepass")
+      if(role == "user"){
+        navigate("/gatepass")
+       }
+       else{
+       navigate("/admin")
+     }
 
     } else {
       console.log("No such document!");
       setUserData(null);
     }
   };
-
-  const adminbtn = () => {
-    navigate('/admin')
-  }
 
 
   return (
@@ -106,12 +120,6 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
               <div className="mt-7">
                 <button type="submit" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Sign In
-                </button>
-              </div>
-
-              <div className="mt-7">
-                <button onClick={adminbtn} type="button" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
-                  Admin
                 </button>
               </div>
 
