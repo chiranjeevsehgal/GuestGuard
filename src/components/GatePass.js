@@ -20,16 +20,26 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
     const [IDtype, setIDType] = useState("");
     const [purpose, setPurpose] = useState("");;
     const [userData, setUserData] = useState("");
+    const [time, setTime] = useState("");
+    const [inpdisabled, setInpdisabled] = useState(false);
 
     
-
+    
+    
+    // const timehandler = ()=>{
+    //     let current = `${date.getDate()}${date.getMonth()+1}${date.getFullYear()%100}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()%100 }`
+    //     setTime(current)
+    // }
+    
+    
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                
+                // console.log(Date.now())
+            
                 // User is signed in, do nothing
                 // console.log(reactLocalStorage.getObject('udata'))
                 // console.log(reactLocalStorage.getObject('udata').name)
@@ -51,9 +61,10 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
             email,
             address,
             ID,
-            purpose
-    
-          });
+            purpose,
+            time
+        });
+        console.log(time);
           console.log("Document written with ID: ");
         } catch (e) {
           console.error("Error adding document: ", e);
@@ -80,16 +91,33 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
     const handleButtonClick = (e) => {
         e.preventDefault()
         if (handlevalidation()) {
-            addNewUser()
-            setShowDetails(!showDetails);
-            setButtonDisabled(true);
-            fetchUserData(phonenumber); 
+            // timehandler()
+            // setTime(`${date.getDate()}${date.getMonth()+1}${date.getFullYear()%100}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()%100 }`)
+
+            const date = new Date();
+            const newTime = `${date.getDate()}${date.getMonth() + 1}${date.getFullYear() % 100}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds() % 100}`;
+            setTime(newTime);
+
+            // addNewUser()
+            // setShowDetails(!showDetails);
+            // setButtonDisabled(true);
+            // fetchUserData(phonenumber); 
 
         }
         else {
             console.log("Error");
         }
     };
+
+    useEffect(() => {
+        if (time !== "") {
+            addNewUser();
+            setInpdisabled(true);
+            setShowDetails(!showDetails);
+            setButtonDisabled(true);
+            fetchUserData(phonenumber); 
+        }
+    }, [time]);
 
     const handlevalidation = () => {
         const datobj = {
@@ -141,6 +169,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                                 setFullName(e.target.value)
                                             }}
                                             value={fullname}
+                                            disabled={inpdisabled}
                                             type="text" placeholder="Name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
                                             required/>
                                     </div>
@@ -166,6 +195,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                         <input id="idnumber"
                                             onChange={(e) => setID(e.target.value)}
                                             value={ID}
+                                            disabled={inpdisabled}
                                             type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
                                             required/>
                                     </div>
@@ -174,12 +204,14 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                         <input id="phone"
                                             onChange={(e) => setPhoneNumber(e.target.value)}
                                             value={phonenumber}
+                                            disabled={inpdisabled}
                                             type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" pattern="[0-9]{10}"
                                             required/>
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="email" className="text-sm">Email</label>
                                         <input id="email"
+                                            disabled={inpdisabled}
                                             onChange={(e) => setEmail(e.target.value)}
                                             value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
                                             required/>
@@ -187,6 +219,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                     <div className="col-span-full">
                                         <label htmlFor="address" className="text-sm">Address</label>
                                         <input id="address"
+                                        disabled={inpdisabled}
                                             onChange={(e) => setAddress(e.target.value)}
                                             value={address}
                                             type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
@@ -195,6 +228,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                     <div className="col-span-full sm:col-span-full">
                                         <label htmlFor="purpose" className="text-sm">Purpose</label>
                                         <input id="purpose"
+                                        disabled={inpdisabled}
                                             onChange={(e) => setPurpose(e.target.value)}
                                             value={purpose}
                                             type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
@@ -241,7 +275,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                     </div>
                                     <div className="p-4 space-y-2 text-sm text-gray-600">
                                         
-                                        <p><span className="font-bold">Gate Pass ID:</span>1234556</p>
+                                        <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
                                         <p><span className="font-bold">Name:</span> {userData.fullname}</p>
                                         <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
                                         <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p>

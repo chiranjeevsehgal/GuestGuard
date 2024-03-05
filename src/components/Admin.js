@@ -91,10 +91,10 @@ function Admin(user, app, props) {
                         </colgroup>
                         <thead className="bg-gray-300">
                             <tr className="text-left">
-                                <th className="p-3">Gate Pass ID</th>
+                                <th className="p-3">Phone Number</th>
                                 <th className="p-3">Full Name</th>
                                 <th className="p-3">Email</th>
-                                <th className="p-3">Phone Number</th>
+                                <th className="p-3">Gate Pass ID</th>
                                 <th className="p-3">Purpose</th>
                                 <th className="p-3">Alert</th>
                                 {/* Add more table headers if needed */}
@@ -106,7 +106,7 @@ function Admin(user, app, props) {
                                     <td className="p-3">{visitor.id}</td>
                                     <td className="p-3">{visitor.fullname}</td>
                                     <td className="p-3">{visitor.email}</td>
-                                    <td className="p-3">{visitor.phonenumber}</td>
+                                    <td className="p-3">{visitor.time}</td>
                                     <td className="p-3">{visitor.purpose}</td>
                                     <td className="p-3"><Dialogue email={visitor.email} /></td>
                                     {/* Add more table data cells if needed */}
