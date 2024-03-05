@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import {reactLocalStorage} from 'reactjs-localstorage';
-import Dialogue from './ui/dialogue';
+import Dialogue from './dialogue';
 
 function Admin(user, app, props) {
     const [visitors, setVisitors] = useState([]);
