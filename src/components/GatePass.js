@@ -170,14 +170,14 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                             }}
                                             value={fullname}
                                             disabled={inpdisabled}
-                                            type="text" placeholder="Name" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
+                                            type="text" placeholder="Name" className="p-3 w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
                                             required/>
                                     </div>
                                     
                                     <div className="col-span-full sm:col-span-1">
                                         <label htmlFor="ID" className="text-sm">ID</label>
                                         
-                                        <select id="id" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400" 
+                                        <select id="id" className="p-1  w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400" 
                                         onChange={(e) => {
                                             setIDType(e.target.value === "1" ? "Aadhar Card" : (e.target.value === "2" ? "Driving License" : "Pan Card"))
                                         }}
@@ -196,7 +196,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                             onChange={(e) => setID(e.target.value)}
                                             value={ID}
                                             disabled={inpdisabled}
-                                            type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
+                                            type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
                                             required/>
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
@@ -205,7 +205,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                             onChange={(e) => setPhoneNumber(e.target.value)}
                                             value={phonenumber}
                                             disabled={inpdisabled}
-                                            type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" pattern="[0-9]{10}"
+                                            type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" pattern="[0-9]{10}"
                                             required/>
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
@@ -213,7 +213,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                         <input id="email"
                                             disabled={inpdisabled}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
+                                            value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
                                             required/>
                                     </div>
                                     <div className="col-span-full">
@@ -222,7 +222,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                         disabled={inpdisabled}
                                             onChange={(e) => setAddress(e.target.value)}
                                             value={address}
-                                            type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
+                                            type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
                                             required/>
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
@@ -231,7 +231,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                         disabled={inpdisabled}
                                             onChange={(e) => setPurpose(e.target.value)}
                                             value={purpose}
-                                            type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
+                                            type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
                                             required/>
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
