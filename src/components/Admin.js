@@ -29,8 +29,9 @@ function Admin(user, app, props) {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in, do nothing
-                // console.log(reactLocalStorage.getObject('udata'))
-                // console.log(reactLocalStorage.getObject('udata').name)
+                if (user.email != "admin@gmail.com"){
+                    navigate("/error");
+                }
             
             } else {
                 navigate("/signin");

@@ -22,7 +22,10 @@ function Dash({ user }) {
 									<p className="mt-6 mb-8 text-lg sm:mb-12">Seamlessly Generate gate passes and Navigate with our Intuitive Web App for an enhanced Campus Experience!
 									</p>
 									<div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-										<Link to={user == null ? "/signin" : "/gatepass"} className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-600" >Generate Gate Pass</Link>
+										{/* <Link to={user == null ? "/signin" : "/gatepass"} className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-600" >Generate Gate Pass</Link> */}
+										
+										<Link to={user == null ? "/signin" : (user.email === "admin@gmail.com" ? "/admin" : "/gatepass")} className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-600" >Generate Gate Pass</Link>
+										
 										<Link to="/about" className="px-8 py-3 text-lg font-semibold border rounded border-gray-800">About</Link>
 									</div>
 								</div>

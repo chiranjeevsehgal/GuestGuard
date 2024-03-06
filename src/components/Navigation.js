@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, useNavigate } from 'react-router-dom';
 import Header from './Header.js'
 
-
 function Navigation({ user, username, useremail, setUsername, setUserEmail, userNumber, setUserNumber }) {
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in, do nothing
+                if (user.email == "admin@gmail.com"){
+                    navigate("/error");
+                }
             } else {
                 <BrowserRouter>
                     navigate("/signin");

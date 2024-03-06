@@ -9,6 +9,7 @@ import GatePass from './components/GatePass.js'
 import About from './components/About.js'
 import Faq from './components/Faq.js'
 import Admin from './components/Admin.js'
+import Error from './components/Error.js'
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/admin" element={<Admin setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user} app={app} />} />
+          <Route path="/error" element={<Error />} />
         </Routes>
       
       </BrowserRouter>
