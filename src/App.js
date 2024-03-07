@@ -40,7 +40,7 @@ function App() {
           <Route path="/faq" element={<Faq username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/admin" element={<Admin setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user} app={app} />} />
           <Route path="/error" element={<Error />} />
-          <Route path="/admin1" element={<Admin1 />} />
+          <Route path="/admin1" element={<Admin1 app={app}/>} />
         </Routes>
       
       </BrowserRouter>

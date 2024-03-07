@@ -24,22 +24,37 @@ function Admin(user, app, props) {
         fetchData();
     }, []); // Empty dependency array to run the effect only once
 
-    useEffect(() => {
-        const auth = getAuth();
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user) {
-                // User is signed in, do nothing
-                if (user.email != "admin@gmail.com"){
-                    navigate("/error");
-                }
+    // useEffect(() => {
+    //     const auth = getAuth();
+    //     const unsubscribe = auth.onAuthStateChanged(user => {
+    //         if (user) {
+    //             // User is signed in, do nothing
+    //             if (user.email != "admin@gmail.com"){
+    //                 navigate("/error");
+    //             }
             
-            } else {
-                navigate("/signin");
-            }
-        });
+    //         } else {
+    //             navigate("/signin");
+    //         }
+    //     });
 
-        return unsubscribe;
-    });
+    //     return unsubscribe;
+    // });
+
+    // useEffect(() => {
+    //     const auth = getAuth();
+    //     const unsubscribe = auth.onAuthStateChanged(user => {
+    //         if (user) {
+    //             // User is signed in, do nothing
+                
+            
+    //         } else {
+    //             navigate("/signin");
+    //         }
+    //     });
+
+    //     return unsubscribe;
+    // });
 
     const handleSignOut = () => {
         const auth = getAuth(); // Get authentication instance
