@@ -6,7 +6,7 @@ import { getAuth, signOut } from "firebase/auth";
 import {reactLocalStorage} from 'reactjs-localstorage';
 import Dialogue from './dialogue';
 
-function Admin(user, app, props) {
+function Admin({admin, setAdmin}) {
     const [visitors, setVisitors] = useState([]);
 
     const navigate = useNavigate();
@@ -24,48 +24,25 @@ function Admin(user, app, props) {
         fetchData();
     }, []); // Empty dependency array to run the effect only once
 
-    // useEffect(() => {
-    //     const auth = getAuth();
-    //     const unsubscribe = auth.onAuthStateChanged(user => {
-    //         if (user) {
-    //             // User is signed in, do nothing
-    //             if (user.email != "admin@gmail.com"){
-    //                 navigate("/error");
-    //             }
+
+    useEffect(() => {
+            if (admin == "logged") {
+                // Admin is signed in, do nothing
             
-    //         } else {
-    //             navigate("/signin");
-    //         }
-    //     });
-
-    //     return unsubscribe;
-    // });
-
-    // useEffect(() => {
-    //     const auth = getAuth();
-    //     const unsubscribe = auth.onAuthStateChanged(user => {
-    //         if (user) {
-    //             // User is signed in, do nothing
-                
-            
-    //         } else {
-    //             navigate("/signin");
-    //         }
-    //     });
-
-    //     return unsubscribe;
-    // });
+            } else {
+                navigate("/adminsignin");
+            }
+        });
 
     const handleSignOut = () => {
         const auth = getAuth(); // Get authentication instance
         signOut(auth).then(() => {
-            console.log("User signed out");
-            props.setUsername("")
-            props.setUserEmail("")
-            props.setUserNumber("")
+            // props.setUsername("")
+            // props.setUserEmail("")
+            // props.setUserNumber("")
             reactLocalStorage.remove('udata');
-            
-            navigate("/signin");
+            console.log("User signed out");
+            navigate("/adminsignin");
         }).catch((error) => {
             console.error("Error signing out:", error);
         });

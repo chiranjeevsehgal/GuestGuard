@@ -10,7 +10,7 @@ import About from './components/About.js'
 import Faq from './components/Faq.js'
 import Admin from './components/Admin.js'
 import Error from './components/Error.js'
-import Admin1 from "./components/Admin1.js";
+import AdminSignin from "./components/AdminSignin.js";
 
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -27,6 +27,7 @@ function App() {
   const [useremail, setUserEmail] = useState("");
   const [username, setUsername] = useState("");
   const [userNumber, setUserNumber] = useState("");
+  const [admin, setAdmin] = useState("");
   return (
     <div>
       <BrowserRouter>
@@ -38,9 +39,9 @@ function App() {
           <Route path="/gatepass" element={<GatePass username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq username={username} useremail={useremail} setUserEmail={setUserEmail} setUsername={setUsername} userNumber={userNumber} setUserNumber={setUserNumber} user={user} />} />
-          <Route path="/admin" element={<Admin setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user} app={app} />} />
+          <Route path="/admin" element={<Admin admin={admin} setAdmin = {setAdmin} setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} user={user} app={app} />} />
           <Route path="/error" element={<Error />} />
-          <Route path="/admin1" element={<Admin1 app={app}/>} />
+          <Route path="/adminsignin" element={<AdminSignin admin={admin} setAdmin = {setAdmin} app={app}/>} />
         </Routes>
       
       </BrowserRouter>

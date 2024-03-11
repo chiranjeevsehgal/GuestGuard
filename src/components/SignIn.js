@@ -20,26 +20,39 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const navigate = useNavigate();
   const auth = getAuth();
 
+  // useEffect(() => {
+  //   if (user != null) {
+  //     // console.log(role);
+  //     if(role == "user"){
+  //        navigate("/gatepass")
+  //       }
+  //       else{
+  //       navigate("/admin")
+  //     }
+  //   }
+  // }, [user])
+  
   useEffect(() => {
     if (user != null) {
       // console.log(role);
-      if(role == "user"){
+      
          navigate("/gatepass")
-        }
-        else{
-        navigate("/admin")
-      }
+        
+      //   else{
+      //   navigate("/admin")
+      // }
     }
   }, [user])
   
-  useEffect(()=>{
-    if (email == "admin@gmail.com"){
-      setRole("admin")
-    }
-    else{
-      setRole("user")
-    }
-  })
+  
+  // useEffect(()=>{
+  //   if (email == "admin@gmail.com"){
+  //     setRole("admin")
+  //   }
+  //   else{
+  //     setRole("user")
+  //   }
+  // })
   
   const signinUser = (e) => {
     e.preventDefault()
@@ -72,12 +85,15 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
       });
       
       // navigate("/gatepass")
-      if(role == "user"){
+    //   if(role == "user"){
+    //     navigate("/gatepass")
+    //    }
+    //    else{
+    //    navigate("/admin")
+    //  }
+      
         navigate("/gatepass")
-       }
-       else{
-       navigate("/admin")
-     }
+     
 
     } else {
       console.log("No such document!");
@@ -153,7 +169,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
               <div className="flex mt-7 justify-center w-full">
 
-                <button className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button type="button" className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Google
                 </button>
               </div>

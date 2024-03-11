@@ -38,13 +38,14 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                console.log(user);
-                if (user.email == "admin@gmail.com"){
-                    navigate("/error");
-                }
+                // User is signed in, do nothing
+                
+                // console.log(user);
+                // if (user.email == "admin@gmail.com"){
+                //     navigate("/error");
+                // }
                 // console.log(Date.now())
             
-                // User is signed in, do nothing
                 // console.log(reactLocalStorage.getObject('udata'))
                 // console.log(reactLocalStorage.getObject('udata').name)
                 

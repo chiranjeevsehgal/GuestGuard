@@ -11,13 +11,13 @@ function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUs
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                if (user.email == "admin@gmail.com"){
-                    navigate("/error");
-                }
+                // if (user.email == "admin@gmail.com"){
+                //     navigate("/error");
+                // }
             } else {
-                <BrowserRouter>
+                // <BrowserRouter>
                 navigate("/signin");
-                </BrowserRouter>
+                // </BrowserRouter>
             }
         });
     
