@@ -1,5 +1,5 @@
 import { getFirestore, } from "firebase/firestore";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function AdminSignin({ app, admin, setAdmin }) {
     const [password, setPassword] = useState("");
     const [error, setError] = useState();
     const [dbpassword, setdbPassword] = useState("");
-    const [admindata, setAdminData] = useState("");
+    // const [admindata, setAdminData] = useState("");
 
     const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ function AdminSignin({ app, admin, setAdmin }) {
             console.log(docSnap.data());
             setdbPassword(docSnap.data()["password"])
             console.log(dbpassword);
-            if (dbpassword == password) {
+            if (dbpassword === password) {
                 console.log("True");
                 setAdmin("logged")
                 navigate("/admin");
@@ -41,7 +41,7 @@ function AdminSignin({ app, admin, setAdmin }) {
         } else {
             console.log("No such document!");
             setError('Invalid Username or Password')
-            setAdminData(null);
+            // setAdminData(null);
         }
     };
 
@@ -73,7 +73,6 @@ function AdminSignin({ app, admin, setAdmin }) {
                     </div>
                     <div className="space-y-2">
                         <div>
-
                             <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-cyan-600 text-gray-50">Sign in</button>
                         </div>
                     </div>

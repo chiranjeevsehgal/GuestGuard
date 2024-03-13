@@ -1,6 +1,6 @@
 import React, { useEffect} from 'react';
 import Header from './Header.js'
-import { BrowserRouter, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getAuth} from 'firebase/auth';
 
 function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUserNumber  }) {
@@ -22,7 +22,7 @@ function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUs
         });
     
         return unsubscribe;
-    }, []);
+    });
 
     return (
         

@@ -10,11 +10,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-  const [role, setRole] = useState();
-  const [userData, setUserData] = useState({
-    email: "",
-    fullName: ""
-  });
+  // const [userData, setUserData] = useState({email: "",fullName: ""});
 
   
   const navigate = useNavigate();
@@ -42,17 +38,11 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
       //   navigate("/admin")
       // }
     }
-  }, [user])
+    // }, [user])
+  }, [user, navigate])
   
   
-  // useEffect(()=>{
-  //   if (email == "admin@gmail.com"){
-  //     setRole("admin")
-  //   }
-  //   else{
-  //     setRole("user")
-  //   }
-  // })
+  
   
   const signinUser = (e) => {
     e.preventDefault()
@@ -97,7 +87,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
     } else {
       console.log("No such document!");
-      setUserData(null);
+      // setUserData(null);
     }
   };
 

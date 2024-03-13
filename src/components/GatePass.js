@@ -5,7 +5,6 @@ import Header from './Header.js'
 
 import {getFirestore,} from "firebase/firestore";
 import { doc, setDoc,getDoc } from "firebase/firestore"; 
-import {reactLocalStorage} from 'reactjs-localstorage';
 
 
 function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUserNumber }) {
@@ -70,6 +69,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
             time
         });
         console.log(time);
+        console.log(docRef);
           console.log("Document written with ID: ");
         } catch (e) {
           console.error("Error adding document: ", e);
@@ -122,6 +122,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
             setButtonDisabled(true);
             fetchUserData(phonenumber); 
         }
+    // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
 
     const handlevalidation = () => {
