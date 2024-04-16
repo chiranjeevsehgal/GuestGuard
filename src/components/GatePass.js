@@ -5,6 +5,7 @@ import Header from './Header.js'
 
 import {getFirestore,} from "firebase/firestore";
 import { doc, setDoc,getDoc } from "firebase/firestore"; 
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 
 function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUserNumber }) {
@@ -21,6 +22,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
     const [userData, setUserData] = useState("");
     const [time, setTime] = useState("");
     const [inpdisabled, setInpdisabled] = useState(false);
+    const [passdetails, setPassDetails] = useState("");
 
     
     
@@ -37,8 +39,9 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                // User is signed in, do nothing
                 
+                // User is signed in, do nothing
+
                 // console.log(user);
                 // if (user.email == "admin@gmail.com"){
                 //     navigate("/error");
@@ -70,11 +73,33 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         });
         console.log(time);
         console.log(docRef);
-          console.log("Document written with ID: ");
+        
+        console.log("Document written with ID: ");
+        
         } catch (e) {
           console.error("Error adding document: ", e);
         }
       }
+
+      useEffect(()=>{
+        fetchPassData()
+        
+      },[])
+
+      const fetchPassData = async ()=> {
+        const passData = reactLocalStorage.getObject('passdata');
+        setPassDetails(passData)
+        if (passData) {
+            // this.setState({ userData });
+            console.log(passData);
+            if (passData){
+                console.log("Yes")
+                setShowDetails(!showDetails);
+            }
+        } else {
+            console.log('No user data found in local storage.');
+        }
+    }
 
       const fetchUserData = async (phonenumber) => {
         const db = getFirestore(app);       
@@ -82,12 +107,16 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
             setUserData(docSnap.data());
+            setPassDetails(docSnap.data());
+            console.log(passdetails);
+            reactLocalStorage.setObject('passdata', passdetails);
+            console.log("Data saved to local storage under key 'udata'");
         } else {
             console.log("No such document!");
             setUserData(null);
         }
     };
-
+//setstate
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -118,7 +147,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         if (time !== "") {
             addNewUser();
             setInpdisabled(true);
-            setShowDetails(!showDetails);
+            setShowDetails(showDetails);
             setButtonDisabled(true);
             fetchUserData(phonenumber); 
         }
@@ -154,6 +183,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         <div>
             
             <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail} />
+            
 
 
             <section className="bg-gray-100 text-gray-800">
@@ -281,10 +311,10 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                     </div>
                                     <div className="p-4 space-y-2 text-sm text-gray-600">
                                         
-                                        <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
-                                        <p><span className="font-bold">Name:</span> {userData.fullname}</p>
-                                        <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
-                                        <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p>
+                                        <p><span className="font-bold">Gate Pass ID: </span>{passdetails.time}</p>
+                                        <p><span className="font-bold">Name:</span> {passdetails.fullname}</p>
+                                        <p><span className="font-bold">Number:</span> {passdetails.phonenumber}</p>
+                                        <p><span className="font-bold">Purpose of Visit:</span> {passdetails.purpose}</p>
                                     </div>
                                 </div>
                                 : null}
