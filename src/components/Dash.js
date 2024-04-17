@@ -25,7 +25,8 @@ function Dash({ user }) {
 									</div>
 								</div>
 								<div className="flex items-center justify-center p-4 sm:p-6 mt-6 sm:mt-0">
-									<img src="Business_SVG.svg" alt="" className="object-contain h-40 sm:h-72 lg:h-80 xl:h-96 2xl:h-112" />
+									{/* <img src="Business_SVG.svg" alt="" className="object-contain h-40 sm:h-72 lg:h-80 xl:h-96 2xl:h-112" /> */}
+									<img src="landing.png" alt="" className="object-contain h-40 sm:h-72 lg:h-80 xl:h-96 2xl:h-112" />
 								</div>
 							</div>
 						</div>

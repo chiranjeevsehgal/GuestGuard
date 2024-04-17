@@ -95,12 +95,14 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   return (
     <div className="font-sans">
       
-    <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 flex  justify-center h-screen">
+    <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 justify-center h-screen">
 
         <div className="relative sm:max-w-sm w-full">
-
+        
+            
             <div className="sm:absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl hidden sm:block"></div>
-            <div className="relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md">
+            
+            <div className="relative w-full rounded-3xl px-6 py-4 bg-gray-100">
 
                 <a href="/"><span className="px-32 mb-2 text-cyan-600 flex justify-center">GuestGuard</span></a>
 
@@ -174,7 +176,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                         </button>
                     </div> */}
 
-                    <div className="mt-0">
+                    <div  >
                         <div className="flex justify-center items-center">
                             <label className="mr-2">Not a user?</label>
                             <a href="/signup" className=" text-cyan-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">

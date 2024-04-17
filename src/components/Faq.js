@@ -35,16 +35,16 @@ function Faq({ user,username,useremail,setUsername,setUserEmail,userNumber,setUs
                     <p className="mt-4 mb-8 text-gray-600">This section serves as a repository of answers to frequently encountered inquiries, providing comprehensive solutions to common concerns.</p>
                     <div className="space-y-4">
                         <details className="w-full border rounded-lg">
-                            <summary className="px-4 py-6 focus:outline-none focus-visible:ri">Question 1?</summary>
-                            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-600">Answer 1. </p>
+                            <summary className="px-4 py-6 focus:outline-none focus-visible:ri">What are the office timings?</summary>
+                            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-600">The office timings are from 9:00 A.M to 4:00 P.M.</p>
                         </details>
                         <details className="w-full border rounded-lg">
-                            <summary className="px-4 py-6 focus:outline-none focus-visible:ri">Question 2?</summary>
-                            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-600">Answer 2. </p>
+                            <summary className="px-4 py-6 focus:outline-none focus-visible:ri">Does the mobile network work inside the campus?</summary>
+                            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-600">During peak hours, there are some issues with the network, but there are Wi-Fi facilities available near the offices for office-related work.</p>
                         </details>
                         <details className="w-full border rounded-lg">
-                            <summary className="px-4 py-6 focus:outline-none focus-visible:ri">Question 3?</summary>
-                            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-600">Answer 3. </p>
+                            <summary className="px-4 py-6 focus:outline-none focus-visible:ri">Are there any cafeterias inside the campus?</summary>
+                            <p className="px-4 py-6 pt-0 ml-4 -mt-4 text-gray-600">Yes! There are many cafeterias inside the campus. You can find them in our navigation menu.</p>
                         </details>
                     </div>
                 </div>

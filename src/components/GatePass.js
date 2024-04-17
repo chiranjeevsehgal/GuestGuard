@@ -62,6 +62,10 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                 setPId(reactLocalStorage.getObject('passdata').id)
                 setPPurpose(reactLocalStorage.getObject('passdata').purpose)
                 setPassFlag(reactLocalStorage.getObject('passdata').flag)
+                setIsChecked(reactLocalStorage.getObject('passdata').flag)
+                if (passflag){
+                    setButtonDisabled(true)
+                }
 
 
 
@@ -101,13 +105,14 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
             // console.log(docSnap.data());
+            
             reactLocalStorage.setObject('passdata', {
                 'name': docSnap.data().fullname,
                 'purpose': docSnap.data().purpose,
                 'id': docSnap.data().time,
                 'number': docSnap.data().phonenumber,
-                'flag': 1
-
+                'flag': 1,
+                
             });
             setUserData(docSnap.data());
             setShowDetails(true)
@@ -155,6 +160,8 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
         }
         // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
+
+
 
     const handlevalidation = () => {
         const datobj = {
@@ -321,15 +328,19 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                         {/* <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
                                         <p><span className="font-bold">Name:</span> {userData.fullname}</p>
                                         <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
-                                        <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p> */}
+                                    <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p> */}
                                     </div>
+                                    <span className="text-x3 font-bold"></span>
+                                    <p className='text-sm px-4 py-4'>*Keep the gate pass until you leave campus, signing out will expire it.</p>
                                 </div>
+                                
                                 : null}
                         </div>
                     </div>
 
                     <div className="hidden sm:flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128 ml-12">
-                        <img src="Business_SVG.svg" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
+                        {/* <img src="Business_SVG.svg" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" /> */}
+                        <img src="gatepass1.png" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
                     </div>
                 </div>
             </section>

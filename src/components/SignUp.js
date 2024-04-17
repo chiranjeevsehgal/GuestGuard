@@ -80,7 +80,7 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
       <div className="sm:absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl hidden sm:block"></div>
 
-      <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
+      <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 ">
       <a href="/"><span className="px-32 mb-2 text-cyan-600 flex justify-center">GuestGuard</span></a>
         <label htmlFor="" className="block mt-3 text-lg text-gray-700 text-center font-semibold">
           Sign Up
