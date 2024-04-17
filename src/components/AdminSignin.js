@@ -47,7 +47,7 @@ function AdminSignin({ app, admin, setAdmin }) {
 
     return (
         <div className="flex items-center justify-center h-screen">
-            <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-800">
+            <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-800 shadow-xl">
                 <div className="mb-8 text-center">
                     <a href="/"><span className="px-32 block text-cyan-600">GuestGuard</span></a>
                     <h1 className="my-3 text-4xl font-bold">Admin Sign in</h1>
