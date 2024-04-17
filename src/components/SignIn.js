@@ -94,7 +94,8 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
   return (
     <div className="font-sans">
-    <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100">
+      
+    <div className="relative min-h-screen flex flex-col sm:justify-center items-center bg-gray-100 flex  justify-center h-screen">
 
         <div className="relative sm:max-w-sm w-full">
 

@@ -5,7 +5,7 @@ function About() {
             <div class="min-h-screen min-w-full bg-gray-100 flex flex-col justify-center p-5 sm:p-10">
                 <div class="relative w-full max-w-full lg:max-w-6xl xl:max-w-screen-2xl mx-auto">
 
-                    <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+                <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl hidden sm:block"></div>
                     <div class="relative bg-white shadow-lg sm:rounded-3xl">
 
 
@@ -67,7 +67,7 @@ function About() {
                                 <div class="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
                                     <p class="p-2 text-sm font-medium tracki text-center uppercase">Development team</p>
                                     <h1 class="text-2xl sm:text-4xl font-bold leadi text-center">The talented people behind the scenes</h1>
-                                    <div class="flex flex-col sm:flex-row flex-wrap justify-center mt-8">
+                                    <div class="flex flex-col lg:flex-row justify-center lg:space-x-8 mt-16 gap-y-4">
 
                                         <div class="flex flex-col justify-center w-full px-4 my-6 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
                                             <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
@@ -100,7 +100,7 @@ function About() {
                                             </div>
                                         </div>
 
-                                        <div class="flex flex-col justify-center w-full px-4 my-6 mt-12 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
+                                        <div class="flex flex-col justify-center w-full px-4 my-6 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
                                             <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
                                             <div class="flex-1 my-4">
                                                 <p className="text-lg font-semibold leadi text-center">Hemangshu Dey</p>
@@ -131,7 +131,7 @@ function About() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div className="mt-4">
                                     <a rel="noopener noreferrer" href="/" class="block mx-auto mt-8 sm:mt-0 sm:inline-block px-4 my-6 sm:px-6 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-500 sm:py-4">Back to dashboard</a>
                                     </div>
 
