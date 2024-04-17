@@ -46,8 +46,8 @@ function AdminSignin({ app, admin, setAdmin }) {
     };
 
     return (
-        <div>
-            <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-50 text-gray-800  m-auto mt-48">
+        <div className="flex items-center justify-center h-screen">
+            <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-50 text-gray-800">
                 <div className="mb-8 text-center">
                     <a href="/"><span className="px-32 block text-cyan-600">GuestGuard</span></a>
                     <h1 className="my-3 text-4xl font-bold">Admin Sign in</h1>
@@ -57,7 +57,7 @@ function AdminSignin({ app, admin, setAdmin }) {
                     <div className="space-y-4">
                         <div>
                             <label htmlFor="email" className="block mb-2 text-sm">Email address</label>
-                            <input type="email" name="email" id="email" className="w-full px-e3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
+                            <input type="email" name="email" id="email" className="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800"
                                 onChange={(e) => setEmail(e.target.value)}
                                 value={email} />
                         </div>

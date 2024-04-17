@@ -1,43 +1,43 @@
 function About() {
     return (
         <div>
-            
-            <div className="min-h-screen min-w-full bg-gray-100 flex flex-col justify-center p-10">
-                <div className="relative w-full max-w-full lg:max-w-6xl xl:max-w-screen-2xl mx-auto">
-            
-                    <div className="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
-                    <div className="relative bg-white shadow-lg sm:rounded-3xl">
-                    
-                    
-                        <div className="px-20 py-6">
-                            <div className="bg-gray-100 text-gray-800">
-                    
-                                
-                                <div className="container mx-auto p-4 my-6 space-y-2 text-center">
-                                <a href="/adminsignin"><span className="px-32 block text-cyan-600">Admin Sign In</span></a>
-                                    <h2 className="text-5xl font-bold mt-7">Revolutionizing Campus Security and Efficiency
+
+            <div class="min-h-screen min-w-full bg-gray-100 flex flex-col justify-center p-5 sm:p-10">
+                <div class="relative w-full max-w-full lg:max-w-6xl xl:max-w-screen-2xl mx-auto">
+
+                    <div class="absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl"></div>
+                    <div class="relative bg-white shadow-lg sm:rounded-3xl">
+
+
+                        <div class="px-5 sm:px-20 py-6">
+                            <div class="bg-gray-100 text-gray-800">
+
+
+                                <div class="container mx-auto p-4 my-6 space-y-2 text-center">
+                                    <a href="/adminsignin"><span class="px-24 sm:px-32 block text-cyan-600">Admin Sign In</span></a>
+                                    <h2 class="text-3xl sm:text-5xl font-bold mt-7">Revolutionizing Campus Security and Efficiency
                                     </h2>
-                                    <p className="text-gray-600">Centralized Tracking, GPS Integration, and Seamless Navigation for a Safer and More Streamlined Visitor Experience.</p>
+                                    <p class="text-gray-600">Centralized Tracking, GPS Integration, and Seamless Navigation for a Safer and More Streamlined Visitor Experience.</p>
                                 </div>
-                                <div className="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                                    <div className="flex flex-col items-center p-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 text-cyan-600">
-                                            <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"></path>
+                                <div class="container mx-auto grid justify-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                                    <div class="flex flex-col items-center p-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8 text-cyan-600">
+                                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
                                         </svg>
-                                        <h3 className="my-3 text-3xl font-semibold">Gate Pass Generation</h3>
-                                        <div className="space-y-1 leadi">
+                                        <h3 class="my-3 text-xl sm:text-3xl font-semibold">Gate Pass Generation</h3>
+                                        <div class="space-y-1 leadi">
                                             <p>Effortlessly generate secure gate</p>
                                             <p>passes through our user-friendly</p>
                                             <p>system, ensuring quick and hassle-</p>
                                             <p>free access to the college campus.</p>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col items-center p-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 text-cyan-600">
-                                            <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"></path>
+                                    <div class="flex flex-col items-center p-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8 text-cyan-600">
+                                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
                                         </svg>
-                                        <h3 className="my-3 text-3xl font-semibold">Navigation Assistance</h3>
-                                        <div className="space-y-1 leadi">
+                                        <h3 class="my-3 text-xl sm:text-3xl font-semibold">Navigation Assistance</h3>
+                                        <div class="space-y-1 leadi">
                                             <p>Navigate the campus with ease using</p>
                                             <p>our navigation feature. Whether you're</p>
                                             <p>a visitor or a regular, our system</p>
@@ -47,12 +47,12 @@ function About() {
                                         </div>
 
                                     </div>
-                                    <div className="flex flex-col items-center p-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-8 h-8 text-cyan-600">
-                                            <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd"></path>
+                                    <div class="flex flex-col items-center p-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-8 h-8 text-cyan-600">
+                                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
                                         </svg>
-                                        <h3 className="my-3 text-3xl font-semibold">Emergency Preparedness</h3>
-                                        <div className="space-y-1 leadi">
+                                        <h3 class="my-3 text-xl sm:text-3xl font-semibold">Emergency Preparedness</h3>
+                                        <div class="space-y-1 leadi">
                                             <p>Stay informed and secure during</p>
                                             <p>unforeseen events with real-time</p>
                                             <p>alerts, evacuation routes, and vital</p>
@@ -63,17 +63,17 @@ function About() {
                                     </div>
                                 </div>
 
-                                
-                                <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
-                                    <p className="p-2 text-sm font-medium tracki text-center uppercase">Development team</p>
-                                    <h1 className="text-4xl font-bold leadi text-center sm:text-5xl">The talented people behind the scenes</h1>
-                                    <div className="flex flex-row flex-wrap-reverse justify-center mt-8">
-                                
-                                        <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-cyan-500 text-gray-100">
-                                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
-                                            <div className="flex-1 my-4">
-                                                <p className="text-xl font-semibold leadi">Chiranjeev Sehgal</p>
-                                                <p>Frontend Developer</p>
+
+                                <div class="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
+                                    <p class="p-2 text-sm font-medium tracki text-center uppercase">Development team</p>
+                                    <h1 class="text-2xl sm:text-4xl font-bold leadi text-center">The talented people behind the scenes</h1>
+                                    <div class="flex flex-col sm:flex-row flex-wrap justify-center mt-8">
+
+                                        <div class="flex flex-col justify-center w-full px-4 my-6 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
+                                            <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
+                                            <div class="flex-1 my-4">
+                                                <p className="text-lg font-semibold leadi text-center">Chiranjeev Sehgal</p>
+                                                <p className="text-center">Frontend Developer</p>
                                             </div>
                                             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
                                                 <a rel="noopener noreferrer" href="/about" title="Email" className="text-gray-50 hover:text-cyan-600">
@@ -99,12 +99,12 @@ function About() {
                                                 </a>
                                             </div>
                                         </div>
-                                        
-                                        <div className="flex flex-col justify-center w-full px-8 mx-6 my-12 text-center rounded-md md:w-96 lg:w-80 xl:w-64 bg-cyan-500 text-gray-100">
-                                            <img alt="" className="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
-                                            <div className="flex-1 my-4">
-                                                <p className="text-xl font-semibold leadi">Hemangshu Dey</p>
-                                                <p>Backend Developer</p>
+
+                                        <div class="flex flex-col justify-center w-full px-4 my-6 mt-12 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
+                                            <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
+                                            <div class="flex-1 my-4">
+                                                <p className="text-lg font-semibold leadi text-center">Hemangshu Dey</p>
+                                                <p className="text-center">Backend Developer</p>
                                             </div>
                                             <div className="flex items-center justify-center p-3 space-x-3 border-t-2">
                                                 <a rel="noopener noreferrer" href="/about" title="Email" className="text-gray-50 hover:text-cyan-600">
@@ -131,7 +131,10 @@ function About() {
                                             </div>
                                         </div>
                                     </div>
-                                        <a rel="noopener noreferrer" href="/" className="px-8 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-500" >Back to dashboard</a>
+                                    <div>
+                                    <a rel="noopener noreferrer" href="/" class="block mx-auto mt-8 sm:mt-0 sm:inline-block px-4 my-6 sm:px-6 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-500 sm:py-4">Back to dashboard</a>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
