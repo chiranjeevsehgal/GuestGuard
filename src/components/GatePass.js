@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
 
-import {getFirestore,} from "firebase/firestore";
-import { doc, setDoc,getDoc } from "firebase/firestore"; 
+import { getFirestore, } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { reactLocalStorage } from 'reactjs-localstorage';
 
 
-function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUserNumber }) {
+function GatePass({ user, app, username, useremail, setUsername, setUserEmail, setUserNumber }) {
     const [showDetails, setShowDetails] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -24,27 +24,27 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
     const [inpdisabled, setInpdisabled] = useState(false);
     const [passdetails, setPassDetails] = useState("");
     const [passflag, setPassFlag] = useState(0)
-    
+
     const [pname, setPName] = useState("");
     const [pnumber, setPNumber] = useState("");
     const [ppurpose, setPPurpose] = useState("");
     const [pid, setPId] = useState("");
-    
-    
-    
+
+
+
     // const timehandler = ()=>{
     //     let current = `${date.getDate()}${date.getMonth()+1}${date.getFullYear()%100}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()%100 }`
     //     setTime(current)
     // }
-    
-    
+
+
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         const auth = getAuth();
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
-                
+
                 // User is signed in, do nothing
 
                 // console.log(user);
@@ -52,19 +52,19 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                 //     navigate("/error");
                 // }
                 // console.log(Date.now())
-            
+
                 // console.log(reactLocalStorage.getObject('udata'))
                 // console.log(reactLocalStorage.getObject('udata').name)
 
-                console.log( reactLocalStorage.getObject('passdata').ID);
+                console.log(reactLocalStorage.getObject('passdata').ID);
                 setPName(reactLocalStorage.getObject('passdata').name)
                 setPNumber(reactLocalStorage.getObject('passdata').number)
                 setPId(reactLocalStorage.getObject('passdata').id)
                 setPPurpose(reactLocalStorage.getObject('passdata').purpose)
                 setPassFlag(reactLocalStorage.getObject('passdata').flag)
-                
-                
-                
+
+
+
             } else {
                 navigate("/signin");
             }
@@ -76,27 +76,27 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
     async function addNewUser() {
         const db = getFirestore(app);
         try {
-          const docRef = await setDoc(doc(db, "gatepass",phonenumber), {
-            fullname,
-            phonenumber,
-            email,
-            address,
-            ID,
-            purpose,
-            time
-        });
-        console.log(time);
-        console.log(docRef);
-        
-        console.log("Document written with ID: ");
-    } catch (e) {
-          console.error("Error adding document: ", e);
+            const docRef = await setDoc(doc(db, "gatepass", phonenumber), {
+                fullname,
+                phonenumber,
+                email,
+                address,
+                ID,
+                purpose,
+                time
+            });
+            console.log(time);
+            console.log(docRef);
+
+            console.log("Document written with ID: ");
+        } catch (e) {
+            console.error("Error adding document: ", e);
         }
-      }
+    }
 
 
-      const fetchUserData = async (phonenumber) => {
-        const db = getFirestore(app);       
+    const fetchUserData = async (phonenumber) => {
+        const db = getFirestore(app);
         const userRef = doc(db, "gatepass", phonenumber);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
@@ -107,8 +107,8 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                 'id': docSnap.data().time,
                 'number': docSnap.data().phonenumber,
                 'flag': 1
-                
-              });
+
+            });
             setUserData(docSnap.data());
             setShowDetails(true)
         } else {
@@ -116,7 +116,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
             setUserData(null);
         }
     };
-//setstate
+    //setstate
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
@@ -150,10 +150,10 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
             setPassFlag(true)
             setShowDetails(true);
             setButtonDisabled(true);
-            fetchUserData(phonenumber); 
+            fetchUserData(phonenumber);
             console.log(userData);
         }
-    // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
+        // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
 
     const handlevalidation = () => {
@@ -183,16 +183,16 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
 
     return (
         <div>
-            
+
             <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail} />
-            
+
 
 
             <section className="bg-gray-100 text-gray-800">
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
-                    <div className="mr-12 bg-gray-100 text-gray-900">
-                        
-                    
+                    <div className=" bg-gray-100 text-gray-900">
+
+
                         <form method="#" action="#" className="container flex flex-col mx-auto space-y-12" onSubmit={handleButtonClick}>
                             <fieldset className="grid grid-cols-2 gap-6 p-6 rounded-md shadow-sm bg-gray-50 ">
                                 <div className="space-y-2 col-span-full lg:col-span-1">
@@ -208,34 +208,34 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                             }}
                                             value={fullname}
                                             disabled={inpdisabled}
-                                            type="text" placeholder="Name" className="p-3 w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900" 
-                                            required/>
+                                            type="text" placeholder="Name" className="p-3 w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900"
+                                            required />
                                     </div>
-                                    
+
                                     <div className="col-span-full sm:col-span-1">
                                         <label htmlFor="ID" className="text-sm">ID</label>
-                                        
-                                        <select id="id" className="p-1  w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400" 
-                                        onChange={(e) => {
-                                            setIDType(e.target.value === "1" ? "Aadhar Card" : (e.target.value === "2" ? "Driving License" : "Pan Card"))
-                                        }}
-                                        datap={IDtype}
-                                        required>
+
+                                        <select id="id" className="p-1  w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-400"
+                                            onChange={(e) => {
+                                                setIDType(e.target.value === "1" ? "Aadhar Card" : (e.target.value === "2" ? "Driving License" : "Pan Card"))
+                                            }}
+                                            datap={IDtype}
+                                            required>
                                             <option value="">Select ID</option>
                                             <option value="1">Aadhar Card</option>
                                             <option value="2">Driving License</option>
                                             <option value="3">Pan Card</option>
                                         </select>
                                     </div>
-                                    
+
                                     <div className="col-span-full sm:col-span-2">
                                         <label htmlFor="idnumber" className="text-sm">ID Number</label>
                                         <input id="idnumber"
                                             onChange={(e) => setID(e.target.value)}
                                             value={ID}
                                             disabled={inpdisabled}
-                                            type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
-                                            required/>
+                                            type="text" placeholder="ID Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3"
+                                            required />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="phone" className="text-sm">Phone Number</label>
@@ -244,39 +244,39 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                             value={phonenumber}
                                             disabled={inpdisabled}
                                             type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" pattern="[0-9]{10}"
-                                            required/>
+                                            required />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="email" className="text-sm">Email</label>
                                         <input id="email"
                                             disabled={inpdisabled}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
-                                            required/>
+                                            value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3"
+                                            required />
                                     </div>
                                     <div className="col-span-full">
                                         <label htmlFor="address" className="text-sm">Address</label>
                                         <input id="address"
-                                        disabled={inpdisabled}
+                                            disabled={inpdisabled}
                                             onChange={(e) => setAddress(e.target.value)}
                                             value={address}
-                                            type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
-                                            required/>
+                                            type="text" placeholder="Address" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3"
+                                            required />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
                                         <label htmlFor="purpose" className="text-sm">Purpose</label>
                                         <input id="purpose"
-                                        disabled={inpdisabled}
+                                            disabled={inpdisabled}
                                             onChange={(e) => setPurpose(e.target.value)}
                                             value={purpose}
-                                            type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" 
-                                            required/>
+                                            type="text" placeholder="Purpose of Visit" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3"
+                                            required />
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
 
                                     </div>
                                     <div className="col-span-full sm:col-span-full">
-                                        
+
                                         <button disabled={buttonDisabled}
                                             type="submit" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
                                     </div>
@@ -312,12 +312,12 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                         </div>
                                     </div>
                                     <div className="p-4 space-y-2 text-sm text-gray-600">
-                                        
+
                                         <p><span className="font-bold">Gate Pass ID: </span>{pid}</p>
                                         <p><span className="font-bold">Name:</span> {pname}</p>
                                         <p><span className="font-bold">Number:</span> {pnumber}</p>
                                         <p><span className="font-bold">Purpose of Visit:</span> {ppurpose}</p>
-                                        
+
                                         {/* <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
                                         <p><span className="font-bold">Name:</span> {userData.fullname}</p>
                                         <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
@@ -328,7 +328,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+                    <div className="hidden sm:flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128 ml-12">
                         <img src="Business_SVG.svg" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
                     </div>
                 </div>
