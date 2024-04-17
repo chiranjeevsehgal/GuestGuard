@@ -99,29 +99,38 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
         <div className="relative sm:max-w-sm w-full">
 
             <div className="sm:absolute inset-0 -mr-3.5 bg-gradient-to-r from-blue-100 to-cyan-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-3 sm:rounded-3xl hidden sm:block"></div>
-            <div className="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
+            <div className="relative w-full rounded-3xl px-6 py-4 bg-gray-100 shadow-md">
 
                 <a href="/"><span className="px-32 mb-2 text-cyan-600 flex justify-center">GuestGuard</span></a>
 
                 <label htmlFor="" className="block mt-3 text-lg text-gray-700 text-center font-semibold">
                     Sign In
                 </label>
-                <form method="#" action="#" className="mt-10" onSubmit={signinUser}>
-                    <div className="mt-7">
-                        <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            type="email" placeholder="Email" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
-                            required />
-                    </div>
+                <form method="#" action="#" className="mt-10 space-y-12" onSubmit={signinUser}>
+                    <div className="mt-7 space-y-4">
+                        <div className="flex flex-col">
+                            <label htmlFor="email" className="text-sm">Email</label>
+                            <input
+                                onChange={(e) => setEmail(e.target.value)}
+                                value={email}
+                                type="email"
+                                placeholder="Email"
+                                className="p-3 border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                                required
+                            />
+                        </div>
 
-                    <div className="mt-7">
-                        <input
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}
-                            type="password" placeholder="Password" className="p-3 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
-                            required
-                        />
+                        <div className="flex flex-col ">
+                            <label htmlFor="password" className="text-sm">Password</label>
+                            <input
+                                onChange={(e) => setPassword(e.target.value)}
+                                value={password}
+                                type="password"
+                                placeholder="Password"
+                                className="p-3 border-nonze bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
+                                required
+                            />
+                        </div>
                     </div>
 
                     <div className="mt-7">
@@ -130,7 +139,8 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                         </button>
                     </div>
 
-                    {error ?
+                    {/* Error message */}
+                    {error && (
                         <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7">
                             <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-8 w-8">
@@ -147,9 +157,9 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                                 </svg>
                             </button>
                         </div>
-                        : null}
+                    )}
 
-                    <div className="flex mt-7 items-center text-center">
+                    {/* <div className="flex mt-7 items-center text-center">
                         <hr className="border-gray-300 border-1 w-full rounded-md" />
                         <label className="block font-medium text-sm text-gray-600 w-full">
                             Or Sign In Using
@@ -158,13 +168,12 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                     </div>
 
                     <div className="flex mt-7 justify-center w-full">
-
                         <button type="button" className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                             Google
                         </button>
-                    </div>
+                    </div> */}
 
-                    <div className="mt-7">
+                    <div className="mt-0">
                         <div className="flex justify-center items-center">
                             <label className="mr-2">Not a user?</label>
                             <a href="/signup" className=" text-cyan-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
@@ -177,6 +186,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
         </div>
     </div>
 </div>
+
 
   )
 }

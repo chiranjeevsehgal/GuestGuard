@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { Helmet } from 'react-helmet';
 import { Button } from "@chakra-ui/react";
-import {reactLocalStorage} from 'reactjs-localstorage';
+import { reactLocalStorage } from 'reactjs-localstorage';
 
 
 function Header(props) {
@@ -30,7 +30,7 @@ function Header(props) {
             props.setUserNumber("")
             reactLocalStorage.remove('udata');
             reactLocalStorage.remove('passdata');
-            
+
             navigate("/signin");
         }).catch((error) => {
             console.error("Error signing out:", error);
@@ -44,12 +44,12 @@ function Header(props) {
             if (user) {
                 // User is signed in, do nothing
                 console.log(reactLocalStorage.getObject('udata'))
-                
+
                 setPName(reactLocalStorage.getObject('udata').name)
                 setPEmail(reactLocalStorage.getObject('udata').email)
                 setPNumber(reactLocalStorage.getObject('udata').number)
 
-                
+
             } else {
                 navigate("/signin");
             }
@@ -115,30 +115,35 @@ function Header(props) {
                                     <li className="border-b border-gray-400 my-8 uppercase">
                                         <Link to="/navigation">Navigation</Link>
                                     </li>
-                                    <li className="border-b border-gray-400 my-8 uppercase">                                        
+                                    <li className="border-b border-gray-400 my-8 uppercase">
                                         <Link to="/faq">FAQ</Link>
+                                    </li>
+                                    <li className="border-b border-gray-400 my-8 uppercase">
+                                        <button onClick={handleSignOut} className="bg-cyan-600 w-full py-3  text-gray-50 shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105 self-center px-8 font-semibold rounded ">
+                                            Sign Out
+                                        </button>
                                     </li>
 
                                 </ul>
                             </div>
                         </section>
-                        
-                        
+
+
 
                         <div className="items-center flex-shrink-0 hidden lg:flex">
                             <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
-                            <section>
-                        {/* ----------------------- */}
-                            <Button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className=" hover:bg-gray-50 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-cyan-600 border-cyan-600 md:p-0 flex items-center justify-between w-full md:w-auto" onClick={() => setIsNavOpen((prev) => !prev)}>Profile
-                            <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                            
-                            </Button>
+                                <section>
+                                    {/* ----------------------- */}
+                                    <Button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className=" hover:bg-gray-50 md:hover:bg-transparent md:border-0 pl-3 pr-4 py-2 md:hover:text-cyan-600 border-cyan-600 md:p-0 flex items-center justify-between w-full md:w-auto" onClick={() => setIsNavOpen((prev) => !prev)}>Profile
+                                        <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
 
-                            <div className={isNavOpen ? "bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-6 absolute" : "hideMenuNav"}>
-                                
+                                    </Button>
 
-                                <div className="max-w-md p-6 sm:flex sm:space-x-6 bg-gray-50 text-gray-800">
-                                            
+                                    <div className={isNavOpen ? "bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-6 absolute" : "hideMenuNav"}>
+
+
+                                        <div className="max-w-md p-6 sm:flex sm:space-x-6 bg-gray-50 text-gray-800">
+
                                             <div className="flex flex-col space-y-4">
                                                 <div>
                                                     <h2 className="text-2xl font-semibold">{pname}</h2>
@@ -157,16 +162,16 @@ function Header(props) {
                                                         </svg>
                                                         <span className="text-gray-600">{pnumber}</span>
                                                     </span>
-                                                </div> 
-                                                </div> 
-                                                </div> 
+                                                </div>
+                                            </div>
+                                        </div>
 
 
 
 
-                                
-                            </div>
-                        </section>
+
+                                    </div>
+                                </section>
 
                                 <li>
                                     <Link id="gatepass" to="/gatepass" className={currentPath === "/gatepass" ? classActive : classn}>Gate Pass</Link>
@@ -177,10 +182,11 @@ function Header(props) {
                                 <li>
                                     <Link id="faq" to="/faq" className={currentPath === "/faq" ? classActive : classn}>FAQ</Link>
                                 </li>
+
                                 <li>
-                        
-                                <div id="dropdownNavbar" className="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4">
-                                    
+
+                                    <div id="dropdownNavbar" className="hidden bg-white text-base z-10 list-none divide-y divide-gray-100 rounded shadow my-4">
+
 
                                     </div>
                                 </li>
