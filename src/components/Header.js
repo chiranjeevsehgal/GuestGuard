@@ -29,6 +29,7 @@ function Header(props) {
             props.setUserEmail("")
             props.setUserNumber("")
             reactLocalStorage.remove('udata');
+            reactLocalStorage.remove('passdata');
             
             navigate("/signin");
         }).catch((error) => {

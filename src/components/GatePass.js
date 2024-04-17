@@ -9,7 +9,7 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 
 
 function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUserNumber }) {
-    const [showDetails, setShowDetails] = useState(false);
+    const [showDetails, setShowDetails] = useState(true);
     const [isChecked, setIsChecked] = useState(false);
     const [buttonDisabled, setButtonDisabled] = useState(false);
     const [fullname, setFullName] = useState("");
@@ -23,7 +23,12 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
     const [time, setTime] = useState("");
     const [inpdisabled, setInpdisabled] = useState(false);
     const [passdetails, setPassDetails] = useState("");
-
+    const [passflag, setPassFlag] = useState(0)
+    
+    const [pname, setPName] = useState("");
+    const [pnumber, setPNumber] = useState("");
+    const [ppurpose, setPPurpose] = useState("");
+    const [pid, setPId] = useState("");
     
     
     
@@ -50,6 +55,15 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
             
                 // console.log(reactLocalStorage.getObject('udata'))
                 // console.log(reactLocalStorage.getObject('udata').name)
+
+                console.log( reactLocalStorage.getObject('passdata').ID);
+                setPName(reactLocalStorage.getObject('passdata').name)
+                setPNumber(reactLocalStorage.getObject('passdata').number)
+                setPId(reactLocalStorage.getObject('passdata').id)
+                setPPurpose(reactLocalStorage.getObject('passdata').purpose)
+                setPassFlag(reactLocalStorage.getObject('passdata').flag)
+                
+                
                 
             } else {
                 navigate("/signin");
@@ -86,7 +100,17 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         const userRef = doc(db, "gatepass", phonenumber);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
+            // console.log(docSnap.data());
+            reactLocalStorage.setObject('passdata', {
+                'name': docSnap.data().fullname,
+                'purpose': docSnap.data().purpose,
+                'id': docSnap.data().time,
+                'number': docSnap.data().phonenumber,
+                'flag': 1
+                
+              });
             setUserData(docSnap.data());
+            setShowDetails(true)
         } else {
             console.log("No such document!");
             setUserData(null);
@@ -123,9 +147,11 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         if (time !== "") {
             addNewUser();
             setInpdisabled(true);
-            setShowDetails(!showDetails);
+            setPassFlag(true)
+            setShowDetails(true);
             setButtonDisabled(true);
             fetchUserData(phonenumber); 
+            console.log(userData);
         }
     // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
@@ -259,7 +285,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                         </form>
 
                         <div>
-                            {showDetails ?
+                            {showDetails && passflag ?
                                 <div className="container flex flex-col w-full max-w-lg p-6 mt-10 divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
                                     <div className="flex justify-between p-4">
                                         <div className="flex space-x-4">
@@ -287,10 +313,15 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                     </div>
                                     <div className="p-4 space-y-2 text-sm text-gray-600">
                                         
-                                        <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
+                                        <p><span className="font-bold">Gate Pass ID: </span>{pid}</p>
+                                        <p><span className="font-bold">Name:</span> {pname}</p>
+                                        <p><span className="font-bold">Number:</span> {pnumber}</p>
+                                        <p><span className="font-bold">Purpose of Visit:</span> {ppurpose}</p>
+                                        
+                                        {/* <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
                                         <p><span className="font-bold">Name:</span> {userData.fullname}</p>
                                         <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
-                                        <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p>
+                                        <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p> */}
                                     </div>
                                 </div>
                                 : null}
