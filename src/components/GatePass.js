@@ -75,31 +75,11 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         console.log(docRef);
         
         console.log("Document written with ID: ");
-        
-        } catch (e) {
+    } catch (e) {
           console.error("Error adding document: ", e);
         }
       }
 
-      useEffect(()=>{
-        fetchPassData()
-        
-      },[])
-
-      const fetchPassData = async ()=> {
-        const passData = reactLocalStorage.getObject('passdata');
-        setPassDetails(passData)
-        if (passData) {
-            // this.setState({ userData });
-            console.log(passData);
-            if (passData){
-                console.log("Yes")
-                setShowDetails(!showDetails);
-            }
-        } else {
-            console.log('No user data found in local storage.');
-        }
-    }
 
       const fetchUserData = async (phonenumber) => {
         const db = getFirestore(app);       
@@ -107,10 +87,6 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
             setUserData(docSnap.data());
-            setPassDetails(docSnap.data());
-            console.log(passdetails);
-            reactLocalStorage.setObject('passdata', passdetails);
-            console.log("Data saved to local storage under key 'udata'");
         } else {
             console.log("No such document!");
             setUserData(null);
@@ -147,7 +123,7 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
         if (time !== "") {
             addNewUser();
             setInpdisabled(true);
-            setShowDetails(showDetails);
+            setShowDetails(!showDetails);
             setButtonDisabled(true);
             fetchUserData(phonenumber); 
         }
@@ -311,10 +287,10 @@ function GatePass({ user, app,username,useremail,setUsername,setUserEmail, setUs
                                     </div>
                                     <div className="p-4 space-y-2 text-sm text-gray-600">
                                         
-                                        <p><span className="font-bold">Gate Pass ID: </span>{passdetails.time}</p>
-                                        <p><span className="font-bold">Name:</span> {passdetails.fullname}</p>
-                                        <p><span className="font-bold">Number:</span> {passdetails.phonenumber}</p>
-                                        <p><span className="font-bold">Purpose of Visit:</span> {passdetails.purpose}</p>
+                                        <p><span className="font-bold">Gate Pass ID: </span>{time}</p>
+                                        <p><span className="font-bold">Name:</span> {userData.fullname}</p>
+                                        <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
+                                        <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p>
                                     </div>
                                 </div>
                                 : null}
