@@ -41,7 +41,7 @@ function Admin({admin, setAdmin}) {
             // props.setUserEmail("")
             // props.setUserNumber("")
             reactLocalStorage.remove('udata');
-            console.log("User signed out");
+            
             navigate("/adminsignin");
         }).catch((error) => {
             console.error("Error signing out:", error);

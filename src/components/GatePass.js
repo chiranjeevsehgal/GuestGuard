@@ -48,16 +48,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
                 // User is signed in, do nothing
 
-                // console.log(user);
-                // if (user.email == "admin@gmail.com"){
-                //     navigate("/error");
-                // }
-                // console.log(Date.now())
-
-                // console.log(reactLocalStorage.getObject('udata'))
-                // console.log(reactLocalStorage.getObject('udata').name)
-
-                console.log(reactLocalStorage.getObject('passdata').ID);
+                
                 setPName(reactLocalStorage.getObject('passdata').name)
                 setPNumber(reactLocalStorage.getObject('passdata').number)
                 setPId(reactLocalStorage.getObject('passdata').id)
@@ -94,12 +85,9 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                 purpose,
                 time
             });
-            console.log(time);
-            console.log(docRef);
-
-            console.log("Document written with ID: ");
+            
         } catch (e) {
-            console.error("Error adding document: ", e);
+            console.error(e);
         }
     }
 
@@ -109,7 +97,6 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
         const userRef = doc(db, "gatepass", phonenumber);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
-            // console.log(docSnap.data());
             
             reactLocalStorage.setObject('passdata', {
                 'name': docSnap.data().fullname,
@@ -122,7 +109,6 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
             setUserData(docSnap.data());
             setShowDetails(true)
         } else {
-            console.log("No such document!");
             setUserData(null);
         }
     };
@@ -149,7 +135,6 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
         }
         else {
-            console.log("Error");
         }
     };
 
@@ -161,7 +146,6 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
             setShowDetails(true);
             setButtonDisabled(true);
             fetchUserData(phonenumber);
-            console.log(userData);
         }
         // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
@@ -183,7 +167,6 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
         for (const key in datobj) {
             if (datobj.hasOwnProperty(key)) {
 
-                // console.log(datobj[key][Object.keys(datobj[key])[0]]);
                 if (datobj[key][Object.keys(datobj[key])[0]] === "") {
                     flag = false
                 }

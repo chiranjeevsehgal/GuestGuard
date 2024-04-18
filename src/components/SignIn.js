@@ -15,28 +15,14 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
   
   const navigate = useNavigate();
   const auth = getAuth();
-
-  // useEffect(() => {
-  //   if (user != null) {
-  //     // console.log(role);
-  //     if(role == "user"){
-  //        navigate("/gatepass")
-  //       }
-  //       else{
-  //       navigate("/admin")
-  //     }
-  //   }
-  // }, [user])
   
   useEffect(() => {
     if (user != null) {
-      // console.log(role);
       
-         navigate("/gatepass")
+      
+        navigate("/gatepass")
         
-      //   else{
-      //   navigate("/admin")
-      // }
+      
     }
     // }, [user])
   }, [user, navigate])

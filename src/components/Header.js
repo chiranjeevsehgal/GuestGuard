@@ -8,7 +8,7 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 
 
 function Header(props) {
-    // console.log(props)
+    
 
     const [isNavOpen, setIsNavOpen] = useState(false);
 
@@ -24,7 +24,7 @@ function Header(props) {
     const handleSignOut = () => {
         const auth = getAuth(); // Get authentication instance
         signOut(auth).then(() => {
-            console.log("User signed out");
+            
             props.setUsername("")
             props.setUserEmail("")
             props.setUserNumber("")
@@ -43,7 +43,7 @@ function Header(props) {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in, do nothing
-                console.log(reactLocalStorage.getObject('udata'))
+                
 
                 setPName(reactLocalStorage.getObject('udata').name)
                 setPEmail(reactLocalStorage.getObject('udata').email)

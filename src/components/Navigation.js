@@ -42,13 +42,13 @@ function Navigation({ user, username, useremail, setUsername, setUserEmail, user
                         <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-gray-900 md:text-6xl md:tracking-tight">
                             <span>Campus Navigation</span>
                         </h1>
-                        <p className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
+                        <div className="px-0 mb-8 text-lg text-gray-600 md:text-xl lg:px-24">
 
                             <p>Navigate the campus with ease using our navigation feature.</p>
                             <p>Whether you're a visitor or a regular, our system
                                 ensures seamless assistance, for a stress-free and
                                 efficient experience within the premises.</p>
-                        </p>
+                        </div>
                     </div>
                     <div className="w-full mx-auto mt-20 text-center md:w-10/12">
                         <div className="relative z-0 w-full mt-8 mb-20">
@@ -64,9 +64,9 @@ function Navigation({ user, username, useremail, setUsername, setUserEmail, user
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5845191752337!2d77.60360607424994!3d12.934404087377604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15392f6ea2f9%3A0x851befe3b3f1d0b0!2sCentral%20campus%2C%20Christ%20University!5e0!3m2!1sen!2sin!4v1709110561417!5m2!1sen!2sin"
                                         title='Map'
                                         className="w-full md:w-600 h-450 border-0 mt-10"
-                                        allowfullscreen=""
+                                        allowFullScreen=""
                                         loading="lazy"
-                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        referrerPolicy="no-referrer-when-downgrade"></iframe>
 
                                 </div>
                             </div>

@@ -24,22 +24,21 @@ function AdminSignin({ app, admin, setAdmin }) {
         const userRef = doc(db, "admin", email);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
-            console.log("Data Available");
-            console.log(docSnap.data());
+            
             setdbPassword(docSnap.data()["password"])
-            console.log(dbpassword);
+            
             if (dbpassword === password) {
-                console.log("True");
+                
                 setAdmin("logged")
                 navigate("/admin");
             }
             else {
-                console.log("False");
+                
                 setError('Invalid Username or Password')
             }
 
         } else {
-            console.log("No such document!");
+            
             setError('Invalid Username or Password')
             // setAdminData(null);
         }

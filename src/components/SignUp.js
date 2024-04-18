@@ -43,10 +43,10 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
               'email': email,
               'number': phonenumber
             });
-            console.log(reactLocalStorage.getObject('udata'));
+            
             navigate("/signin")
           }).catch(() => {
-            console.log("failed");
+            
           });
       })
       .catch((error) => {
@@ -63,12 +63,12 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
         phonenumber
 
       });
-      console.log("Document written with ID: ");
+      
       setUserEmail(email)
       setUsername(fullname)
       setUserNumber(phonenumber)
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error(e);
     }
   }
 
