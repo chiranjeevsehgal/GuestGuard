@@ -70,7 +70,7 @@ function About() {
                                     <div class="flex flex-col lg:flex-row justify-center lg:space-x-8 mt-16 gap-y-4">
 
                                         <div class="flex flex-col justify-center w-full px-4 my-6 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
-                                            <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
+                                            <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500 p-2" src="user.png" />
                                             <div class="flex-1 my-4">
                                                 <p className="text-lg font-semibold leadi text-center">Chiranjeev Sehgal</p>
                                                 <p className="text-center">Frontend Developer</p>
@@ -101,7 +101,7 @@ function About() {
                                         </div>
 
                                         <div class="flex flex-col justify-center w-full px-4 my-6 sm:w-96 bg-cyan-500 text-gray-100 rounded-md">
-                                            <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500" src="" />
+                                            <img alt="" class="self-center flex-shrink-0 w-24 h-24 -mt-12 bg-center bg-cover rounded-full bg-gray-500 p-2" src="user.png" />
                                             <div class="flex-1 my-4">
                                                 <p className="text-lg font-semibold leadi text-center">Hemangshu Dey</p>
                                                 <p className="text-center">Backend Developer</p>

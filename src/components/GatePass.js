@@ -196,6 +196,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
 
             <section className="bg-gray-100 text-gray-800">
+                
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
                     <div className=" bg-gray-100 text-gray-900">
 
