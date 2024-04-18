@@ -24,12 +24,13 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
     const [inpdisabled, setInpdisabled] = useState(false);
     const [passdetails, setPassDetails] = useState("");
     const [passflag, setPassFlag] = useState(0)
-
+    
     const [pname, setPName] = useState("");
     const [pnumber, setPNumber] = useState("");
     const [ppurpose, setPPurpose] = useState("");
     const [pid, setPId] = useState("");
-
+    
+    const [preinpdisabled, setPreInpdisabled] = useState(true);
 
 
     // const timehandler = ()=>{
@@ -66,6 +67,10 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                 if (passflag){
                     setButtonDisabled(true)
                 }
+
+                setFullName(reactLocalStorage.getObject('udata').name)
+                setEmail(reactLocalStorage.getObject('udata').email)
+                setPhoneNumber(reactLocalStorage.getObject('udata').number)
 
 
 
@@ -215,9 +220,10 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                                 setFullName(e.target.value)
                                             }}
                                             value={fullname}
-                                            disabled={inpdisabled}
+                                            disabled={preinpdisabled}
                                             type="text" placeholder="Name" className="p-3 w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900"
-                                            required />
+                                            required 
+                                            />
                                     </div>
 
                                     <div className="col-span-full sm:col-span-1">
@@ -250,14 +256,14 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                         <input id="phone"
                                             onChange={(e) => setPhoneNumber(e.target.value)}
                                             value={phonenumber}
-                                            disabled={inpdisabled}
+                                            disabled={preinpdisabled}
                                             type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" pattern="[0-9]{10}"
                                             required />
                                     </div>
                                     <div className="col-span-full sm:col-span-3">
                                         <label htmlFor="email" className="text-sm">Email</label>
                                         <input id="email"
-                                            disabled={inpdisabled}
+                                            disabled={preinpdisabled}
                                             onChange={(e) => setEmail(e.target.value)}
                                             value={email} type="email" placeholder="Email" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3"
                                             required />
@@ -304,7 +310,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                         <div className="flex items-center space-x-2 text-yellow-500">
                                             <span className="text-x3 font-bold">
                                                 <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer text-gray-800">
-                                                    <span>New</span>
+                                                    
                                                     <span className="relative">
                                                         <input id="Toggle1" type="checkbox" className="hidden peer"
                                                             checked={isChecked}
@@ -314,7 +320,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                                         <div className="w-10 h-6 rounded-full shadow-inner bg-gray-600 peer-checked:bg-cyan-600"></div>
                                                         <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-gray-100"></div>
                                                     </span>
-                                                    <span>Used</span>
+                                                    <span>Active</span>
                                                 </label>
                                             </span>
                                         </div>
