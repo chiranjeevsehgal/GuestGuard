@@ -14,7 +14,7 @@ function About() {
 
 
                                 <div className="container mx-auto p-4 my-6 space-y-2 text-center">
-                                    <a href="/adminsignin"><span className="px-24 sm:px-32 block text-cyan-600">Admin Sign In</span></a>
+                                    {/* <a href="/adminsignin"><span className="px-24 sm:px-32 block text-cyan-600">Admin Sign In</span></a> */}
                                     <h2 className="text-3xl sm:text-5xl font-bold mt-7">Revolutionizing Campus Security and Efficiency
                                     </h2>
                                     <p className="text-gray-600">Centralized Tracking, GPS Integration, and Seamless Navigation for a Safer and More Streamlined Visitor Experience.</p>
