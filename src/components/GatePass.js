@@ -1,11 +1,15 @@
 import { getAuth } from 'firebase/auth';
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header.js'
-
 import { getFirestore, } from "firebase/firestore";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { reactLocalStorage } from 'reactjs-localstorage';
+
+import html2canvas from 'html2canvas';
+import { Download } from 'lucide-react';
+
+
 
 
 function GatePass({ user, app, username, useremail, setUsername, setUserEmail, setUserNumber }) {
@@ -24,19 +28,19 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
     const [inpdisabled, setInpdisabled] = useState(false);
     const [passdetails, setPassDetails] = useState("");
     const [passflag, setPassFlag] = useState(0)
-    
+
     const [pname, setPName] = useState("");
     const [pnumber, setPNumber] = useState("");
     const [ppurpose, setPPurpose] = useState("");
     const [pid, setPId] = useState("");
-    
+
     const [preinpdisabled, setPreInpdisabled] = useState(true);
 
+    const gatePassRef = useRef(null);
+    const [downloadUrl, setDownloadUrl] = useState('');
+    const downloadLinkRef = useRef(null); // Define downloadLinkRef
 
-    // const timehandler = ()=>{
-    //     let current = `${date.getDate()}${date.getMonth()+1}${date.getFullYear()%100}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()%100 }`
-    //     setTime(current)
-    // }
+    const [date, setDate] = useState()
 
 
     const navigate = useNavigate();
@@ -48,14 +52,15 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
                 // User is signed in, do nothing
 
-                
+
                 setPName(reactLocalStorage.getObject('passdata').name)
                 setPNumber(reactLocalStorage.getObject('passdata').number)
                 setPId(reactLocalStorage.getObject('passdata').id)
+                setDate(reactLocalStorage.getObject('passdata').date)
                 setPPurpose(reactLocalStorage.getObject('passdata').purpose)
                 setPassFlag(reactLocalStorage.getObject('passdata').flag)
                 setIsChecked(reactLocalStorage.getObject('passdata').flag)
-                if (passflag){
+                if (passflag) {
                     setButtonDisabled(true)
                 }
 
@@ -85,7 +90,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                 purpose,
                 time
             });
-            
+
         } catch (e) {
             console.error(e);
         }
@@ -97,14 +102,15 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
         const userRef = doc(db, "gatepass", phonenumber);
         const docSnap = await getDoc(userRef);
         if (docSnap.exists()) {
-            
+
             reactLocalStorage.setObject('passdata', {
                 'name': docSnap.data().fullname,
                 'purpose': docSnap.data().purpose,
+                'date': date,
                 'id': docSnap.data().time,
                 'number': docSnap.data().phonenumber,
                 'flag': 1,
-                
+
             });
             setUserData(docSnap.data());
             setShowDetails(true)
@@ -114,12 +120,34 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
     };
     //setstate
 
+    const handleDownload = () => {
+        if (gatePassRef.current) {
+            console.log(gatePassRef.current)
+            html2canvas(gatePassRef.current)
+                .then(canvas => {
+                    // Convert canvas to data URL
+                    const imageUrl = canvas.toDataURL('image/png');
+                    setDownloadUrl(imageUrl);
+                    console.log(imageUrl);
+                })
+                .catch(error => {
+                    console.error('Error capturing gate pass:', error);
+                });
+        }
+    };
+
+    useEffect(()=>{
+        handleDownload()
+    }, [passflag])
+
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
 
     const handleButtonClick = (e) => {
         e.preventDefault()
+        
+        setDate(getFormattedDate())
         if (handlevalidation()) {
             // timehandler()
             // setTime(`${date.getDate()}${date.getMonth()+1}${date.getFullYear()%100}${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getMilliseconds()%100 }`)
@@ -149,6 +177,15 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
         }
         // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
+
+    function getFormattedDate() {
+        const today = new Date();
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        const year = today.getFullYear();
+
+        return `${day}-${month}-${year}`;
+    }
 
 
 
@@ -184,7 +221,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
 
             <section className="bg-gray-100 text-gray-800">
-                
+
                 <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
                     <div className=" bg-gray-100 text-gray-900">
 
@@ -205,8 +242,8 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                             value={fullname}
                                             disabled={preinpdisabled}
                                             type="text" placeholder="Name" className="p-3 w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900"
-                                            required 
-                                            />
+                                            required
+                                        />
                                     </div>
 
                                     <div className="col-span-full sm:col-span-1">
@@ -281,19 +318,29 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                             </fieldset>
                         </form>
 
-                        <div>
+                        <div >
                             {showDetails && passflag ?
-                                <div className="container flex flex-col w-full max-w-lg p-6 mt-10 divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800">
-                                    <div className="flex justify-between p-4">
-                                        <div className="flex space-x-4">
+                                <div className="container flex flex-col w-full max-w-lg p-6 mt-10 divide-y rounded-md divide-gray-300 bg-gray-50 text-gray-800" ref={gatePassRef}>
+                                    <div className="flex justify-between items-center p-4">
+                                        <div className="flex space-x-4 items-center">
                                             <div>
                                                 <h4 className="font-bold">Gate Pass has been generated.</h4>
                                             </div>
                                         </div>
-                                        <div className="flex items-center space-x-2 text-yellow-500">
-                                            <span className="text-x3 font-bold">
-                                                <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer text-gray-800">
-                                                    
+                                        <div className="flex items-center space-x-2 gap-x-2">
+
+                                            <a
+                                                // onClick={handleDownload}
+                                                href={downloadUrl}
+                                                download="gate_pass.png"
+                                                // style={{ display: 'none' }}
+                                                ref={downloadLinkRef}
+                                            >
+                                                <Download height={22} />
+                                            </a>
+                                            <span className="text-x3 font-bold flex hidden">
+                                                <label htmlFor="Toggle1" className="inline-flex items-center space-x-2 cursor-pointer text-gray-800">
+
                                                     <span className="relative">
                                                         <input id="Toggle1" type="checkbox" className="hidden peer"
                                                             checked={isChecked}
@@ -308,9 +355,10 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                             </span>
                                         </div>
                                     </div>
-                                    <div className="p-4 space-y-2 text-sm text-gray-600">
+                                    <div className="p-4 space-y-2 text-sm text-gray-600" >
 
                                         <p><span className="font-bold">Gate Pass ID: </span>{pid}</p>
+                                        <p><span className="font-bold">Date: </span>{date}</p>
                                         <p><span className="font-bold">Name:</span> {pname}</p>
                                         <p><span className="font-bold">Number:</span> {pnumber}</p>
                                         <p><span className="font-bold">Purpose of Visit:</span> {ppurpose}</p>
@@ -320,11 +368,25 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                         <p><span className="font-bold">Number:</span> {userData.phonenumber}</p>
                                     <p><span className="font-bold">Purpose of Visit:</span> {userData.purpose}</p> */}
                                     </div>
+                                    {/* <button onClick={handleDownload}>Download Gate Pass</button> */}
+
+                                    {/* <a
+                                            onClick={handleDownload}
+                                            href={downloadUrl}
+                                            download="gate_pass.png"
+                                            // style={{ display: 'none' }}
+                                            ref={downloadLinkRef}
+                                        >
+                                            Download Gate Pass
+                                        </a> */}
+
                                     <span className="text-x3 font-bold"></span>
                                     <p className='text-sm px-4 py-4'>*Keep the gate pass until you leave campus, signing out will expire it.</p>
+
                                 </div>
-                                
+
                                 : null}
+
                         </div>
                     </div>
 
