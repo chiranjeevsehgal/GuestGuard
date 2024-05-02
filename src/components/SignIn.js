@@ -148,7 +148,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                         </div>
                     )}
 
-                    {/* <div className="flex mt-7 items-center text-center">
+                    <div className="flex mt-7 items-center text-center">
                         <hr className="border-gray-300 border-1 w-full rounded-md" />
                         <label className="block font-medium text-sm text-gray-600 w-full">
                             Or Sign In Using
@@ -160,7 +160,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                         <button type="button" className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                             Google
                         </button>
-                    </div> */}
+                    </div>
 
                     <div  >
                         <div className="flex justify-center items-center">
