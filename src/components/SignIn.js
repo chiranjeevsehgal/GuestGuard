@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, } from "firebase/firestore";
 import { doc, getDoc } from "firebase/firestore";
@@ -77,6 +77,18 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     }
   };
 
+
+//Google auth signin
+  const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log("Successful")
+      }).catch((error) => {
+        // Handle Errors here.
+        setError('Google Sign-in Failed');
+      });
+  };
 
   return (
     <div className="font-sans">
@@ -157,7 +169,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                     </div>
 
                     <div className="flex mt-7 justify-center w-full">
-                        <button type="button" className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                        <button onClick={signInWithGoogle} type="button"  className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                             Google
                         </button>
                     </div>

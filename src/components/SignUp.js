@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth,GoogleAuthProvider,signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
@@ -53,6 +53,32 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
         setError('Error occured')
       });
   };
+  
+//Updated google auth
+  const handleGoogle= async (e) => {
+    const auth=getAuth();
+    const provider = await new GoogleAuthProvider();
+    return signInWithPopup(auth, provider)
+  //   signInWithPopup(auth, provider)
+  // .then((result) => {
+  //   // This gives you a Google Access Token. You can use it to access the Google API.
+  //   const credential = GoogleAuthProvider.credentialFromResult(result);
+  //   const token = credential.accessToken;
+  //   // The signed-in user info.
+  //   const user = result.user;
+  //   // IdP data available using getAdditionalUserInfo(result)
+  //   // ...
+  // }).catch((error) => {
+  //   // Handle Errors here.
+  //   const errorCode = error.code;
+  //   const errorMessage = error.message;
+  //   // The email of the user's account used.
+  //   const email = error.customData.email;
+  //   // The AuthCredential type that was used.
+  //   const credential = GoogleAuthProvider.credentialFromError(error);
+  //   // ...
+  // });
+  }
 
   async function addNewUser() {
     const db = getFirestore(app);
@@ -181,7 +207,7 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
               </div>
 
               <div className="flex mt-7 justify-center w-full">
-                <button type="button" className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button type="button" onClick={handleGoogle} className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Google
                 </button>
               </div>
