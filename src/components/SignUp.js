@@ -8,7 +8,6 @@ import { reactLocalStorage } from 'reactjs-localstorage';
 function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
   const [email, setEmail] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
   const [fullname, setname] = useState("");
@@ -17,6 +16,8 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
+  const auth = getAuth();
+
 
   useEffect(() => {
     if (user != null)
@@ -40,8 +41,7 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
             reactLocalStorage.remove('udata');
             reactLocalStorage.setObject('udata', {
               'name': fullname,
-              'email': email,
-              'number': phonenumber
+              'email': email
             });
 
             navigate("/signin")
@@ -55,44 +55,41 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
   };
   
 //Updated google auth
-  const handleGoogle= async (e) => {
-    const auth=getAuth();
-    const provider = await new GoogleAuthProvider();
-    return signInWithPopup(auth, provider)
-  //   signInWithPopup(auth, provider)
-  // .then((result) => {
-  //   // This gives you a Google Access Token. You can use it to access the Google API.
-  //   const credential = GoogleAuthProvider.credentialFromResult(result);
-  //   const token = credential.accessToken;
-  //   // The signed-in user info.
-  //   const user = result.user;
-  //   // IdP data available using getAdditionalUserInfo(result)
-  //   // ...
-  // }).catch((error) => {
-  //   // Handle Errors here.
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   // The email of the user's account used.
-  //   const email = error.customData.email;
-  //   // The AuthCredential type that was used.
-  //   const credential = GoogleAuthProvider.credentialFromError(error);
-  //   // ...
-  // });
-  }
+
+  const handleGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        
+        
+        reactLocalStorage.remove('udata');
+        reactLocalStorage.setObject('udata', {
+            'name': auth.currentUser.displayName,
+            'email': auth.currentUser.email
+          });
+
+          navigate("/signin")
+
+       
+
+      }).catch((error) => {
+        // Handle Errors here.
+        setError('Google Sign-in Failed');
+      });
+  };
+
 
   async function addNewUser() {
     const db = getFirestore(app);
     try {
       const docRef = await setDoc(doc(db, "signUp", email), {
         fullname,
-        email,
-        phonenumber
+        email
 
       });
 
       setUserEmail(email)
       setUsername(fullname)
-      setUserNumber(phonenumber)
     } catch (e) {
       console.error(e);
     }
@@ -120,17 +117,6 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
                   value={fullname}
                   type="text" placeholder="Name" className="p-3 border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
                   required />
-              </div>
-
-              <div className="mt-7 flex flex-col">
-                <label htmlFor="phonenumber" className="text-sm">Phone Number</label>
-                <input
-                  onChange={(e) => setPhonenumber(e.target.value)}
-                  value={phonenumber}
-                  type="tel" placeholder="Phone Number" className="p-3 border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0"
-                  required
-                  pattern="[0-9]{10}"
-                />
               </div>
 
               <div className="mt-7 flex flex-col">
@@ -201,13 +187,13 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
                 <label className="block font-medium text-sm text-gray-600 w-full">
-                  Or Sign Up Using
+                Or Continue With
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
 
               <div className="flex mt-7 justify-center w-full">
-                <button type="button" onClick={handleGoogle} className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                <button type="button" onClick={handleGoogle} className="bg-red-500 border-none px-20 py-3 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                   Google
                 </button>
               </div>

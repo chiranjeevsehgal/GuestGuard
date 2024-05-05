@@ -66,7 +66,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
                 setFullName(reactLocalStorage.getObject('udata').name)
                 setEmail(reactLocalStorage.getObject('udata').email)
-                setPhoneNumber(reactLocalStorage.getObject('udata').number)
+                // setPhoneNumber(reactLocalStorage.getObject('udata').number)
 
 
 
@@ -85,6 +85,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                 fullname,
                 phonenumber,
                 email,
+                date,
                 address,
                 ID,
                 purpose,
@@ -122,13 +123,13 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
     const handleDownload = () => {
         if (gatePassRef.current) {
-            console.log(gatePassRef.current)
+        
             html2canvas(gatePassRef.current)
                 .then(canvas => {
                     // Convert canvas to data URL
                     const imageUrl = canvas.toDataURL('image/png');
                     setDownloadUrl(imageUrl);
-                    console.log(imageUrl);
+                    
                 })
                 .catch(error => {
                     console.error('Error capturing gate pass:', error);
@@ -216,7 +217,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
     return (
         <div>
 
-            <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail} />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail}  />
 
 
 
@@ -275,8 +276,8 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                         <label htmlFor="phone" className="text-sm">Phone Number</label>
                                         <input id="phone"
                                             onChange={(e) => setPhoneNumber(e.target.value)}
+                                            disabled={inpdisabled}
                                             value={phonenumber}
-                                            disabled={preinpdisabled}
                                             type="tel" placeholder="Phone Number" className="w-full h-10 rounded-md focus:ring focus:ri focus:ri border-gray-300 text-gray-900 p-3" pattern="[0-9]{10}"
                                             required />
                                     </div>

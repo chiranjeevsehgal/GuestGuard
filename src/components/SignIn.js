@@ -6,11 +6,12 @@ import { doc, getDoc } from "firebase/firestore";
 import { reactLocalStorage } from 'reactjs-localstorage';
 
 
-function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
+function SignIn({ user, app, setUserEmail, setUsername, setUserNumber}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
   // const [userData, setUserData] = useState({email: "",fullName: ""});
+
 
   
   const navigate = useNavigate();
@@ -20,7 +21,16 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     if (user != null) {
       
       
-        navigate("/gatepass")
+        // navigate("/gatepass")
+        
+        if (auth.currentUser.uid === "lM70OM2NLhOVQdaDYe8dIsJE6T72"){
+            navigate("/admin")
+            
+        }
+        else{
+            
+            navigate("/gatepass")
+        }
         
       
     }
@@ -35,6 +45,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
         fetchUserData(email)
+        
       }
       )
       .catch(() =>
@@ -49,14 +60,15 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     const docSnap = await getDoc(userRef);
     if (docSnap.exists()) {
       
+
+        
       setUserEmail(docSnap.data().email)
       setUsername(docSnap.data().fullname)
       setUserNumber(docSnap.data().phonenumber)
 
       reactLocalStorage.setObject('udata', {
         'name': docSnap.data().fullname,
-        'email': docSnap.data().email,
-        'number': docSnap.data().phonenumber
+        'email': docSnap.data().email
         
       });
       
@@ -67,12 +79,20 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     //    else{
     //    navigate("/admin")
     //  }
+
+        if (auth.currentUser.uid === "lM70OM2NLhOVQdaDYe8dIsJE6T72"){
+            navigate("/admin")
+            
+        }
+        else{
+            
+            navigate("/gatepass")
+        }
       
-        navigate("/gatepass")
      
 
     } else {
-      console.log("No such document!");
+      
       // setUserData(null);
     }
   };
@@ -83,7 +103,15 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log("Successful")
+        
+        reactLocalStorage.setObject('udata', {
+            'name': auth.currentUser.displayName,
+            'email': auth.currentUser.email
+            
+          });
+
+        
+
       }).catch((error) => {
         // Handle Errors here.
         setError('Google Sign-in Failed');
@@ -107,7 +135,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                 <label htmlFor="" className="block mt-3 text-lg text-gray-700 text-center font-semibold">
                     Sign In
                 </label>
-                <form method="#" action="#" className="mt-10 space-y-12" onSubmit={signinUser}>
+                <form method="#" action="#" className="mt-10" onSubmit={signinUser}>
                     <div className="mt-7 space-y-4">
                         <div className="flex flex-col">
                             <label htmlFor="email" className="text-sm">Email</label>
@@ -135,7 +163,7 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                     </div>
 
                     <div className="mt-7">
-                        <button type="submit" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                        <button type="submit" className="bg-cyan-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105 mt-4">
                             Sign In
                         </button>
                     </div>
@@ -163,19 +191,19 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
                     <div className="flex mt-7 items-center text-center">
                         <hr className="border-gray-300 border-1 w-full rounded-md" />
                         <label className="block font-medium text-sm text-gray-600 w-full">
-                            Or Sign In Using
+                            Or Continue With
                         </label>
                         <hr className="border-gray-300 border-1 w-full rounded-md" />
                     </div>
 
                     <div className="flex mt-7 justify-center w-full">
-                        <button onClick={signInWithGoogle} type="button"  className="bg-red-500 border-none px-4 py-2 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
+                        <button onClick={signInWithGoogle} type="button"  className="bg-red-500 border-none px-20 py-3 rounded-xl cursor-pointer text-white shadow-xl hover:shadow-inner transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                             Google
                         </button>
                     </div>
 
                     <div  >
-                        <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center mt-8">
                             <label className="mr-2">Not a user?</label>
                             <a href="/signup" className=" text-cyan-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105">
                                 Sign Up
