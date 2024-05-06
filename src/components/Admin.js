@@ -165,11 +165,13 @@ function Admin({ user, admin, setAdmin, app }) {
                             <col />
                             <col />
                             <col />
+                            <col />
 
                             <col className="w-24" />
                         </colgroup>
                         <thead className="bg-gray-300">
                             <tr className="text-left">
+                                <th className="p-3">Date</th>
                                 <th className="p-3">Phone Number</th>
                                 <th className="p-3">Full Name</th>
                                 <th className="p-3">Email</th>
@@ -182,6 +184,7 @@ function Admin({ user, admin, setAdmin, app }) {
                         <tbody>
                             {visitors.map(visitor => (
                                 <tr key={visitor.id} className="border-b border-opacity-20 border-gray-300 bg-gray-50">
+                                    <td className="p-3">{visitor.date}</td>
                                     <td className="p-3">{visitor.id}</td>
                                     <td className="p-3">{visitor.fullname}</td>
                                     <td className="p-3">{visitor.email}</td>

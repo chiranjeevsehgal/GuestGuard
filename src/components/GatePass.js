@@ -5,6 +5,9 @@ import Header from './Header.js'
 import { getFirestore, } from "firebase/firestore";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import html2canvas from 'html2canvas';
 import { Download } from 'lucide-react';
@@ -92,8 +95,22 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                 time
             });
 
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            // console.error(e);
+            let errorMessage = error.code.split("/").pop().replace(/-/g, " ");
+
+            errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
+            // console.log(errorMessage);
+            toast.error(errorMessage, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light"
+            });
         }
     }
 
@@ -123,21 +140,35 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
     const handleDownload = () => {
         if (gatePassRef.current) {
-        
+
             html2canvas(gatePassRef.current)
                 .then(canvas => {
                     // Convert canvas to data URL
                     const imageUrl = canvas.toDataURL('image/png');
                     setDownloadUrl(imageUrl);
-                    
+
                 })
                 .catch(error => {
-                    console.error('Error capturing gate pass:', error);
+                    // console.error('Error capturing gate pass:', error);
+                    let errorMessage = error.code.split("/").pop().replace(/-/g, " ");
+
+                    errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
+                    // console.log(errorMessage);
+                    toast.error(errorMessage, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light"
+                    });
                 });
         }
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         handleDownload()
     }, [passflag])
 
@@ -147,7 +178,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
 
     const handleButtonClick = (e) => {
         e.preventDefault()
-        
+
         setDate(getFormattedDate())
         if (handlevalidation()) {
             // timehandler()
@@ -175,6 +206,16 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
             setShowDetails(true);
             setButtonDisabled(true);
             fetchUserData(phonenumber);
+            toast.success('Gate pass has been generated.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light"
+                });
         }
         // }, [time, showDetails, phonenumber,addNewUser,fetchUserData]);
     }, [time]);
@@ -217,7 +258,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
     return (
         <div>
 
-            <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail}  />
+            <Header setUserEmail={setUserEmail} setUsername={setUsername} setUserNumber={setUserNumber} username={username} useremail={useremail} />
 
 
 
@@ -325,7 +366,7 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                     <div className="flex justify-between items-center p-4">
                                         <div className="flex space-x-4 items-center">
                                             <div>
-                                                <h4 className="font-bold">Gate Pass has been generated.</h4>
+                                                <h4 className="font-bold">Gate Pass</h4>
                                             </div>
                                         </div>
                                         <div className="flex items-center space-x-2 gap-x-2">
@@ -397,7 +438,9 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </div>
+
     )
 }
 

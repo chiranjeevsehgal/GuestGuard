@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getAuth,GoogleAuthProvider,signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getFirestore, } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import { reactLocalStorage } from 'reactjs-localstorage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
@@ -11,8 +13,8 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
   const [password, setPassword] = useState("");
   const [cnfpassword, setcnfPassword] = useState("");
   const [fullname, setname] = useState("");
-  const [success, setSuccess] = useState(null);
-  const [error, setError] = useState(null);
+  // const [success, setSuccess] = useState(null);
+  // const [error, setError] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
@@ -33,9 +35,19 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
-        setError(null)
+        // setError(null)
         setButtonDisabled(true)
-        setSuccess('Sign up success')
+        // setSuccess('Sign up success')
+        toast.success('Signup successful, You will now be redirected to the dashboard.', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
         addNewUser()
           .then(() => {
             reactLocalStorage.remove('udata');
@@ -45,36 +57,64 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
             });
 
             navigate("/signin")
-          }).catch(() => {
+          }).catch((e) => {
+            console.log(e);
 
           });
       })
       .catch((error) => {
-        setError('Error occured')
+        let errorMessage = error.code.split("/").pop().replace(/-/g, " ");
+
+        errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
+        // console.log(errorMessage);
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
       });
   };
-  
-//Updated google auth
+
+  //Updated google auth
 
   const handleGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
       .then((result) => {
-        
-        
+
+
         reactLocalStorage.remove('udata');
         reactLocalStorage.setObject('udata', {
-            'name': auth.currentUser.displayName,
-            'email': auth.currentUser.email
-          });
+          'name': auth.currentUser.displayName,
+          'email': auth.currentUser.email
+        });
 
-          navigate("/signin")
+        navigate("/signin")
 
-       
+
 
       }).catch((error) => {
         // Handle Errors here.
-        setError('Google Sign-in Failed');
+        let errorMessage = error.code.split("/").pop().replace(/-/g, " ");
+
+        errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
+        // console.log(errorMessage);
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+        // setError('Google Sign-in Failed');
       });
   };
 
@@ -90,8 +130,22 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
 
       setUserEmail(email)
       setUsername(fullname)
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
+      let errorMessage = error.code.split("/").pop().replace(/-/g, " ");
+
+      errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
+      // console.log(errorMessage);
+      toast.error(errorMessage, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
     }
   }
 
@@ -156,16 +210,16 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
                 </button>
               </div>
 
-              {success &&
+              {/* {success &&
                 <div className="flex shadow-md gap-6 rounded-lg overflow-hidden divide-x max-w-2xl bg-gray-50 text-gray-800 divide-gray-300 mt-7">
                   <div className="flex flex-1 flex-col p-4 border-l-8 border-cyan-600">
                     <span className="text-2xl">Success</span>
                     <span className="text-xs text-gray-600">You have been successfully registered. Please sign in with your details</span>
                   </div>
                 </div>
-              }
+              } */}
 
-              {error &&
+              {/* {error &&
                 <div className="flex items-center rounded shadow-md overflow-hidden max-w-xl relative bg-gray-50 text-gray-800 mt-7">
                   <div className="self-stretch flex items-center px-3 flex-shrink-0 bg-gray-300 text-red-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-8 w-8">
@@ -182,12 +236,12 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
                     </svg>
                   </button>
                 </div>
-              }
+              } */}
 
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
                 <label className="block font-medium text-sm text-gray-600 w-full">
-                Or Continue With
+                  Or Continue With
                 </label>
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
@@ -210,6 +264,8 @@ function SignUp({ user, app, setUserEmail, setUsername, setUserNumber }) {
           </div>
         </div>
       </div>
+      <ToastContainer />
+
     </div>
 
   )
