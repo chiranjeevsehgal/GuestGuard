@@ -354,7 +354,8 @@ function GatePass({ user, app, username, useremail, setUsername, setUserEmail, s
                                     <div className="col-span-full sm:col-span-full">
 
                                         <button disabled={buttonDisabled}
-                                            type="submit" className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Generate Pass</button>
+                                            type="submit"    className={`self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50 ${!buttonDisabled ? 'hover:bg-cyan-700 hover:text-white' : ''}`}
+                                            >Generate Pass</button>
                                     </div>
                                 </div>
                             </fieldset>

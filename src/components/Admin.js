@@ -5,11 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { reactLocalStorage } from 'reactjs-localstorage';
 import Dialogue from './dialogue';
+import * as XLSX from 'xlsx';
+import { Download } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function Admin({ user, admin, setAdmin, app }) {
     const [visitors, setVisitors] = useState([]);
     const [filter, setFilter] = useState("all"); // Default filter by today
     const [customDate, setCustomDate] = useState(""); // State for custom date input
+
 
 
 
@@ -56,6 +63,47 @@ function Admin({ user, admin, setAdmin, app }) {
         };
         fetchData();
     }, [filter, customDate, app]);
+
+    const exportData = async () => {
+        try {
+            const db = getFirestore(app);
+            let querySnapshot;
+            if (filter === "today") {
+                const formattedDate = getTodayDate();
+                querySnapshot = await getDocs(query(collection(db, "gatepass"), where("date", "==", formattedDate)));
+            } else if (filter === "yesterday") {
+                const yesterday = getYesterdayDate();
+                querySnapshot = await getDocs(query(collection(db, "gatepass"), where("date", "==", yesterday)));
+            } else if (filter === "all") {
+                querySnapshot = await getDocs(collection(db, "gatepass"));
+            } else if (filter === "custom" && customDate) {
+                querySnapshot = await getDocs(query(collection(db, "gatepass"), where("date", "==", customDate)));
+            }
+            const data = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Visitors");
+            // Save Excel file
+            XLSX.writeFile(wb, "exported_data.xlsx");
+        } catch (error) {
+            let errorMessage = error.code.split("/").pop().replace(/-/g, " ");
+            errorMessage = errorMessage.charAt(0).toUpperCase() + errorMessage.slice(1);
+            toast.error(errorMessage, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light"
+            });
+        }
+    };
 
     const handleCustomDate = () => {
         if (customDate) {
@@ -129,7 +177,7 @@ function Admin({ user, admin, setAdmin, app }) {
 
                     <div className="items-center flex-shrink-0 lg:flex">
                         {/* <button className="self-center px-8 py-3 rounded">Sign in</button> */}
-                        <button onClick={handleSignOut} className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50">Sign Out</button>
+                        <button onClick={handleSignOut} className="self-center px-8 py-3 font-semibold rounded bg-cyan-600 text-gray-50 hover:bg-cyan-700 hover:text-white">Sign Out</button>
                     </div>
 
                 </div>
@@ -140,19 +188,26 @@ function Admin({ user, admin, setAdmin, app }) {
 
                 <div className="flex justify-between mb-4">
                     <div className="flex">
-                    <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "all" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("all")}>All</button>
+                        <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "all" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("all")}>All</button>
 
                         <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "today" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("today")}>Today</button>
                         <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "yesterday" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("yesterday")}>Yesterday</button>
-                    
-                    
+
+
                         <input type="date" className='border-2 ml-16 p-2 bg-gray-100 rounded' onChange={(e) => setCustomDate(e.target.value)} />
 
-                        
-                        <button className="px-12 py-2 rounded bg-cyan-600 text-gray-50 font-semibold ml-4" onClick={handleCustomDate}>Search</button>
 
-                    
+                        <button className="px-12 py-2 rounded bg-cyan-600 text-gray-50 font-semibold ml-4 hover:bg-cyan-700 hover:text-white " onClick={handleCustomDate}>Search</button>
+
+
+
+
                     </div>
+                    <button onClick={exportData} className="px-6 py-3 rounded bg-green-500 text-white font-semibold flex items-center hover:bg-green-700">
+                        <Download width={20} className="mr-2" />
+                        Export Data
+                    </button>
+
                 </div>
 
 
@@ -198,6 +253,8 @@ function Admin({ user, admin, setAdmin, app }) {
                     </table>
                 </div>
             </div>
+            <ToastContainer />
+
 
         </div>
     )

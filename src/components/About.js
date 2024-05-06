@@ -132,7 +132,7 @@ function About() {
                                         </div>
                                     </div>
                                     <div className="mt-4">
-                                    <a rel="noopener noreferrer" href="/" class="block mx-auto mt-8 sm:mt-0 sm:inline-block px-4 my-6 sm:px-6 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-500 sm:py-4">Back to dashboard</a>
+                                    <a rel="noopener noreferrer" href="/" class="block mx-auto mt-8 sm:mt-0 sm:inline-block px-4 my-6 sm:px-6 py-3 text-lg font-semibold rounded text-gray-50 bg-cyan-500 sm:py-4 hover:bg-cyan-700 hover:text-white">Back to dashboard</a>
                                     </div>
 
                                 </div>

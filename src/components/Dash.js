@@ -20,8 +20,8 @@ function Dash({ user }) {
 									</h1>
 									<p className="mt-4 sm:mt-6 mb-6 sm:mb-8 text-sm sm:text-lg">Seamlessly Generate gate passes and Navigate with our Intuitive Web App for an enhanced Campus Experience!</p>
 									<div className="flex flex-col sm:flex-row sm:space-x-4 lg:justify-start">
-										<Link to={user == null ? "/signin" : (user.email === "admin@gmail.com" ? "/admin" : "/gatepass")} className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg font-semibold rounded text-gray-50 bg-cyan-600">Generate Gate Pass</Link>
-										<Link to="/about" className="px-6 sm:px-8 py-2 sm:py-3 mt-2 sm:mt-0 text-sm sm:text-lg font-semibold border rounded border-gray-800">About</Link>
+										<Link to={user == null ? "/signin" : (user.email === "admin@gmail.com" ? "/admin" : "/gatepass")} className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-lg font-semibold rounded text-gray-50 bg-cyan-600 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105 shadow-xl">Generate Gate Pass</Link>
+										<Link to="/about" className="px-6 sm:px-8 py-2 sm:py-3 mt-2 sm:mt-0 text-sm sm:text-lg font-semibold border rounded border-gray-800 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105 shadow-xl">About</Link>
 									</div>
 								</div>
 								<div className="flex items-center justify-center p-4 sm:p-6 mt-6 sm:mt-0">
