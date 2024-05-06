@@ -8,7 +8,7 @@ import Dialogue from './dialogue';
 
 function Admin({ user, admin, setAdmin, app }) {
     const [visitors, setVisitors] = useState([]);
-    const [filter, setFilter] = useState("today"); // Default filter by today
+    const [filter, setFilter] = useState("all"); // Default filter by today
     const [customDate, setCustomDate] = useState(""); // State for custom date input
 
 
@@ -43,9 +43,10 @@ function Admin({ user, admin, setAdmin, app }) {
                 // Filter by yesterday's date
                 const yesterday = getYesterdayDate() // Get yesterday's date in DD-MM-YYYY format
                 querySnapshot = await getDocs(query(collection(db, "gatepass"), where("date", "==", yesterday)));
-            } else {
-                // No filter or custom filter
+            } else if (filter === "all") {
                 querySnapshot = await getDocs(collection(db, "gatepass"));
+            } else if (filter === "custom" && customDate) {
+                querySnapshot = await getDocs(query(collection(db, "gatepass"), where("date", "==", customDate)));
             }
             const data = querySnapshot.docs.map(doc => ({
                 id: doc.id,
@@ -54,13 +55,20 @@ function Admin({ user, admin, setAdmin, app }) {
             setVisitors(data);
         };
         fetchData();
-    }, [filter, app]);
+    }, [filter, customDate, app]);
 
     const handleCustomDate = () => {
-        // Perform fetching based on custom date
-        // Example:
-        // fetchData(customDate);
+        if (customDate) {
+            const formattedDate = formatInputDate(customDate);
+            setCustomDate(formattedDate);  // Update customDate to the correct format
+            setFilter("custom");
+        }
     };
+
+    function formatInputDate(inputDate) {
+        const [year, month, day] = inputDate.split("-");
+        return `${day}-${month}-${year}`;
+    }
 
     function getTodayDate() {
         const today = new Date();
@@ -132,13 +140,17 @@ function Admin({ user, admin, setAdmin, app }) {
 
                 <div className="flex justify-between mb-4">
                     <div className="flex">
-                        <button className={`mr-2 px-4 py-2 rounded-lg border-4 ${filter === "today" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("today")}>Today</button>
-                        <button className={`mr-2 px-4 py-2 rounded border-4 ${filter === "yesterday" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("yesterday")}>Yesterday</button>
+                    <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "all" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("all")}>All</button>
+
+                        <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "today" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("today")}>Today</button>
+                        <button className={`mr-2 px-4 py-2 rounded border-2 ${filter === "yesterday" ? "bg-gray-300" : "bg-gray-100"}`} onClick={() => setFilter("yesterday")}>Yesterday</button>
                     
                     
-                        <input type="date" className='ml-16 p-2 bg-gray-100 rounded' onChange={(e) => setCustomDate(e.target.value)} />
+                        <input type="date" className='border-2 ml-16 p-2 bg-gray-100 rounded' onChange={(e) => setCustomDate(e.target.value)} />
+
                         
-                        <button className="px-12 py-2 rounded bg-blue-500 text-white ml-8" onClick={handleCustomDate}>Search</button>
+                        <button className="px-12 py-2 rounded bg-cyan-600 text-gray-50 font-semibold ml-4" onClick={handleCustomDate}>Search</button>
+
                     
                     </div>
                 </div>
@@ -146,7 +158,7 @@ function Admin({ user, admin, setAdmin, app }) {
 
                 <h2 className="mb-4 text-2xl font-semibold leadi">Visitors</h2>
                 <div className="overflow-x-auto">
-                    <table className="min-w-full text-m">
+                    <table className="min-w-full text-m mb-12">
                         <colgroup>
                             <col />
                             <col />
