@@ -21,26 +21,64 @@ function SignIn({ user, app, setUserEmail, setUsername, setUserNumber }) {
     const navigate = useNavigate();
     const auth = getAuth();
 
+    // useEffect(() => {
+    //     if (user != null) {
+
+
+    //         // navigate("/gatepass")
+
+    //         if (auth.currentUser.uid === "lM70OM2NLhOVQdaDYe8dIsJE6T72") {
+    //             navigate("/admin")
+
+    //         }
+    //         else {
+
+    //             navigate("/gatepass")
+    //         }
+
+
+    //     }
+    //     // }, [user])
+    // }, [user, navigate])
+
+    // useEffect(() => {
+    //     if (user != null) {
+    //         // Fetch the AdminUID from your database
+    //         const fetchAdminUID = async () => {
+    //             const adminDoc = await getDoc(doc(db, "AdminUID", ""));
+    //             if (adminDoc.exists()) {
+    //                 if (auth.currentUser.uid === adminDoc) {
+    //                     navigate("/admin");
+    //                 } else {
+    //                     navigate("/gatepass");
+    //                 }
+    //             } else {
+    //                 console.log("No admin document found!");
+    //                 navigate("/gatepass");
+    //             }
+    //         };
+    
+    //         fetchAdminUID();
+    //     }
+    // }, [user, navigate]);
+    
+    const db = getFirestore(app);
     useEffect(() => {
         if (user != null) {
-
-
-            // navigate("/gatepass")
-
-            if (auth.currentUser.uid === "lM70OM2NLhOVQdaDYe8dIsJE6T72") {
-                navigate("/admin")
-
-            }
-            else {
-
-                navigate("/gatepass")
-            }
-
-
+            const checkAdminStatus = async () => {
+                const adminDocRef = doc(db, "AdminUID", auth.currentUser.uid);
+                const adminDocSnap = await getDoc(adminDocRef);
+    
+                if (adminDocSnap.exists()) {
+                    navigate("/admin");
+                } else {
+                    navigate("/gatepass");
+                }
+            };
+    
+            checkAdminStatus();
         }
-        // }, [user])
-    }, [user, navigate])
-
+    }, [user, navigate]);
 
 
 
