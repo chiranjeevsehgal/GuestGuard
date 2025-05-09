@@ -1,6 +1,5 @@
 {
   "name": "guestguard",
-  "homepage": "/guestguard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
